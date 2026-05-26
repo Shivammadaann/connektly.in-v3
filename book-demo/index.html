@@ -548,7 +548,8 @@
         line-height: 1.2;
       }
 
-      .form-field input {
+      .form-field input,
+      .form-field textarea {
         width: 100%;
         min-height: 3.2rem;
         padding: 0.85rem 0.95rem;
@@ -560,7 +561,13 @@
         transition: border-color 180ms ease, box-shadow 180ms ease;
       }
 
-      .form-field input:focus {
+      .form-field textarea {
+        min-height: 7rem;
+        resize: vertical;
+      }
+
+      .form-field input:focus,
+      .form-field textarea:focus {
         border-color: rgba(11, 111, 255, 0.52);
         box-shadow: 0 0 0 4px rgba(11, 111, 255, 0.12);
       }
@@ -995,22 +1002,6 @@
             <ul class="demo-points" aria-label="What to expect in your demo">
               <li>Enjoy a personalized guided tour, not a group webinar</li>
               <li>Demos are given by experts on using Connektly's live environment</li>
-  </head>
-  <body data-page="book-demo">
-    <div data-site-header></div>
-
-    <main>
-      <section class="demo-hero section">
-        <div class="demo-hero__grid">
-          <div class="hero-copy reveal">
-            <h1>Book your <span>free demo</span></h1>
-            <p class="demo-hero__lede">
-              We really encourage you to see how Connektly lets you use WhatsApp and other Business tools as a
-              communication channel to sell, market and support more efficiently.
-            </p>
-            <ul class="demo-points" aria-label="What to expect in your demo">
-              <li>Enjoy a personalized guided tour, not a group webinar</li>
-              <li>Demos are given by experts on using Connektly's live environment</li>
               <li>See how Connektly simplifies communicating using WhatsApp</li>
               <li>We'll show you how Connektly helps you to grow your business</li>
             </ul>
@@ -1019,15 +1010,18 @@
           <div class="demo-form-panel reveal">
             <h2>Request your demo</h2>
             <form class="demo-form" action="https://api.web3forms.com/submit" method="POST">
-              <input type="hidden" name="access_key" value="172215ed-8d99-4637-be34-9884fc69b47e">
+              <input type="hidden" name="access_key" value="172215ed-8d99-4637-be34-9884fc69b47e" />
+              <input type="hidden" name="subject" value="New Connektly demo request" />
+              <input type="hidden" name="redirect" value="https://www.connektly.in/thank-you/" />
+
               <div class="form-grid">
                 <div class="form-field">
                   <label for="first-name">First Name</label>
-                  <input id="first-name" name="first-name" type="text" autocomplete="given-name" required />
+                  <input id="first-name" name="name" type="text" autocomplete="given-name" required />
                 </div>
                 <div class="form-field">
                   <label for="last-name">Last Name</label>
-                  <input id="last-name" name="last-name" type="text" autocomplete="family-name" required />
+                  <input id="last-name" name="last_name" type="text" autocomplete="family-name" required />
                 </div>
                 <div class="form-field form-field--full">
                   <label for="email">Email Address</label>
@@ -1035,7 +1029,11 @@
                 </div>
                 <div class="form-field form-field--full">
                   <label for="whatsapp-number">WhatsApp Number</label>
-                  <input id="whatsapp-number" name="whatsapp-number" type="tel" autocomplete="tel" required />
+                  <input id="whatsapp-number" name="whatsapp_number" type="tel" autocomplete="tel" required />
+                </div>
+                <div class="form-field form-field--full">
+                  <label for="message">Message</label>
+                  <textarea id="message" name="message" required></textarea>
                 </div>
               </div>
 
@@ -1081,30 +1079,6 @@
         revealNodes.forEach((node) => node.classList.add("is-visible"));
       }
 
-      const demoForm = document.querySelector(".demo-form");
-      if (demoForm) {
-        demoForm.addEventListener("submit", async (event) => {
-          event.preventDefault();
-          
-          const submitBtn = demoForm.querySelector('button[type="submit"]');
-          if (submitBtn) {
-            submitBtn.textContent = "Submitted. Redirecting...";
-            submitBtn.disabled = true;
-          }
-
-          const formData = new FormData(demoForm);
-          try {
-            await fetch(demoForm.action, {
-              method: demoForm.method,
-              body: formData
-            });
-          } catch (error) {
-            console.error("Form submission error:", error);
-          }
-          
-          window.location.assign("/thank-you/");
-        });
-      }
     </script>
   </body>
 </html>
