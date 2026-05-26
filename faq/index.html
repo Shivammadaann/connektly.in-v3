@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frequently Asked Questions | Connektly</title>
+    <meta
+      name="description"
+      content="Find answers to commonly asked questions about Connektly, WhatsApp Business API setup, features, pricing plans, and security policies."
+    />
+    <link rel="icon" type="image/png" href="../connektly-favicon.png" />
+    <link rel="apple-touch-icon" href="../connektly-favicon.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-soft: #f5fbf7;
+        --surface: rgba(255, 255, 255, 0.86);
+        --surface-dark: #0b1120;
+        --text: #13241d;
+        --muted: #62766d;
+        --line: rgba(19, 54, 41, 0.12);
+        --green: #0b6fff;
+        --green-bright: #2f86ff;
+        --green-soft: #eaf2ff;
+        --blue: #16b7ff;
+        --shadow: 0 28px 70px rgba(24, 60, 47, 0.12);
+        --radius-lg: 32px;
+        --radius-md: 22px;
+        --max-width: clamp(1320px, 88vw, 1640px);
+        --site-header-shell-height: 5rem;
+        --site-header-gap: 0rem;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 8.5rem;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Manrope", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 12% 14%, rgba(11, 111, 255, 0.13), transparent 28rem),
+          radial-gradient(circle at 88% 8%, rgba(22, 183, 255, 0.12), transparent 30rem),
+          linear-gradient(180deg, #ffffff 0%, #f8fcfa 46%, #ffffff 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        cursor: pointer;
+        font: inherit;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+
+      [data-site-header] {
+        display: block;
+        min-height: calc(var(--site-header-shell-height) + var(--site-header-gap, 0px));
+      }
+
+      .site-header {
+        position: fixed;
+        top: var(--site-header-gap, 0px);
+        left: 0;
+        z-index: 35;
+        width: 100%;
+        margin: 0;
+        padding: 1rem max(1.25rem, calc((100vw - var(--max-width)) / 2 + 1.25rem));
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 1rem;
+        border: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 0;
+        background: #111827;
+        color: #ffffff;
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 0 8px 24px rgba(24, 60, 47, 0.08);
+        transition: background 300ms ease, backdrop-filter 300ms ease, box-shadow 300ms ease;
+      }
+
+      .site-header.is-scrolled {
+        background: #111827;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.85rem;
+        min-width: 0;
+        justify-self: start;
+      }
+
+      .brand__mark {
+        position: relative;
+        width: 2.9rem;
+        height: 2.9rem;
+        display: grid;
+        place-items: center;
+        font-family: "Sora", sans-serif;
+        font-weight: 700;
+        color: #082012;
+        background: var(--green);
+        border-radius: 1rem;
+        box-shadow: inset 0 -8px 20px rgba(0, 0, 0, 0.14);
+      }
+
+      .brand__mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .brand__mark::after {
+        content: "";
+        position: absolute;
+        left: 0.4rem;
+        bottom: -0.28rem;
+        width: 0.8rem;
+        height: 0.8rem;
+        background: inherit;
+        border-radius: 0 0 0.7rem 0;
+        transform: rotate(34deg);
+      }
+
+      .brand__mark--image {
+        padding: 0.08rem;
+        background: #ffffff;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+      }
+
+      .brand__mark--image::after {
+        display: none;
+      }
+
+      .brand__text {
+        display: grid;
+      }
+
+      .brand__text strong {
+        font-family: "Sora", sans-serif;
+        font-size: 1rem;
+        line-height: 1;
+        color: #ffffff;
+      }
+
+      .brand__text small {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 0.75rem;
+      }
+
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        justify-self: center;
+      }
+
+      .header-actions {
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+      }
+
+      .header-actions .nav-login,
+      .mobile-actions .nav-login {
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 0.95rem;
+        transition: color 180ms ease, transform 180ms ease;
+      }
+
+      .header-actions .nav-login:hover,
+      .mobile-actions .nav-login:hover {
+        color: #0b6fff;
+        transform: translateY(-1px);
+      }
+
+      .mobile-actions {
+        display: none;
+      }
+
+      .site-nav>a:not(.button),
+      .nav-dropdown__toggle {
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 0.95rem;
+        transition: color 180ms ease, transform 180ms ease;
+      }
+
+      .site-nav>a:not(.button):hover,
+      .site-nav>a:not(.button).is-active,
+      .nav-dropdown__toggle:hover,
+      .nav-dropdown[open]>.nav-dropdown__toggle,
+      .nav-dropdown--current>.nav-dropdown__toggle {
+        color: #0b6fff;
+        transform: translateY(-1px);
+      }
+
+      .nav-dropdown {
+        position: relative;
+      }
+
+      .nav-dropdown__toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      .nav-dropdown__toggle::after {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid currentColor;
+        transition: transform 200ms ease;
+      }
+
+      .nav-dropdown[open]>.nav-dropdown__toggle::after {
+        transform: rotate(180deg);
+      }
+
+      .nav-dropdown__menu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        z-index: 40;
+        min-width: 220px;
+        padding: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 1rem;
+        background: #111827;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 200ms ease, opacity 200ms ease, visibility 200ms ease;
+      }
+
+      .nav-dropdown:hover>.nav-dropdown__menu,
+      .nav-dropdown[open]>.nav-dropdown__menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .nav-dropdown__menu a {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        border-radius: 0.5rem;
+        transition: background 180ms ease, color 180ms ease;
+      }
+
+      .nav-dropdown__menu a:hover,
+      .nav-dropdown__menu a.is-active {
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
+      }
+
+      .button--sm {
+        min-height: 2.25rem;
+        padding: 0.5rem 1.25rem;
+        font-size: 0.88rem;
+      }
+
+      .mobile-actions,
+      .nav-toggle {
+        display: none;
+      }
+
+      .nav-toggle {
+        width: 2.7rem;
+        height: 2.7rem;
+        border: 0;
+        border-radius: 999px;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .nav-toggle span {
+        display: block;
+        width: 1rem;
+        height: 2px;
+        margin: 0.18rem auto;
+        border-radius: 999px;
+        background: #ffffff;
+        transition: transform 220ms ease, opacity 220ms ease;
+      }
+
+      /* Custom Footer Styles */
+      .site-footer.custom-footer {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 5rem max(1rem, calc((100vw - var(--max-width)) / 2)) 2rem;
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 0;
+        background-color: #0b1120;
+        box-shadow: none;
+      }
+
+      .custom-footer .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 3rem;
+        padding-bottom: 3rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .custom-footer .footer-brand-col {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+      }
+
+      .custom-footer .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .custom-footer .footer-brand-logo {
+        flex-shrink: 0;
+      }
+
+      .custom-footer .footer-brand-text {
+        color: #ffffff;
+        font-size: 1.35rem;
+        font-weight: 700;
+      }
+
+      .custom-footer .footer-desc,
+      .custom-footer .footer-copy,
+      .custom-footer .footer-nav-col ul li a,
+      .custom-footer .footer-legal li a {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .custom-footer .footer-desc {
+        max-width: 320px;
+        margin: 0;
+      }
+
+      .custom-footer .footer-socials,
+      .custom-footer .footer-bottom-flex,
+      .custom-footer .footer-legal {
+        display: flex;
+        align-items: center;
+      }
+
+      .custom-footer .footer-socials {
+        gap: 1.25rem;
+        margin-top: 0.5rem;
+      }
+
+      .custom-footer .social-icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.7;
+        transition: opacity 200ms;
+      }
+
+      .custom-footer .social-icon:hover {
+        opacity: 1;
+      }
+
+      .custom-footer .social-icon img {
+        width: 100%;
+        height: auto;
+      }
+
+      .custom-footer .footer-nav-col h3 {
+        margin: 0 0 1.25rem;
+        color: #ffffff;
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .custom-footer .footer-nav-col ul,
+      .custom-footer .footer-legal {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .custom-footer .footer-nav-col ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+
+      .custom-footer .footer-nav-col ul li a,
+      .custom-footer .footer-legal li a {
+        transition: color 200ms;
+      }
+
+      .custom-footer .footer-nav-col ul li a:hover,
+      .custom-footer .footer-legal li a:hover {
+        color: #ffffff;
+      }
+
+      .custom-footer .footer-bottom {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        margin: 2rem auto 0;
+      }
+
+      .custom-footer .footer-bottom-flex {
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+
+      .custom-footer .footer-copy {
+        margin: 0;
+      }
+
+      .custom-footer .footer-legal {
+        gap: 1.5rem;
+      }
+
+      .custom-footer .footer-disclaimer {
+        margin: 0;
+        color: #475569;
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+
+      /* Header Keyframe Animations */
+      @keyframes headerDropDesktop {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(-110%) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0) scale(1);
+        }
+      }
+
+      @keyframes headerDropMobile {
+        from {
+          opacity: 0;
+          transform: translateY(-100%);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      main {
+        overflow: hidden;
+      }
+
+      /* Hero Section */
+      .faq-hero {
+        position: relative;
+        width: min(calc(100% - clamp(2rem, 5vw, 6rem)), min(var(--max-width), 1360px));
+        margin: 0 auto;
+        padding: clamp(3rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4.5rem);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      padding: 0.4rem 1rem;
+      border: none;
+      border-radius: 999px;
+      background: var(--green-soft);
+      box-shadow: none;
+      margin-bottom: 0.8rem;
+    }
+
+      .eyebrow::before {
+        content: "";
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--green), var(--blue));
+        box-shadow: 0 0 0 0.45rem rgba(11, 111, 255, 0.1);
+      }
+
+      .faq-hero h1 {
+        max-width: 25ch;
+        margin: 0;
+        font-family: "Sora", sans-serif;
+        font-size: clamp(2.25rem, 3.8vw, 3.6rem);
+        line-height: 1.08;
+        letter-spacing: -0.055em;
+        color: #07111f;
+      }
+
+      .faq-hero h1 span {
+        display: block;
+        color: #0b6fff;
+      }
+
+      .faq-hero__lede {
+        max-width: 60ch;
+        margin: 1.65rem 0 2rem;
+        color: #273246;
+        font-size: clamp(1rem, 1.35vw, 1.25rem);
+        line-height: 1.58;
+      }
+
+      /* Search Section */
+      .search-wrapper {
+        position: relative;
+        width: min(100%, 620px);
+        margin-bottom: 1rem;
+        z-index: 10;
+      }
+
+      .search-box {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.45rem 0.5rem 0.45rem 1.65rem;
+        box-shadow: 
+          0 12px 36px rgba(24, 60, 47, 0.06), 
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: 
+          border-color 280ms ease, 
+          box-shadow 280ms ease, 
+          transform 280ms ease;
+      }
+
+      .search-box:focus-within {
+        border-color: var(--green);
+        box-shadow: 
+          0 18px 48px rgba(11, 111, 255, 0.12),
+          0 0 0 4px rgba(11, 111, 255, 0.08);
+        transform: translateY(-1px);
+      }
+
+      .search-icon {
+        width: 1.35rem;
+        height: 1.35rem;
+        color: var(--muted);
+        margin-right: 0.95rem;
+        flex-shrink: 0;
+        transition: color 240ms ease;
+      }
+
+      .search-box:focus-within .search-icon {
+        color: var(--green);
+      }
+
+      .search-input {
+        width: 100%;
+        height: 2.85rem;
+        border: none;
+        background: transparent;
+        outline: none;
+        color: var(--text);
+        font-family: inherit;
+        font-size: 1.05rem;
+        font-weight: 500;
+      }
+
+      .search-input::placeholder {
+        color: #9ab0a6;
+      }
+
+      .search-clear {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 999px;
+        color: var(--muted);
+        background: transparent;
+        margin-right: 0.25rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 200ms ease, background-color 200ms ease, color 200ms ease;
+      }
+
+      .search-clear.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .search-clear:hover {
+        background-color: rgba(19, 54, 41, 0.06);
+        color: var(--text);
+      }
+
+      .search-clear svg {
+        width: 1rem;
+        height: 1rem;
+        stroke-width: 2.5;
+      }
+
+      /* Quick Suggestion Tags */
+      .search-suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.55rem;
+        margin-top: 1rem;
+      }
+
+      .suggestion-tag {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(19, 54, 41, 0.08);
+        border-radius: 999px;
+        padding: 0.42rem 0.95rem;
+        box-shadow: 0 4px 10px rgba(24, 60, 47, 0.02);
+        transition: 
+          background-color 200ms, 
+          border-color 200ms, 
+          color 200ms, 
+          transform 200ms;
+      }
+
+      .suggestion-tag:hover {
+        background-color: var(--green-soft);
+        border-color: rgba(11, 111, 255, 0.25);
+        color: #084fba;
+        transform: translateY(-1px);
+      }
+
+      /* Main Page Content Grid */
+      .faq-shell {
+        width: min(calc(100% - clamp(2rem, 5vw, 6rem)), min(var(--max-width), 1360px));
+        margin: 0 auto clamp(5rem, 8vw, 8rem);
+        display: grid;
+        grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+        gap: clamp(2rem, 5vw, 5rem);
+        align-items: start;
+      }
+
+      /* Sticky Sidebar Navigation */
+      .faq-nav-container {
+        position: sticky;
+        top: 8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      .faq-nav {
+        padding: 1.15rem;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: 0 18px 44px rgba(24, 60, 47, 0.06);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+
+      .faq-nav strong {
+        display: block;
+        margin: 0.25rem 0.5rem 0.95rem;
+        font-size: 0.84rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(19, 54, 41, 0.58);
+      }
+
+      .faq-nav a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 0.95rem;
+        border-radius: 0.95rem;
+        color: #294339;
+        font-size: 0.94rem;
+        font-weight: 750;
+        margin-bottom: 0.25rem;
+        transition: 
+          background 220ms ease, 
+          color 220ms ease, 
+          transform 220ms ease;
+      }
+
+      .faq-nav a:last-child {
+        margin-bottom: 0;
+      }
+
+      .faq-nav a:hover {
+        background: rgba(11, 111, 255, 0.08);
+        color: #084fba;
+        transform: translateX(3px);
+      }
+
+      .faq-nav a.is-active {
+        background: #0b1120;
+        color: #ffffff;
+        transform: translateX(3px);
+        box-shadow: 0 8px 20px rgba(11, 17, 32, 0.12);
+      }
+
+      .faq-nav a .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.74rem;
+        font-weight: 800;
+        padding: 0.15rem 0.45rem;
+        border-radius: 999px;
+        background: rgba(19, 54, 41, 0.06);
+        color: var(--muted);
+        transition: background-color 220ms, color 220ms;
+      }
+
+      .faq-nav a:hover .badge {
+        background: rgba(11, 111, 255, 0.12);
+        color: #084fba;
+      }
+
+      .faq-nav a.is-active .badge {
+        background: rgba(255, 255, 255, 0.15);
+        color: #2f86ff;
+      }
+
+      /* Right-side Content */
+      .faq-content {
+        display: flex;
+        flex-direction: column;
+        gap: 3.5rem;
+      }
+
+      .faq-category {
+        scroll-margin-top: 8.5rem;
+      }
+
+      .faq-category__header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .faq-category__header h2 {
+        margin: 0;
+        font-family: "Sora", sans-serif;
+        font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+        line-height: 1.15;
+        letter-spacing: -0.04em;
+        color: #07111f;
+      }
+
+      .faq-category__icon {
+        width: 2.25rem;
+        height: 2.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.72rem;
+        background: linear-gradient(135deg, var(--green-soft), #dbeafe);
+        color: #084fba;
+        box-shadow: 0 4px 12px rgba(11, 111, 255, 0.08);
+        flex-shrink: 0;
+      }
+
+      .faq-category__icon svg {
+        width: 1.2rem;
+        height: 1.2rem;
+        stroke-width: 2.3;
+      }
+
+      .faq-cards-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+      }
+
+      /* Premium FAQ Accordion Card */
+      .faq-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.86);
+        box-shadow: 0 10px 30px rgba(24, 60, 47, 0.04);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        overflow: hidden;
+        transition: 
+          transform 300ms ease, 
+          box-shadow 300ms ease, 
+          border-color 300ms ease;
+      }
+
+      .faq-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 16px 40px rgba(24, 60, 47, 0.08), 
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        border-color: rgba(47, 134, 255, 0.35);
+      }
+
+      .faq-card.is-open {
+        border-color: rgba(47, 134, 255, 0.5);
+        box-shadow: 
+          0 20px 48px rgba(24, 60, 47, 0.1),
+          0 0 24px rgba(47, 134, 255, 0.06);
+      }
+
+      .faq-card__trigger {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.25rem;
+        padding: 1.35rem 1.65rem;
+        text-align: left;
+        color: #07111f;
+        transition: color 240ms;
+      }
+
+      .faq-card__trigger h3 {
+        margin: 0;
+        font-family: "Sora", sans-serif;
+        font-size: clamp(0.98rem, 1.25vw, 1.15rem);
+        font-weight: 700;
+        line-height: 1.35;
+        letter-spacing: -0.02em;
+        transition: color 240ms ease;
+      }
+
+      .faq-card:hover .faq-card__trigger h3 {
+        color: #084fba;
+      }
+
+      .faq-card.is-open .faq-card__trigger h3 {
+        color: #084fba;
+      }
+
+      .faq-card__chevron {
+        width: 1.65rem;
+        height: 1.65rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: rgba(19, 54, 41, 0.04);
+        color: var(--muted);
+        flex-shrink: 0;
+        transition: 
+          transform 320ms cubic-bezier(0.16, 1, 0.3, 1), 
+          background-color 240ms, 
+          color 240ms;
+      }
+
+      .faq-card:hover .faq-card__chevron {
+        background-color: var(--green-soft);
+        color: #084fba;
+      }
+
+      .faq-card.is-open .faq-card__chevron {
+        transform: rotate(180deg);
+        background-color: #0b1120;
+        color: #ffffff;
+      }
+
+      .faq-card__chevron svg {
+        width: 0.85rem;
+        height: 0.85rem;
+        stroke-width: 3;
+      }
+
+      /* Grid transition trick for height animation */
+      .faq-card__body {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        visibility: hidden;
+        transition: 
+          grid-template-rows 280ms cubic-bezier(0.16, 1, 0.3, 1), 
+          opacity 240ms ease, 
+          visibility 280ms ease;
+      }
+
+      .faq-card.is-open .faq-card__body {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .faq-card__content {
+        overflow: hidden;
+        min-height: 0;
+      }
+
+      .faq-card__inner {
+        padding: 0 1.65rem 1.45rem;
+        color: var(--muted);
+        font-size: 0.96rem;
+        line-height: 1.68;
+      }
+
+      .faq-card__inner p {
+        margin: 0;
+      }
+
+      .faq-card__inner p + p {
+        margin-top: 0.85rem;
+      }
+
+      /* No Results Found card */
+      .no-results {
+        display: none;
+        text-align: center;
+        padding: 3.5rem 2rem;
+        border: 1px dashed var(--line);
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .no-results__illustration {
+        width: 3.5rem;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: #f1f5f9;
+        color: #64748b;
+        margin: 0 auto 1.25rem;
+      }
+
+      .no-results h3 {
+        margin: 0 0 0.5rem;
+        font-family: "Sora", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #07111f;
+      }
+
+      .no-results p {
+        margin: 0 0 1.5rem;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .reset-search-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        height: 2.5rem;
+        padding: 0 1.2rem;
+        border-radius: 999px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #084fba;
+        background: var(--green-soft);
+        border: 1px solid rgba(11, 111, 255, 0.15);
+        box-shadow: 0 4px 12px rgba(11, 111, 255, 0.06);
+        transition: all 200ms ease;
+      }
+
+      .reset-search-btn:hover {
+        background: #dbeafe;
+        border-color: rgba(11, 111, 255, 0.3);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(11, 111, 255, 0.12);
+      }
+
+      /* Premium CTA Section */
+      .contact-band {
+        margin-top: 2rem;
+        padding: clamp(2rem, 4vw, 3.2rem);
+        border-radius: var(--radius-lg);
+        background: #0b1120;
+        color: #ffffff;
+        box-shadow: 0 28px 70px rgba(8, 13, 24, 0.22);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .contact-band::before {
+        content: "";
+        position: absolute;
+        inset: -20% -20% auto auto;
+        width: 25rem;
+        height: 25rem;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(47, 134, 255, 0.15), transparent 65%);
+        pointer-events: none;
+      }
+
+      .contact-band__content {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .contact-band h2 {
+        margin: 0;
+        font-family: "Sora", sans-serif;
+        font-size: clamp(1.85rem, 3vw, 2.75rem);
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+      }
+
+      .contact-band p {
+        margin: 0.85rem 0 0;
+        max-width: 60ch;
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.65;
+      }
+
+      .contact-band__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+        justify-self: end;
+      }    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3.35rem;
+      padding: 0.95rem 1.85rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #1687ff 0%, #0b6fff 100%);
+      color: #ffffff;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      box-shadow: 0 12px 28px rgba(11, 111, 255, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(11, 111, 255, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    }    .button--ghost {
+      background: #ffffff;
+      color: #0f172a;
+      border: 1px solid rgba(15, 23, 42, 0.1);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .button--ghost:hover {
+      background: #f8fafc;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      border-color: rgba(15, 23, 42, 0.15);
+    }
+
+      /* Animation reveals */
+      .reveal {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(40px) scale(0.95);
+      transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1), transform 1000ms cubic-bezier(0.16, 1, 0.3, 1), filter 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0) scale(1);
+    }
+
+      /* Responsive Media Queries */
+      @media (max-width: 1024px) {
+        .faq-shell {
+          grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+          gap: 2.5rem;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .faq-hero {
+          padding-top: clamp(2rem, 5vw, 3rem);
+        }
+
+        .faq-shell {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        /* Convert sticky vertical list to mobile horizontal tab bar */
+        .faq-nav-container {
+          position: sticky;
+          top: 4rem; /* Match header height */
+          z-index: 25;
+          margin-inline: -1rem;
+          padding-inline: 1rem;
+          background: rgba(248, 252, 250, 0.94);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-bottom: 1px solid var(--line);
+        }
+
+        .faq-nav {
+          display: flex;
+          gap: 0.45rem;
+          overflow-x: auto;
+          padding: 0.75rem 0.25rem;
+          border: none;
+          background: transparent;
+          box-shadow: none;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+          scrollbar-width: none; /* Firefox */
+        }
+
+        .faq-nav::-webkit-scrollbar {
+          display: none; /* Chrome/Safari */
+        }
+
+        .faq-nav strong {
+          display: none;
+        }
+
+        .faq-nav a {
+          white-space: nowrap;
+          margin-bottom: 0;
+          font-size: 0.88rem;
+          padding: 0.52rem 0.95rem;
+          border-radius: 999px;
+          border: 1px solid rgba(19, 54, 41, 0.08);
+          background: rgba(255, 255, 255, 0.78);
+        }
+
+        .faq-nav a.is-active {
+          border-color: #0b1120;
+          transform: none;
+        }
+
+        .faq-nav a:hover {
+          transform: none;
+        }
+
+        .faq-category__header {
+          margin-bottom: 1.15rem;
+        }
+
+        .contact-band__content {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .contact-band__actions {
+          justify-self: start;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .faq-hero h1 {
+          font-size: clamp(1.85rem, 7vw, 2.35rem);
+        }
+
+        .search-box {
+          padding-left: 1.25rem;
+        }
+
+        .search-icon {
+          margin-right: 0.65rem;
+        }
+
+        .suggestion-tag {
+          font-size: 0.78rem;
+          padding: 0.35rem 0.8rem;
+        }
+
+        .faq-card__trigger {
+          padding: 1.15rem 1.35rem;
+          gap: 1rem;
+        }
+
+        .faq-card__inner {
+          padding: 0 1.35rem 1.25rem;
+          font-size: 0.92rem;
+        }
+
+        .contact-band {
+          padding: 1.5rem;
+        }
+
+        .contact-band__actions {
+          flex-direction: column;
+          width: 100%;
+          gap: 0.7rem;
+        }
+
+        .contact-band__actions .button {
+          width: 100%;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    
+    .parallax-slow {
+      transform: translateY(calc(var(--scroll-y, 0px) * 0.1));
+      will-change: transform;
+    }
+    .section-heading {
+      align-items: center !important;
+      text-align: center !important;
+      max-width: 100% !important;
+    }
+    .section-heading h2 {
+      text-align: center !important;
+      white-space: normal !important; text-wrap: balance;
+      max-width: 100% !important;
+    }
+    @media (max-width: 1024px) {
+      .section-heading h2 {
+        white-space: normal !important;
+      }
+    }
+    
+    .faq__intro h2, .omnichannel .copy-panel h2 {
+      text-align: left !important;
+      white-space: normal !important;
+    }
+  </style>
+  <style>
+    .section-heading {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      max-width: 100% !important;
+    }
+    .section-heading h2 {
+      text-align: center !important;
+      white-space: normal !important; text-wrap: balance;
+      max-width: 100% !important;
+    }
+    @media (max-width: 1024px) {
+      .section-heading h2 {
+        white-space: normal !important;
+      }
+    }
+    
+    .faq__intro h2, .omnichannel .copy-panel h2 {
+      text-align: left !important;
+      white-space: normal !important;
+    }
+  </style>
+  </head>
+  <body>
+    <div data-site-header></div>
+
+    <main>
+      <!-- Hero Header Section -->
+      <section class="faq-hero">
+        <div class="reveal is-visible">
+          <span class="eyebrow">FAQ Help Desk</span>
+          <h1>Frequently Asked <span>Questions</span></h1>
+          <p class="faq-hero__lede">
+            Have questions about Connektly platform solutions, WhatsApp Business API setup, features, billing, or compliance? Find instant answers below.
+          </p>
+        </div>
+
+        <!-- Live Search Bar -->
+        <div class="search-wrapper reveal is-visible">
+          <div class="search-box">
+            <svg
+              class="search-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="text"
+              id="faq-search"
+              class="search-input"
+              placeholder="Search answers by keywords..."
+              autocomplete="off"
+              aria-label="Search FAQ"
+            />
+            <button type="button" id="search-clear-btn" class="search-clear" aria-label="Clear search input">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Suggested Search Keywords -->
+          <div class="search-suggestions">
+            <button type="button" class="suggestion-tag" data-query="free trial">Free Trial</button>
+            <button type="button" class="suggestion-tag" data-query="meta verification">Meta Verification</button>
+            <button type="button" class="suggestion-tag" data-query="green tick">Green Tick</button>
+            <button type="button" class="suggestion-tag" data-query="meta charges">Meta Conversation Charges</button>
+            <button type="button" class="suggestion-tag" data-query="compliance">WhatsApp Compliance</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Shelf Content Grid -->
+      <section class="faq-shell">
+        <!-- Left Side Navigation -->
+        <aside class="faq-nav-container reveal is-visible">
+          <nav class="faq-nav" aria-label="FAQ categories selection">
+            <strong>Categories</strong>
+            <a href="#getting-started" class="faq-nav-link is-active">
+              <span>Getting Started</span>
+              <span class="badge" data-count="3">3</span>
+            </a>
+            <a href="#whatsapp-api" class="faq-nav-link">
+              <span>WhatsApp API</span>
+              <span class="badge" data-count="4">4</span>
+            </a>
+            <a href="#inbox-automation" class="faq-nav-link">
+              <span>Inbox & Automation</span>
+              <span class="badge" data-count="3">3</span>
+            </a>
+            <a href="#pricing-billing" class="faq-nav-link">
+              <span>Pricing & Billing</span>
+              <span class="badge" data-count="3">3</span>
+            </a>
+            <a href="#security-compliance" class="faq-nav-link">
+              <span>Security & Compliance</span>
+              <span class="badge" data-count="2">2</span>
+            </a>
+          </nav>
+        </aside>
+
+        <!-- Right Side FAQ Content Cards -->
+        <div class="faq-content-wrap">
+          <div class="faq-content">
+            
+            <!-- Category 1: Getting Started -->
+            <section id="getting-started" class="faq-category reveal is-visible">
+              <div class="faq-category__header">
+                <span class="faq-category__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </span>
+                <h2>Getting Started</h2>
+              </div>
+              <div class="faq-cards-list">
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>What is Connektly?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Connektly is a premium, developer-friendly communication platform and infrastructure built directly on top of the official WhatsApp Cloud API. We help growing businesses, developers, and support departments unify their customer interactions across WhatsApp and other social integrations (like Instagram and Messenger).
+                        </p>
+                        <p>
+                          With Connektly, you can manage conversations in a shared collaborative inbox, build robust automated message routing workflows, launch highly targeted campaign broadcasts with deliverability reports, and track exact Meta consumption rates.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>How does the 7-day free trial work?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Our 7-day free trial gives you access to the Connektly platform features, including the Shared Inbox, visual workflow builder, templates approval system, broadcasts, and developer webhook systems.
+                        </p>
+                        <p>
+                          Upon registration, you will get access to a secure sandbox environment where you can safely test the API sending and receiving. You can also immediately connect your own WhatsApp Business number to validate live customer communication channels right away.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>Do I need a credit card to sign up for the trial?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          No. Absolutely no credit card is required to sign up or build inside our sandbox environment during your 7-day trial.
+                        </p>
+                        <p>
+                          You are free to try out the interface and APIs entirely risk-free. If your team is satisfied with Connektly and decides to transition to active production channels, you can input your payment preferences and subscribe to one of our premium plans.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <!-- Category 2: WhatsApp API -->
+            <section id="whatsapp-api" class="faq-category reveal">
+              <div class="faq-category__header">
+                <span class="faq-category__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                </span>
+                <h2>WhatsApp API</h2>
+              </div>
+              <div class="faq-cards-list">
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>What is the difference between WhatsApp Business App and WhatsApp Business API?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          The **WhatsApp Business App** is a basic, free mobile application designed strictly for small, local merchants with low chat volumes. It is limited to one primary phone and up to four linked devices, lacking automation pipelines, deep CRM sync, template schedulers, or scalable bulk campaigns.
+                        </p>
+                        <p>
+                          The **WhatsApp Business API** is built for growing and enterprise scale teams. It provides advanced developers and operations managers with the capability to integrate WhatsApp directly into custom software, support desks, and CRM databases. It enables multi-agent collaboration, smart AI chatbots, automated high-throughput routing, and mass broadcasts. Connektly acts as the premium interface and backend server layer for Meta's official API.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>Do I need my own WhatsApp number to use Connektly?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Yes. To communicate with actual customers, you will need a clean, active phone number that is owned by your business. The phone number must be able to receive an SMS or voice verification call, and it cannot have an active standard WhatsApp app or WhatsApp Business mobile app account associated with it. If it does, you must delete those mobile accounts first during setup.
+                        </p>
+                        <p>
+                          However, if you are simply trying out the platform features or drafting your API integration code, you do not need a phone number immediately. We supply you with a dedicated test sandbox phone number to send mock alerts right away.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>How does the Meta business verification process work?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Meta Business Verification is a review process where Meta validates the official existence, legal name, and physical location of your business entity. You submit standard corporate registration documents, tax certificates, or utility bills via your Meta Business Manager suite.
+                        </p>
+                        <p>
+                          While completing verification is no longer mandatory to start sending WhatsApp messages (Meta allows unverified businesses to run a "trial tier" of up to 250 customer-initiated chats per day), verification is highly recommended. Completing the verification raises your message delivery limits, opens high-volume limits, and allows your profile to qualify for the Official Green Tick badge.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>Can I get an Official Green Tick badge for my WhatsApp number?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Yes. The Official Business Account designation (signified by a green checkmark badge next to your company name in chat windows) is granted directly by Meta to verified business numbers representing recognized, authentic, and heavily searched brands.
+                        </p>
+                        <p>
+                          To qualify, you must first complete Meta Business Verification and establish active paid subscription messaging histories on Connektly. Once ready, you can file the Green Tick application directly through your Connektly control panel at no extra cost, and our team will guide you to optimize your approval chances.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <!-- Category 3: Inbox & Automation -->
+            <section id="inbox-automation" class="faq-category reveal">
+              <div class="faq-category__header">
+                <span class="faq-category__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                  </svg>
+                </span>
+                <h2>Inbox & Automation</h2>
+              </div>
+              <div class="faq-cards-list">
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>Can we route conversations to specific team members?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Yes, completely. Connektly contains a sophisticated routing and workflow engine. You can configure custom assignment rules to auto-allocate incoming customer chats based on active support hours, team specialties, agent queues, and trigger keywords.
+                        </p>
+                        <p>
+                          Agents also have the manual flexibility to transfer tickets, leave internal notes that are completely hidden from the customer to discuss complex cases, and apply custom labels to segment conversations.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>Does Connektly support message templates and media broadcasts?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Yes. Connektly features a comprehensive templates designer where you can compose Meta-compliant message templates. Our template creator supports variables, custom action buttons, quick replies, images, and document attachments.
+                        </p>
+                        <p>
+                          Once submitted, template approvals are returned by Meta within minutes. After approval, you can schedule and launch targeted media broadcasts to large segments of opted-in customer lists, tracking open rates, click rates, and delivery success statistics.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>Can I connect channels other than WhatsApp?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Yes. Connektly provides a truly omnichannel communication workspace. In addition to our flagship WhatsApp Business API features, you can natively sync and connect Instagram Direct Messages and Facebook Messenger channels to your inbox.
+                        </p>
+                        <p>
+                          This lets your support agents read, categorize, assign, and reply to all cross-channel chats inside a single unified dashboard, reducing tool hopping and saving valuable time.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <!-- Category 4: Pricing & Billing -->
+            <section id="pricing-billing" class="faq-category reveal">
+              <div class="faq-category__header">
+                <span class="faq-category__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                  </svg>
+                </span>
+                <h2>Pricing & Billing</h2>
+              </div>
+              <div class="faq-cards-list">
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>How are platform plans billed?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Connektly plans are billed on a flexible monthly or heavily discounted annual cycle. The platform fee covers core platform server operations, dashboard metrics, unlimited agent logins, automation scripts, CRM integration hooks, and visual templates management features.
+                        </p>
+                        <p>
+                          There are absolutely no hidden platform transaction charges or markup rates on our software. The exact subscription price is determined by the specific workflow plan (Developer, Business, or Enterprise) that your team chooses.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>What are Meta conversation charges and how are they calculated?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Meta charges for official WhatsApp Business API usage on a per-conversation basis rather than a per-message basis. A single conversation is a 24-hour continuous window that begins the moment you reply to a customer query or send a business-initiated template alert.
+                        </p>
+                        <p>
+                          These conversations are billed under four distinct categories: Utility, Authentication, Marketing, and Service. Each category has its own specific regional pricing set directly by Meta. Connektly routes these usage fees directly to your Meta billing setup with **zero additional platform markup**, ensuring complete financial transparency.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>Can I change or cancel my plan at any time?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Yes. You have total freedom to upgrade, downgrade, or cancel your Connektly platform subscription plan at any time from your account billing tab.
+                        </p>
+                        <p>
+                          Upgrades and downgrades will update your account permissions instantly and apply prorated adjustments to your subsequent billing invoice. If you decide to cancel, your access will remain fully functional until the final day of your current billing period.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <!-- Category 5: Security & Compliance -->
+            <section id="security-compliance" class="faq-category reveal">
+              <div class="faq-category__header">
+                <span class="faq-category__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <polyline points="9 12 11 14 15 10"></polyline>
+                  </svg>
+                </span>
+                <h2>Security & Compliance</h2>
+              </div>
+              <div class="faq-cards-list">
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>Is my customer conversation data secure with Connektly?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Absolutely. Security and data isolation are core principles of our server infrastructure. All text data, media files, and active session tokens processed by Connektly are encrypted using industry-standard TLS 1.3 protocol during transit, and secure AES-256 formatting at rest.
+                        </p>
+                        <p>
+                          Our servers are hosted inside secure, state-of-the-art cloud datacenters featuring physical security checks, virtual firewalls, DDoS protection, and continuous security auditing protocols. We enforce strict role-based access tokens to ensure your workspace data is never exposed.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="faq-card">
+                  <button class="faq-card__trigger" aria-expanded="false">
+                    <h3>Is Connektly compliant with WhatsApp and Meta policies?</h3>
+                    <span class="faq-card__chevron">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
+                  </button>
+                  <div class="faq-card__body">
+                    <div class="faq-card__content">
+                      <div class="faq-card__inner">
+                        <p>
+                          Yes, fully. Connektly is designed in complete alignment with Meta's official Developer Guidelines and WhatsApp's Business Policy and Commerce Policy documents.
+                        </p>
+                        <p>
+                          By using our dashboard to deploy official template builders, user opt-in workflows, and response mechanisms, you verify that your marketing broadcasts conform to compliance laws. This proactive alignment safeguards your business phone number from spam reports, keep block rates low, and prevents Meta phone status suspensions.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <!-- No Results Card -->
+            <div id="no-results-card" class="no-results">
+              <div class="no-results__illustration">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+              </div>
+              <h3>No answers found</h3>
+              <p>We couldn't find any questions matching your search keywords. Try adjusting your query or filters.</p>
+              <button type="button" id="reset-search-btn" class="reset-search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                Reset Search
+              </button>
+            </div>
+
+            <!-- Premium CTA Support Banner -->
+            <section class="contact-band reveal">
+              <div class="contact-band__content">
+                <div>
+                  <h2>Still have questions?</h2>
+                  <p>
+                    Can't find the answers you are looking for? Our messaging specialists are here to guide you with custom onboarding assistance, enterprise architectures, or billing questions.
+                  </p>
+                </div>
+                <div class="contact-band__actions">
+                  <a class="button" href="https://app.connektly.in/signup" target="_blank" rel="noopener noreferrer">Start Free Trial</a>
+                  <a class="button button--ghost" href="mailto:support@connektly.in">Contact Support</a>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div data-site-footer></div>
+
+    <!-- Scripts -->
+    <script src="../components/global.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- 1. Accordion Toggle Functionality ---
+        const accordions = document.querySelectorAll(".faq-card");
+
+        accordions.forEach((card) => {
+          const trigger = card.querySelector(".faq-card__trigger");
+
+          trigger.addEventListener("click", () => {
+            const isOpen = card.classList.contains("is-open");
+            
+            // Toggle current accordion
+            card.classList.toggle("is-open", !isOpen);
+            trigger.setAttribute("aria-expanded", String(!isOpen));
+          });
+        });
+
+        // --- 2. Live Search Filtering ---
+        const searchInput = document.getElementById("faq-search");
+        const clearBtn = document.getElementById("search-clear-btn");
+        const faqCards = document.querySelectorAll(".faq-card");
+        const faqCategories = document.querySelectorAll(".faq-category");
+        const noResultsCard = document.getElementById("no-results-card");
+        const resetBtn = document.getElementById("reset-search-btn");
+        const navLinks = document.querySelectorAll(".faq-nav-link");
+
+        function filterFAQ(query) {
+          const cleanQuery = query.trim().toLowerCase();
+          let totalVisible = 0;
+
+          // Toggle clear button visibility
+          if (cleanQuery.length > 0) {
+            clearBtn.classList.add("is-visible");
+          } else {
+            clearBtn.classList.remove("is-visible");
+          }
+
+          faqCategories.forEach((category) => {
+            const cards = category.querySelectorAll(".faq-card");
+            let categoryVisibleCount = 0;
+
+            cards.forEach((card) => {
+              const question = card.querySelector("h3").textContent.toLowerCase();
+              const answer = card.querySelector(".faq-card__inner").textContent.toLowerCase();
+              
+              if (question.includes(cleanQuery) || answer.includes(cleanQuery)) {
+                card.style.display = "block";
+                categoryVisibleCount++;
+                totalVisible++;
+                
+                // Highlight search term inside card logic (optional, keep it clean for now)
+              } else {
+                card.style.display = "none";
+                card.classList.remove("is-open");
+                card.querySelector(".faq-card__trigger").setAttribute("aria-expanded", "false");
+              }
+            });
+
+            // Toggle category header & section visibility
+            if (categoryVisibleCount > 0) {
+              category.style.display = "block";
+            } else {
+              category.style.display = "none";
+            }
+
+            // Update badges in the navigation menu
+            const categoryId = category.getAttribute("id");
+            const navLink = document.querySelector(`.faq-nav-link[href="#${categoryId}"]`);
+            if (navLink) {
+              const badge = navLink.querySelector(".badge");
+              badge.textContent = categoryVisibleCount;
+              if (categoryVisibleCount === 0) {
+                navLink.style.display = "none";
+              } else {
+                navLink.style.display = "flex";
+              }
+            }
+          });
+
+          // Toggle No Results State
+          if (totalVisible === 0) {
+            noResultsCard.style.display = "block";
+          } else {
+            noResultsCard.style.display = "none";
+          }
+        }
+
+        searchInput.addEventListener("input", (e) => {
+          filterFAQ(e.target.value);
+        });
+
+        // Clear button click
+        clearBtn.addEventListener("click", () => {
+          searchInput.value = "";
+          filterFAQ("");
+          searchInput.focus();
+        });
+
+        // Reset search button click
+        resetBtn.addEventListener("click", () => {
+          searchInput.value = "";
+          filterFAQ("");
+          searchInput.focus();
+        });
+
+        // Suggestion Tags click
+        const suggestions = document.querySelectorAll(".suggestion-tag");
+        suggestions.forEach((tag) => {
+          tag.addEventListener("click", () => {
+            const query = tag.dataset.query;
+            searchInput.value = query;
+            filterFAQ(query);
+            
+            // Smooth scroll to the main shell top to see search results clearly
+            document.querySelector(".faq-shell").scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          });
+        });
+
+        // --- 3. ScrollSpy & Sidebar Highlight ---
+        const scrollSpyOptions = {
+          root: null,
+          rootMargin: "-20% 0px -60% 0px", // Trigger when category occupies center viewport
+          threshold: 0
+        };
+
+        const activeObserver = new IntersectionObserver((entries) => {
+          // If search is filtering, don't execute normal scrollspy to avoid conflicts
+          if (searchInput.value.trim().length > 0) return;
+
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute("id");
+              
+              navLinks.forEach((link) => {
+                const href = link.getAttribute("href").replace("#", "");
+                if (href === id) {
+                  link.classList.add("is-active");
+                } else {
+                  link.classList.remove("is-active");
+                }
+              });
+            }
+          });
+        }, scrollSpyOptions);
+
+        faqCategories.forEach((category) => {
+          activeObserver.observe(category);
+        });
+
+        // Mobile smooth tab-center helper
+        navLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            // Remove active classes manually on click
+            navLinks.forEach((l) => l.classList.remove("is-active"));
+            link.classList.add("is-active");
+            
+            // On mobile, scroll the tab bar horizontally so clicked link is centered
+            if (window.innerWidth <= 900) {
+              const navElement = document.querySelector(".faq-nav");
+              const linkRect = link.getBoundingClientRect();
+              const navRect = navElement.getBoundingClientRect();
+              const scrollLeft = navElement.scrollLeft + (linkRect.left - navRect.left) - (navRect.width / 2) + (linkRect.width / 2);
+              
+              navElement.scrollTo({
+                left: scrollLeft,
+                behavior: "smooth"
+              });
+            }
+          });
+        });
+
+        // --- 4. IntersectionObserver for Reveal Animations ---
+        const revealNodes = document.querySelectorAll(".reveal");
+
+        if ("IntersectionObserver" in window) {
+          const revealObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  revealObserver.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+          );
+
+          revealNodes.forEach((node) => revealObserver.observe(node));
+        } else {
+          revealNodes.forEach((node) => node.classList.add("is-visible"));
+        }
+      });
+    </script>
+  </body>
+</html>

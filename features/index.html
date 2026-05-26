@@ -1,0 +1,3541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features | Connektly</title>
+  <meta name="description" content="Explore Connektly's powerful features. One platform for everything WhatsApp." />
+  <link rel="icon" type="image/png" href="../connektly-favicon.png" />
+  <link rel="apple-touch-icon" href="../connektly-favicon.png" />
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f5fbf7;
+      --surface: rgba(255, 255, 255, 0.86);
+      --surface-dark: #0b1120;
+      --text: #13241d;
+      --muted: #62766d;
+      --line: rgba(19, 54, 41, 0.12);
+      --green: #0b6fff;
+      --green-bright: #2f86ff;
+      --green-soft: #eaf2ff;
+      --blue: #16b7ff;
+      --shadow: 0 28px 70px rgba(24, 60, 47, 0.12);
+      --radius-lg: 32px;
+      --radius-md: 22px;
+      --max-width: clamp(1320px, 88vw, 1640px);
+      --site-header-shell-height: 4.15rem;
+      --header-float-offset: 0.65rem;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(11, 111, 255, 0.13), transparent 28rem),
+        radial-gradient(circle at 88% 8%, rgba(22, 183, 255, 0.12), transparent 30rem),
+        linear-gradient(180deg, #ffffff 0%, #f8fcfa 46%, #ffffff 100%);
+      min-height: 100vh;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      cursor: pointer;
+      font: inherit;
+    }
+
+
+
+    .policy-hero {
+      width: min(calc(100% - clamp(2rem, 5vw, 6rem)), min(var(--max-width), 1360px));
+      margin: 0 auto;
+      padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(2.5rem, 5vw, 4.5rem);
+    }
+
+    .policy-hero__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(310px, 0.8fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: start;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      padding: 0.4rem 1rem;
+      border: none;
+      border-radius: 999px;
+      background: var(--green-soft);
+      box-shadow: none;
+      margin-bottom: 0.8rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      box-shadow: 0 0 0 0.45rem rgba(11, 111, 255, 0.1);
+    }
+
+    .policy-hero h1 {
+      max-width: 30ch;
+      margin: 1rem 0 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(2.2rem, 3.8vw, 3.8rem);
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+      color: #07111f;
+    }
+
+    .policy-hero h1 span {
+      display: block;
+      color: #0b6fff;
+    }
+
+    .policy-hero__lede {
+      max-width: 60ch;
+      margin: 1.65rem 0 0;
+      color: #273246;
+      font-size: clamp(0.945rem, 1.26vw, 1.215rem);
+      line-height: 1.58;
+    }
+
+    .policy-status {
+      padding: clamp(1.25rem, 2.4vw, 2rem);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(135deg, rgba(19, 36, 29, 0.96), rgba(8, 17, 31, 0.96)),
+        radial-gradient(circle at 80% 10%, rgba(47, 134, 255, 0.25), transparent 50%);
+      color: #ffffff;
+      box-shadow: 0 28px 70px rgba(8, 13, 24, 0.22);
+      transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+    }
+
+    .policy-status:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 32px 80px rgba(8, 13, 24, 0.28);
+      border-color: rgba(47, 134, 255, 0.25);
+    }
+
+    .policy-status strong {
+      display: block;
+      margin-bottom: 0.65rem;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+    }
+
+    .policy-status p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.74);
+      line-height: 1.7;
+    }
+
+    .policy-meta {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .policy-meta span {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.11);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.92rem;
+    }
+
+    .policy-meta b {
+      color: #ffffff;
+    }
+
+    .policy-shell {
+      width: min(calc(100% - clamp(2rem, 5vw, 6rem)), min(var(--max-width), 1360px));
+      margin: 0 auto clamp(4rem, 7vw, 7rem);
+      display: grid;
+      grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: start;
+    }
+
+    .policy-nav {
+      position: sticky;
+      top: 7rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 18px 44px rgba(24, 60, 47, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .policy-nav strong {
+      display: block;
+      margin: 0.25rem 0 0.85rem;
+      font-size: 0.86rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(19, 54, 41, 0.58);
+    }
+
+    .policy-nav a {
+      display: block;
+      padding: 0.78rem 0.85rem;
+      border-radius: 0.95rem;
+      color: #294339;
+      font-weight: 750;
+      transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+    }
+
+    .policy-nav a:hover {
+      background: rgba(11, 111, 255, 0.1);
+      color: #084fba;
+      transform: translateX(3px);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .summary-card,
+    .policy-content {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 18px 44px rgba(24, 60, 47, 0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .summary-card {
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 54px rgba(24, 60, 47, 0.12);
+      border-color: rgba(47, 134, 255, 0.3);
+    }
+
+    .summary-card span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-bottom: 0.95rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--green-soft), #dbeafe);
+      color: #084fba;
+      font-size: 1.1rem;
+      font-weight: 900;
+      box-shadow: 0 4px 12px rgba(11, 111, 255, 0.12);
+    }
+
+    .summary-card h2 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+    }
+
+    .summary-card p {
+      margin: 0.55rem 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .policy-content {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .policy-section {
+      padding: clamp(2rem, 4vw, 3.5rem);
+      scroll-margin-top: 7.5rem;
+    }
+
+    .policy-section+.policy-section {
+      border-top: 1px solid var(--line);
+    }
+
+    .policy-section h2 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: #07111f;
+    }
+
+    .policy-section p {
+      margin: 1rem 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .policy-section ul {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1.2rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .policy-section li {
+      position: relative;
+      padding-left: 1.45rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.65rem;
+    }
+
+    .policy-section li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7rem;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 999px;
+      background: var(--green);
+    }
+
+    .contact-band {
+      margin-top: 1.25rem;
+      padding: clamp(1.5rem, 3vw, 2.35rem);
+      border-radius: var(--radius-lg);
+      background: #0b1120;
+      color: #ffffff;
+      box-shadow: 0 28px 70px rgba(8, 13, 24, 0.18);
+    }
+
+    .contact-band h2 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(2rem, 3.3vw, 3.35rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+    }
+
+    .contact-band p {
+      margin: 0.85rem 0 0;
+      max-width: 70ch;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .contact-band a {
+      color: var(--green-bright);
+      font-weight: 800;
+    }
+
+    .site-footer.custom-footer {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 5rem max(1rem, calc((100vw - var(--max-width)) / 2)) 2rem;
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0;
+      background-color: #0b1120;
+      box-shadow: none;
+    }
+
+    .custom-footer .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .custom-footer .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .custom-footer .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .custom-footer .footer-brand-logo {
+      flex-shrink: 0;
+      /* filter removed for natural logo color */
+    }
+
+    .custom-footer .footer-brand-text {
+      color: #ffffff;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .custom-footer .footer-desc,
+    .custom-footer .footer-copy,
+    .custom-footer .footer-nav-col ul li a,
+    .custom-footer .footer-legal li a {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .custom-footer .footer-desc {
+      max-width: 320px;
+      margin: 0;
+    }
+
+    .custom-footer .footer-socials,
+    .custom-footer .footer-bottom-flex,
+    .custom-footer .footer-legal {
+      display: flex;
+      align-items: center;
+    }
+
+    .custom-footer .footer-socials {
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .custom-footer .social-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.7;
+      transition: opacity 200ms;
+    }
+
+    .custom-footer .social-icon:hover {
+      opacity: 1;
+    }
+
+    .custom-footer .social-icon img {
+      width: 100%;
+      height: auto;
+    }
+
+    .custom-footer .footer-nav-col h3 {
+      margin: 0 0 1.25rem;
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .custom-footer .footer-nav-col ul,
+    .custom-footer .footer-legal {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .custom-footer .footer-nav-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .custom-footer .footer-nav-col ul li a,
+    .custom-footer .footer-legal li a {
+      transition: color 200ms;
+    }
+
+    .custom-footer .footer-nav-col ul li a:hover,
+    .custom-footer .footer-legal li a:hover {
+      color: #ffffff;
+    }
+
+    .custom-footer .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin: 2rem auto 0;
+    }
+
+    .custom-footer .footer-bottom-flex {
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .custom-footer .footer-copy {
+      margin: 0;
+    }
+
+    .custom-footer .footer-legal {
+      gap: 1.5rem;
+    }
+
+    .custom-footer .footer-disclaimer {
+      margin: 0;
+      color: #475569;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .reveal {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(40px) scale(0.95);
+      transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1), transform 1000ms cubic-bezier(0.16, 1, 0.3, 1), filter 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0) scale(1);
+    }
+
+
+
+    @media (max-width: 1080px) {
+      .site-nav {
+        gap: 0.05rem;
+      }
+
+      .site-nav>a:not(.button),
+      .nav-dropdown__toggle {
+        padding-inline: 0.58rem;
+        font-size: 0.84rem;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .policy-hero__grid,
+      .policy-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .policy-nav {
+        position: static;
+        display: flex;
+        gap: 0.35rem;
+        overflow-x: auto;
+      }
+
+      .policy-nav strong {
+        display: none;
+      }
+
+      .policy-nav a {
+        white-space: nowrap;
+      }
+
+      .policy-hero h1 {
+        font-size: clamp(1.7rem, 6.8vw, 2.55rem);
+      }
+
+      .policy-section h2,
+      .contact-band h2 {
+        line-height: 1.08;
+      }
+
+      .custom-footer .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem 2rem;
+      }
+    }
+
+
+
+    @media (max-width: 600px) {
+
+      .policy-hero,
+      .policy-shell {
+        width: min(calc(100% - 1.25rem), 100%);
+      }
+
+      .policy-hero {
+        padding-top: 2rem;
+      }
+
+      .policy-hero h1 {
+        max-width: 100%;
+        font-size: clamp(1.85rem, 6.8vw, 2.15rem);
+        letter-spacing: -0.045em;
+      }
+
+      .custom-footer .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .custom-footer .footer-bottom-flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .features-page {
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 5%, rgba(47, 134, 255, 0.18), transparent 30rem),
+        radial-gradient(circle at 88% 7%, rgba(22, 183, 255, 0.13), transparent 32rem),
+        linear-gradient(180deg, #ffffff 0%, #f7fcfa 44%, #ffffff 100%);
+    }
+
+    .features-hero {
+      position: relative;
+      isolation: isolate;
+      padding: clamp(2.75rem, 6vw, 6rem) max(1.25rem, calc((100vw - var(--max-width)) / 2)) clamp(3rem, 6vw, 5rem);
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(47, 134, 255, 0.2), transparent 28rem),
+        linear-gradient(135deg, #0b1120 0%, #111827 48%, #07111f 100%);
+    }
+
+    .features-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 -1px;
+      height: 5rem;
+      background: linear-gradient(180deg, transparent, #f7fcfa);
+      pointer-events: none;
+    }
+
+    .features-hero__grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+      gap: clamp(2rem, 5vw, 5.5rem);
+      align-items: center;
+    }
+
+    .features-hero h1 {
+      max-width: 12ch;
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(2.75rem, 6.4vw, 6.35rem);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
+    }
+
+    .features-hero h1 span {
+      color: var(--green-bright);
+    }
+
+    .features-hero__lede {
+      max-width: 58ch;
+      margin: 1.45rem 0 0;
+      color: rgba(226, 232, 240, 0.82);
+      font-size: clamp(1rem, 1.35vw, 1.28rem);
+      line-height: 1.68;
+    }
+
+    .features-hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }    .button--ghost {
+      background: #ffffff;
+      color: #0f172a;
+      border: 1px solid rgba(15, 23, 42, 0.1);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .button--ghost:hover {
+      background: #f8fafc;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      border-color: rgba(15, 23, 42, 0.15);
+    }
+
+    .features-hero__proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: clamp(2rem, 4vw, 3rem);
+    }
+
+    .features-hero__proof span {
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(226, 232, 240, 0.78);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .features-hero__proof strong {
+      display: block;
+      margin-bottom: 0.24rem;
+      color: #ffffff;
+      font-family: "Sora", sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: -0.03em;
+    }
+
+    .product-console {
+      position: relative;
+      display: grid;
+      gap: 0.9rem;
+      padding: clamp(1rem, 2vw, 1.35rem);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 1.6rem;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.045)),
+        rgba(8, 15, 26, 0.7);
+      box-shadow: 0 34px 90px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .product-console__bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: #cbd5e1;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .product-console__dots {
+      display: inline-flex;
+      gap: 0.38rem;
+    }
+
+    .product-console__dots i {
+      width: 0.64rem;
+      height: 0.64rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .product-console__dots i:first-child {
+      background: #2f86ff;
+    }
+
+    .product-console__body {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.5fr) minmax(0, 1fr);
+      min-height: 460px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.15rem;
+      background: #f8fbfa;
+      color: #111827;
+    }
+
+    .console-sidebar {
+      display: grid;
+      align-content: start;
+      gap: 0.55rem;
+      padding: 1rem;
+      background: #0f172a;
+      color: #cbd5e1;
+    }
+
+    .console-sidebar span {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-height: 2.45rem;
+      padding: 0.68rem 0.72rem;
+      border-radius: 0.75rem;
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .console-sidebar span::before {
+      content: "";
+      width: 0.58rem;
+      height: 0.58rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .console-sidebar span.is-active {
+      background: rgba(47, 134, 255, 0.13);
+      color: #ffffff;
+    }
+
+    .console-sidebar span.is-active::before {
+      background: #2f86ff;
+      box-shadow: 0 0 0 0.3rem rgba(47, 134, 255, 0.12);
+    }
+
+    .console-main {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-width: 0;
+      background:
+        radial-gradient(circle at 85% 12%, rgba(47, 134, 255, 0.13), transparent 18rem),
+        #f8fbfa;
+    }
+
+    .console-main__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .console-main__header strong {
+      font-family: "Sora", sans-serif;
+      font-size: 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .console-main__header span {
+      color: #16a45a;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .console-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(170px, 0.65fr);
+      gap: 0.85rem;
+      padding: 1rem;
+    }
+
+    .conversation-list,
+    .campaign-panel {
+      display: grid;
+      align-content: start;
+      gap: 0.72rem;
+    }
+
+    .conversation-item,
+    .campaign-card,
+    .metric-strip {
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 0.95rem;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 12px 28px rgba(24, 60, 47, 0.08);
+    }
+
+    .conversation-item {
+      display: grid;
+      grid-template-columns: 2.3rem minmax(0, 1fr);
+      gap: 0.75rem;
+      padding: 0.8rem;
+    }
+
+    .conversation-item b {
+      display: grid;
+      place-items: center;
+      width: 2.3rem;
+      height: 2.3rem;
+      border-radius: 0.75rem;
+      background: #eaf2ff;
+      color: #084fba;
+      font-size: 0.78rem;
+    }
+
+    .conversation-item strong {
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    .conversation-item small {
+      display: block;
+      margin-top: 0.2rem;
+      color: #64748b;
+      line-height: 1.45;
+    }
+
+    .campaign-card {
+      padding: 1rem;
+    }
+
+    .campaign-card strong {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .campaign-card p {
+      margin: 0.45rem 0 0.8rem;
+      color: #64748b;
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    .progress-line {
+      height: 0.58rem;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e2e8f0;
+    }
+
+    .progress-line span {
+      display: block;
+      width: 76%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #0b6fff, #16b7ff);
+    }
+
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      padding: 0.85rem;
+    }
+
+    .metric-strip span {
+      color: #64748b;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .metric-strip strong {
+      display: block;
+      margin-top: 0.28rem;
+      color: #0f172a;
+      font-family: "Sora", sans-serif;
+      font-size: 1.2rem;
+    }
+
+    .features-section {
+      padding: clamp(4rem, 8vw, 7rem) max(1.25rem, calc((100vw - var(--max-width)) / 2));
+    }
+
+    .features-section--dark {
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 12% 14%, rgba(47, 134, 255, 0.12), transparent 26rem),
+        linear-gradient(135deg, #0b1120 0%, #111827 100%);
+    }
+
+    .features-section__head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.75fr) minmax(280px, 0.5fr);
+      gap: clamp(1.5rem, 4vw, 4rem);
+      align-items: end;
+      margin-bottom: clamp(2rem, 5vw, 4rem);
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(19, 54, 41, 0.7);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .features-section--dark .section-label {
+      color: rgba(47, 134, 255, 0.9);
+    }
+
+    .section-label::before {
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      box-shadow: 0 0 0 0.38rem rgba(11, 111, 255, 0.1);
+    }
+
+    .features-section h2 {
+      max-width: 14ch;
+      margin: 0.75rem 0 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(2.1rem, 4vw, 4.3rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      color: #07111f;
+    }
+
+    .features-section--dark h2 {
+      color: #ffffff;
+    }
+
+    .features-section__head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.22vw, 1.15rem);
+      line-height: 1.75;
+    }
+
+    .features-section--dark .features-section__head p {
+      color: rgba(203, 213, 225, 0.78);
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .capability-card {
+      position: relative;
+      min-height: 260px;
+      padding: 1.45rem;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 1.35rem;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 18px 44px rgba(24, 60, 47, 0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: transform 280ms ease, box-shadow 280ms ease, border-color 280ms ease;
+    }
+
+    .capability-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(47, 134, 255, 0.28);
+      box-shadow: 0 24px 58px rgba(24, 60, 47, 0.13);
+    }
+
+    .capability-card__icon {
+      display: grid;
+      place-items: center;
+      width: 2.65rem;
+      height: 2.65rem;
+      margin-bottom: 1.1rem;
+      border-radius: 0.85rem;
+      background: #eaf2ff;
+      color: #084fba;
+      font-weight: 900;
+      font-size: 0.82rem;
+    }
+
+    .capability-card h3 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: 1.2rem;
+      line-height: 1.16;
+      letter-spacing: -0.045em;
+      color: #07111f;
+    }
+
+    .capability-card p {
+      margin: 0.8rem 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .feature-showcase {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+      gap: clamp(1.75rem, 5vw, 5rem);
+      align-items: center;
+    }
+
+    .feature-showcase__copy h2 {
+      max-width: 12ch;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 0.8rem;
+      margin: 1.8rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .feature-list li {
+      display: grid;
+      grid-template-columns: 2.2rem minmax(0, 1fr);
+      gap: 0.8rem;
+      align-items: start;
+      color: rgba(226, 232, 240, 0.78);
+      line-height: 1.6;
+    }
+
+    .feature-list li::before {
+      content: "";
+      width: 0.72rem;
+      height: 0.72rem;
+      margin-top: 0.45rem;
+      border-radius: 999px;
+      background: #2f86ff;
+      box-shadow: 0 0 0 0.38rem rgba(47, 134, 255, 0.12);
+    }
+
+    .omnichannel-frame {
+      position: relative;
+      padding: clamp(0.7rem, 1.5vw, 1rem);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 1.6rem;
+      background: rgba(255, 255, 255, 0.075);
+      box-shadow: 0 30px 86px rgba(0, 0, 0, 0.28);
+    }
+
+    .omnichannel-frame img {
+      width: 100%;
+      min-height: 360px;
+      object-fit: cover;
+      border-radius: 1.1rem;
+      background: #ffffff;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.2);
+    }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .workflow-step {
+      position: relative;
+      display: grid;
+      align-content: start;
+      min-height: 240px;
+      padding: 1.35rem;
+      border: 1px solid var(--line);
+      border-radius: 1.35rem;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 18px 44px rgba(24, 60, 47, 0.08);
+    }
+
+    .workflow-step span {
+      color: #0b6fff;
+      font-family: "Sora", sans-serif;
+      font-size: 0.86rem;
+      font-weight: 900;
+    }
+
+    .workflow-step h3 {
+      margin: 1.2rem 0 0;
+      font-family: "Sora", sans-serif;
+      font-size: 1.12rem;
+      line-height: 1.18;
+      letter-spacing: -0.045em;
+    }
+
+    .workflow-step p {
+      margin: 0.75rem 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .features-cta {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 2rem;
+      align-items: center;
+      padding: clamp(1.5rem, 4vw, 3.5rem);
+      border-radius: 1.6rem;
+      background:
+        radial-gradient(circle at 86% 16%, rgba(22, 183, 255, 0.2), transparent 22rem),
+        linear-gradient(135deg, #0b1120, #13241d);
+      color: #ffffff;
+      box-shadow: 0 30px 80px rgba(8, 13, 24, 0.22);
+    }
+
+    .features-cta h2 {
+      max-width: 15ch;
+      margin: 0;
+      color: #ffffff;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+    }
+
+    .features-cta p {
+      max-width: 66ch;
+      margin: 1rem 0 0;
+      color: rgba(203, 213, 225, 0.78);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1080px) {
+      .features-hero__grid,
+      .feature-showcase,
+      .features-section__head,
+      .features-cta {
+        grid-template-columns: 1fr;
+      }
+
+      .features-hero h1,
+      .features-section h2,
+      .features-cta h2 {
+        max-width: 100%;
+      }
+
+      .capability-grid,
+      .workflow-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .features-hero {
+        padding-top: 2rem;
+        padding-bottom: 3.5rem;
+      }
+
+      .features-hero__grid {
+        gap: 1.5rem;
+      }
+
+      .features-hero h1 {
+        font-size: clamp(2.4rem, 11vw, 3.05rem);
+        line-height: 0.98;
+      }
+
+      .features-hero__proof,
+      .capability-grid,
+      .workflow-grid,
+      .product-console__body,
+      .console-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features-hero__actions {
+        flex-direction: column;
+      }
+
+      .features-hero__actions .button,
+      .features-cta .button {
+        width: 100%;
+      }
+
+      .features-hero__proof {
+        display: none;
+      }
+
+      .product-console__body {
+        min-height: auto;
+      }
+
+      .console-sidebar {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .console-sidebar span {
+        justify-content: center;
+        padding-inline: 0.4rem;
+        font-size: 0.74rem;
+      }
+
+      .console-sidebar span::before {
+        display: none;
+      }
+
+      .omnichannel-frame img {
+        min-height: 250px;
+      }
+
+      .features-section {
+        padding-block: 3.25rem;
+      }
+    }
+
+    /* Ecosystem Showcase Grid & Cards */
+    .ecosystem-section {
+      background: linear-gradient(180deg, #f7fcfa 0%, #ffffff 100%);
+    }
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .ecosystem-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--line);
+      border-radius: 1.6rem;
+      overflow: hidden;
+      box-shadow: 0 18px 44px rgba(24, 60, 47, 0.06);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), 
+                  box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 320ms ease;
+    }
+    .ecosystem-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(47, 134, 255, 0.32);
+      box-shadow: 0 28px 64px rgba(24, 60, 47, 0.12);
+    }
+    .ecosystem-card__content {
+      padding: 2rem 2rem 1.25rem;
+      flex-grow: 1;
+    }
+    .ecosystem-card__badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #084fba;
+      background: var(--green-soft);
+      padding: 0.32rem 0.68rem;
+      border-radius: 999px;
+      margin-bottom: 0.95rem;
+    }
+    .ecosystem-card h3 {
+      margin: 0 0 0.6rem;
+      font-family: "Sora", sans-serif;
+      font-size: 1.28rem;
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      color: #07111f;
+    }
+    .ecosystem-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.62;
+      color: var(--muted);
+    }
+    .ecosystem-card__preview {
+      height: 250px;
+      padding: 1.25rem;
+      background: #f8fafc;
+      border-top: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: background 320ms ease;
+    }
+    .ecosystem-card:hover .ecosystem-card__preview {
+      background: #f1f5f9;
+    }
+
+    /* Mockup 1: Inbox */
+    .preview-inbox {
+      background: #0f172a;
+    }
+    .ecosystem-card:hover .preview-inbox {
+      background: #0b0f19;
+    }
+    .inbox-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-shrink: 0;
+    }
+    .inbox-dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+    .inbox-dots i {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+    }
+    .inbox-dots i:nth-child(1) { background: #ef4444; }
+    .inbox-dots i:nth-child(2) { background: #f59e0b; }
+    .inbox-dots i:nth-child(3) { background: #10b981; }
+    .inbox-title {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .inbox-thread {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      padding-top: 0.75rem;
+    }
+    .inbox-message {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      transform: translateY(0);
+      transition: transform 320ms ease;
+    }
+    .ecosystem-card:hover .inbox-message {
+      transform: translateY(-2px);
+    }
+    .msg-avatar {
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.68rem;
+      font-weight: 900;
+      color: #ffffff;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .av-blue { background: linear-gradient(135deg, #006aff, #00c6ff); }
+    .av-pink { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+    .av-agent { background: linear-gradient(135deg, #0b6fff, #16b7ff); }
+    .msg-bubble-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      max-width: 80%;
+    }
+    .msg-tag {
+      font-size: 0.58rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .tag-messenger { color: #00c6ff; }
+    .tag-instagram { color: #f472b6; }
+    .tag-agent { color: #0b6fff; }
+    .msg-bubble {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 0.75rem;
+      border-top-left-radius: 0.15rem;
+      padding: 0.45rem 0.7rem;
+      font-size: 0.75rem;
+      line-height: 1.42;
+      color: #e2e8f0;
+    }
+    .msg-agent .msg-bubble {
+      border-top-left-radius: 0.75rem;
+      border-top-right-radius: 0.15rem;
+      background: rgba(47, 134, 255, 0.1);
+      border-color: rgba(47, 134, 255, 0.15);
+      color: #ffffff;
+    }
+
+    /* Mockup 2: Ads Manager */
+    .preview-ads {
+      background: #0b0f17;
+    }
+    .ecosystem-card:hover .preview-ads {
+      background: #07090f;
+    }
+    .ads-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-shrink: 0;
+    }
+    .ads-header strong {
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-family: Sora;
+      letter-spacing: -0.01em;
+    }
+    .ads-status {
+      color: #0b6fff;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.28rem;
+    }
+    .ads-status::before {
+      content: "";
+      width: 0.35rem;
+      height: 0.35rem;
+      border-radius: 50%;
+      background: #2f86ff;
+      box-shadow: 0 0 8px #2f86ff;
+      animation: blink 1.5s infinite;
+    }
+    .ads-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      padding-block: 0.8rem;
+      flex-shrink: 0;
+    }
+    .ads-stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .ads-stat-item span {
+      color: rgba(255, 255, 255, 0.42);
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .ads-stat-item strong {
+      font-size: 0.94rem;
+      color: #ffffff;
+      font-family: Sora;
+    }
+    .text-glow-blue {
+      color: #16b7ff !important;
+      text-shadow: 0 0 12px rgba(22, 183, 255, 0.4);
+    }
+    .text-glow-green {
+      color: #2f86ff !important;
+      text-shadow: 0 0 12px rgba(47, 134, 255, 0.4);
+    }
+    .ads-graph-container {
+      height: 90px;
+      margin-top: auto;
+      position: relative;
+    }
+    .ads-graph {
+      width: 100%;
+      height: 100%;
+    }
+    .ads-dot-pulse {
+      animation: blink 2s infinite;
+    }
+
+    /* Mockup 3: Calls */
+    .preview-calls {
+      background: #0b141a;
+    }
+    .ecosystem-card:hover .preview-calls {
+      background: #070e12;
+    }
+    .call-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      color: #ffffff;
+    }
+    .call-status {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.68rem;
+      color: #0b6fff;
+      font-weight: 800;
+      background: rgba(47, 134, 255, 0.08);
+      border: 1px solid rgba(47, 134, 255, 0.15);
+      padding: 0.28rem 0.65rem;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .status-indicator-dot {
+      width: 0.35rem;
+      height: 0.35rem;
+      border-radius: 50%;
+      background: #2f86ff;
+      box-shadow: 0 0 6px #2f86ff;
+      animation: blink 1.5s infinite;
+    }
+    .call-timer {
+      color: rgba(255, 255, 255, 0.7);
+      margin-left: 0.3rem;
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      padding-left: 0.4rem;
+    }
+    .call-user {
+      text-align: center;
+      margin-block: 0.75rem 0.5rem;
+      flex-shrink: 0;
+    }
+    .avatar-pulse-wrapper {
+      position: relative;
+      width: 3.8rem;
+      height: 3.8rem;
+      margin: 0 auto 0.6rem;
+    }
+    .call-avatar {
+      width: 3.8rem;
+      height: 3.8rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #128c7e, #075e54);
+      color: #ffffff;
+      font-size: 1.25rem;
+      font-family: Sora;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 8px 24px rgba(7, 94, 84, 0.3);
+    }
+    .pulse-ring, .pulse-ring2 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid rgba(47, 134, 255, 0.3);
+      animation: ringPulse 2s infinite ease-out;
+      z-index: 1;
+    }
+    .pulse-ring2 {
+      animation-delay: 0.9s;
+    }
+    .call-user strong {
+      display: block;
+      font-size: 0.94rem;
+      font-family: Sora;
+      color: #ffffff;
+    }
+    .call-user span {
+      display: block;
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 0.15rem;
+    }
+    .call-controls {
+      display: flex;
+      gap: 0.85rem;
+      justify-content: center;
+      margin-top: auto;
+      width: 100%;
+      flex-shrink: 0;
+    }
+    .ctrl-btn {
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 50%;
+      border: 0;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      transition: background 200ms ease, transform 200ms ease;
+    }
+    .ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(1.05);
+    }
+    .btn-hangup {
+      background: #ea0038;
+      box-shadow: 0 4px 14px rgba(234, 0, 56, 0.35);
+    }
+    .btn-hangup:hover {
+      background: #ff1a52;
+    }
+
+    /* Mockup 4: WhatsApp Catalog */
+    .preview-catalog {
+      background: #efeae2;
+      background-image: radial-gradient(rgba(19, 54, 41, 0.06) 12%, transparent 12%);
+      background-size: 14px 14px;
+    }
+    .ecosystem-card:hover .preview-catalog {
+      background-color: #e9e4dc;
+    }
+    .catalog-chat {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+    }
+    .catalog-bubble {
+      background: #ffffff;
+      border-radius: 0.8rem;
+      border-top-left-radius: 0.15rem;
+      box-shadow: 0 4px 16px rgba(19, 54, 41, 0.08);
+      max-width: 86%;
+      overflow: hidden;
+      padding: 0.45rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      transform: scale(1);
+      transition: transform 320ms ease;
+    }
+    .ecosystem-card:hover .catalog-bubble {
+      transform: scale(1.01);
+    }
+    .catalog-image-placeholder {
+      height: 80px;
+      background: linear-gradient(135deg, #eaf2ff, #dbeafe);
+      border-radius: 0.5rem;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+    .catalog-svg-icon {
+      width: 1.8rem;
+      height: 1.8rem;
+      color: #084fba;
+    }
+    .catalog-tag {
+      position: absolute;
+      top: 0.4rem;
+      left: 0.4rem;
+      background: #075e54;
+      color: #ffffff;
+      font-size: 0.58rem;
+      font-weight: 800;
+      padding: 0.15rem 0.45rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .catalog-details {
+      padding: 0.2rem;
+    }
+    .catalog-details h4 {
+      margin: 0 0 0.15rem;
+      font-size: 0.82rem;
+      font-family: Sora;
+      color: #07111f;
+      font-weight: 700;
+    }
+    .catalog-desc {
+      display: block;
+      font-size: 0.68rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .catalog-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.35rem;
+    }
+    .catalog-price {
+      color: #075e54;
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+    .catalog-stock {
+      font-size: 0.6rem;
+      color: #084fba;
+      background: #eaf2ff;
+      padding: 0.12rem 0.35rem;
+      border-radius: 4px;
+      font-weight: 800;
+    }
+    .catalog-btn-add {
+      border: 0;
+      background: #075e54;
+      color: #ffffff;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.45rem 1rem;
+      text-align: center;
+      margin-top: 0.5rem;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(7, 94, 84, 0.15);
+      transition: background 200ms ease, box-shadow 200ms ease;
+    }
+    .catalog-btn-add:hover {
+      background: #054c44;
+      box-shadow: 0 6px 14px rgba(7, 94, 84, 0.25);
+    }
+    .catalog-bubble-user {
+      background: #d9fdd3;
+      border-radius: 0.8rem;
+      border-top-right-radius: 0.15rem;
+      box-shadow: 0 3px 12px rgba(19, 54, 41, 0.05);
+      align-self: flex-end;
+      padding: 0.45rem 0.7rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      margin-top: 0.6rem;
+      color: #112a1f;
+      transform: scale(0.95);
+      opacity: 0;
+      transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), opacity 320ms ease;
+    }
+    .ecosystem-card:hover .catalog-bubble-user {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* Mockup 5: Lead Capture */
+    .preview-leads {
+      background: #f1f5f9;
+    }
+    .leads-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      gap: 0.25rem;
+    }
+    .leads-form-side {
+      flex: 1;
+      background: #ffffff;
+      border-radius: 0.8rem;
+      padding: 0.65rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      min-width: 0;
+    }
+    .form-title {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #1877f2;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      margin-bottom: 0.4rem;
+    }
+    .form-field label {
+      font-size: 0.55rem;
+      color: var(--muted);
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .form-input {
+      font-size: 0.72rem;
+      color: #07111f;
+      font-weight: 700;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 0.35rem;
+      padding: 0.22rem 0.45rem;
+      background: #f8fafc;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .form-submit-btn {
+      border: 0;
+      background: #1877f2;
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 0.35rem;
+      border-radius: 0.35rem;
+      width: 100%;
+      text-align: center;
+    }
+    .leads-connector {
+      width: 1.6rem;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+    }
+    .leads-connector-arrow {
+      width: 100%;
+      animation: pulseArrow 1.5s infinite;
+    }
+    .leads-list-side {
+      flex: 1.1;
+      background: #0b1120;
+      border-radius: 0.8rem;
+      padding: 0.65rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      min-width: 0;
+      color: #ffffff;
+    }
+    .list-title {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #0b6fff;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .list-row {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 0.3rem;
+      font-size: 0.68rem;
+      padding-block: 0.28rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .list-row--header {
+      font-weight: 800;
+      color: rgba(255,255,255,0.38);
+      text-transform: uppercase;
+      font-size: 0.58rem;
+    }
+    .lead-name {
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lead-source {
+      color: #0b6fff;
+      font-weight: 800;
+      text-align: right;
+    }
+    .new-lead-row {
+      animation: leadSyncPulse 3s infinite;
+      border-radius: 0.25rem;
+    }
+
+    /* Mockup 6: Email Composer */
+    .preview-email {
+      background: #0f172a;
+    }
+    .ecosystem-card:hover .preview-email {
+      background: #0b0f19;
+    }
+    .email-composer {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border-radius: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #1e293b;
+      overflow: hidden;
+    }
+    .composer-header {
+      background: #0f172a;
+      padding: 0.55rem 0.65rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      flex-shrink: 0;
+    }
+    .composer-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.45);
+    }
+    .composer-fields strong {
+      color: #ffffff;
+    }
+    .composer-body {
+      padding: 0.6rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .email-template-box {
+      background: #ffffff;
+      border-radius: 0.4rem;
+      padding: 0.55rem;
+      text-align: center;
+      color: #07111f;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      transform: translateY(0);
+      transition: transform 320ms ease;
+    }
+    .ecosystem-card:hover .email-template-box {
+      transform: translateY(-2px);
+    }
+    .template-header {
+      font-size: 0.58rem;
+      font-weight: 900;
+      color: #084fba;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 0.2rem;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .template-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    .template-hero h5 {
+      margin: 0;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #0b1120;
+      font-family: Sora;
+      letter-spacing: -0.01em;
+    }
+    .template-hero p {
+      margin: 0;
+      font-size: 0.52rem;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+    .template-cta-btn {
+      background: #0b1120;
+      color: #ffffff;
+      border-radius: 4px;
+      font-size: 0.52rem;
+      font-weight: 800;
+      padding: 0.25rem 0.45rem;
+      margin-top: 0.35rem;
+      display: inline-block;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .composer-status-bar {
+      background: #084fba;
+      color: #ffffff;
+      font-size: 0.58rem;
+      font-weight: 800;
+      padding: 0.3rem 0.5rem;
+      text-align: center;
+      letter-spacing: 0.01em;
+      flex-shrink: 0;
+    }
+
+    /* Animations */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    @keyframes ringPulse {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+    @keyframes pulseArrow {
+      0%, 100% { transform: translateX(0); opacity: 0.7; }
+      50% { transform: translateX(3px); opacity: 1; }
+    }
+    @keyframes leadSyncPulse {
+      0%, 100% { background: rgba(47, 134, 255, 0.04); }
+      50% { background: rgba(47, 134, 255, 0.16); }
+    }
+
+    /* Ecosystem Responsive Breakpoints */
+    @media (max-width: 1120px) {
+      .ecosystem-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 768px) {
+      .ecosystem-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ==========================================================================
+       Premium Features Showcase Section
+       ========================================================================== */
+    .premium-features-section {
+      background: #090d16;
+      position: relative;
+      isolation: isolate;
+      padding: clamp(4rem, 8vw, 8rem) max(1.25rem, calc((100vw - var(--max-width)) / 2));
+      overflow: visible;
+    }
+
+    .premium-features-section::before {
+      content: "";
+      position: absolute;
+      top: 15%;
+      left: 10%;
+      width: clamp(20rem, 40vw, 45rem);
+      height: clamp(20rem, 40vw, 45rem);
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(47, 134, 255, 0.08) 0%, transparent 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .premium-features-section::after {
+      content: "";
+      position: absolute;
+      bottom: 15%;
+      right: 10%;
+      width: clamp(20rem, 40vw, 45rem);
+      height: clamp(20rem, 40vw, 45rem);
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(22, 183, 255, 0.07) 0%, transparent 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .pf-header {
+      text-align: center;
+      margin-bottom: clamp(3rem, 6vw, 5.5rem);
+    }
+
+    .pf-header h2 {
+      font-family: "Sora", sans-serif;
+      font-size: clamp(2.2rem, 4.2vw, 4.4rem);
+      font-weight: 800;
+      color: #ffffff !important;
+      letter-spacing: -0.05em;
+      line-height: 1.05;
+      margin: 0 0 0.85rem 0;
+    }
+
+    .pf-header p {
+      font-family: "Sora", sans-serif;
+      font-size: clamp(0.85rem, 1.1vw, 1.15rem);
+      font-weight: 800;
+      color: #0b6fff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0;
+    }
+
+    .pf-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4.5rem;
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .pf-block {
+      position: relative;
+      background: rgba(17, 24, 39, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.8rem, 3.5vw, 3.5rem);
+      box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: visible;
+      transition: border-color 300ms ease, box-shadow 300ms ease;
+    }
+
+    .pf-block:hover {
+      border-color: rgba(47, 134, 255, 0.2);
+      box-shadow: 
+        0 34px 90px rgba(0, 0, 0, 0.45),
+        0 0 40px rgba(47, 134, 255, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .pf-block-badge {
+      position: absolute;
+      top: 0;
+      transform: translateY(-50%);
+      font-family: "Sora", sans-serif;
+      font-size: 0.76rem;
+      font-weight: 900;
+      padding: 0.55rem 1.15rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .pf-block-badge--blue {
+      left: clamp(1.5rem, 3vw, 3.5rem);
+      background: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45);
+    }
+
+    .pf-block-badge--yellow {
+      right: clamp(1.5rem, 3vw, 3.5rem);
+      background: #eab308;
+      color: #1e1b4b;
+      box-shadow: 0 8px 24px rgba(234, 179, 8, 0.4);
+    }
+
+    .pf-block-badge--teal {
+      left: clamp(1.5rem, 3vw, 3.5rem);
+      background: #0d9488;
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.45);
+    }
+
+    .pf-block-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(2rem, 4vw, 4.5rem);
+      align-items: center;
+    }
+
+    .pf-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: clamp(1.8rem, 3vw, 2.8rem);
+      box-shadow: 
+        0 24px 60px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      align-items: flex-start;
+      text-align: left;
+      z-index: 2;
+    }
+
+    .pf-card-tag {
+      background: #10b981;
+      color: #ffffff;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(0.85rem, 1.1vw, 1.05rem);
+      font-weight: 800;
+      padding: 0.65rem 1.3rem;
+      border-radius: 999px;
+      line-height: 1.25;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+    }
+
+    .pf-card-desc {
+      font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+      line-height: 1.68;
+      color: #374151;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    /* Mockups & Visual elements CSS styling */
+    .pf-visual {
+      position: relative;
+      width: 100%;
+      height: 310px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    /* Mockup 1: Broadcast Dashboard UI */
+    .pf-visual--broadcast {
+      background: radial-gradient(circle at center, rgba(47, 134, 255, 0.05) 0%, transparent 70%);
+    }
+
+    .broad-win {
+      width: 85%;
+      height: 76%;
+      background: #1e293b;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      overflow: hidden;
+    }
+
+    .broad-win-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 0.4rem;
+    }
+
+    .broad-win-dots {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .broad-win-dots i {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .broad-win-dots i:nth-child(1) { background: #ef4444; }
+    .broad-win-dots i:nth-child(2) { background: #f59e0b; }
+    .broad-win-dots i:nth-child(3) { background: #10b981; }
+
+    .broad-win-title {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .broad-win-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      height: 100%;
+      justify-content: center;
+    }
+
+    .broad-win-line {
+      height: 6px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.06);
+      width: 80%;
+    }
+
+    .broad-win-line--short {
+      width: 50%;
+    }
+
+    /* Modal dialog */
+    .broad-modal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -46%);
+      width: 82%;
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #10b981;
+      box-shadow: 0 16px 36px rgba(16, 185, 129, 0.22);
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      animation: floatModal 6s ease-in-out infinite;
+      z-index: 3;
+    }
+
+    .broad-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .broad-modal-icon {
+      width: 1.6rem;
+      height: 1.6rem;
+      background: #eaf2ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #10b981;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    .broad-modal-title {
+      font-family: "Sora", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #07111f;
+    }
+
+    .broad-modal-status {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #10b981;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .broad-modal-desc {
+      font-size: 0.72rem;
+      line-height: 1.4;
+      color: #4b5563;
+      margin: 0;
+    }
+
+    .broad-modal-btn {
+      align-self: center;
+      background: #10b981;
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    /* Scattered avatars */
+    .broad-avatar {
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 3px solid #111827;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .broad-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .broad-avatar--1 {
+      top: 10%;
+      left: 3%;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      animation: floatAvatar1 7s ease-in-out infinite;
+    }
+
+    .broad-avatar--2 {
+      bottom: 8%;
+      left: 5%;
+      background: linear-gradient(135deg, #10b981, #047857);
+      animation: floatAvatar2 8s ease-in-out infinite;
+    }
+
+    .broad-avatar--3 {
+      top: 8%;
+      right: 3%;
+      background: linear-gradient(135deg, #ec4899, #be185d);
+      animation: floatAvatar3 6.5s ease-in-out infinite;
+    }
+
+    .broad-avatar--4 {
+      bottom: 12%;
+      right: 5%;
+      background: linear-gradient(135deg, #f59e0b, #b45309);
+      animation: floatAvatar4 7.5s ease-in-out infinite;
+    }
+
+    /* Mockup 2: Store & Platform Sync */
+    .pf-visual--store {
+      gap: 1.5rem;
+    }
+
+    .sync-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+      padding: 1.1rem;
+      width: 145px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      z-index: 2;
+      align-self: center;
+      transform: translateY(0);
+      transition: transform 300ms ease;
+    }
+
+    .pf-block:hover .sync-card {
+      transform: translateY(-4px);
+    }
+
+    .sync-card-label {
+      font-size: 0.58rem;
+      font-weight: 900;
+      color: rgba(17, 24, 39, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 0.35rem;
+    }
+
+    .sync-platform-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .sync-platform-icon {
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 6px;
+      background: #f1f5f9;
+      display: grid;
+      place-items: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .sync-arrow {
+      color: #10b981;
+      font-size: 0.9rem;
+      font-weight: 900;
+      animation: pulseSync 1.5s infinite;
+    }
+
+    .sync-status {
+      font-size: 0.6rem;
+      font-weight: 800;
+      color: #10b981;
+      background: #eaf2ff;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      align-self: center;
+    }
+
+    /* iPhone preview frame */
+    .iphone-frame {
+      width: 175px;
+      height: 295px;
+      background: #000000;
+      border-radius: 30px;
+      border: 5px solid #374151;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      z-index: 2;
+    }
+
+    .iphone-notch {
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 55px;
+      height: 14px;
+      background: #374151;
+      border-radius: 10px;
+      z-index: 10;
+    }
+
+    .iphone-screen {
+      flex-grow: 1;
+      background: #efeae2;
+      background-image: radial-gradient(rgba(19, 54, 41, 0.05) 10%, transparent 10%);
+      background-size: 12px 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .iphone-header {
+      background: #075e54;
+      color: #ffffff;
+      padding: 1.25rem 0.5rem 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      flex-shrink: 0;
+    }
+
+    .iphone-avatar {
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #075e54;
+      display: grid;
+      place-items: center;
+      font-size: 0.65rem;
+      font-weight: 900;
+    }
+
+    .iphone-header-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .iphone-header-text strong {
+      font-size: 0.65rem;
+      font-family: "Sora", sans-serif;
+      line-height: 1;
+    }
+
+    .iphone-header-text span {
+      font-size: 0.5rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .iphone-body {
+      flex-grow: 1;
+      padding: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+
+    .iphone-bubble {
+      background: #ffffff;
+      border-radius: 8px;
+      border-top-left-radius: 0.15rem;
+      box-shadow: 0 4px 12px rgba(19, 54, 41, 0.06);
+      padding: 0.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      text-align: left;
+    }
+
+    .iphone-prod-img {
+      height: 52px;
+      background: linear-gradient(135deg, #eaf2ff 0%, #dbeafe 100%);
+      border-radius: 5px;
+      display: grid;
+      place-items: center;
+      color: #10b981;
+      font-weight: bold;
+      font-size: 0.6rem;
+      position: relative;
+    }
+
+    .iphone-prod-badge {
+      position: absolute;
+      top: 0.2rem;
+      left: 0.2rem;
+      background: #075e54;
+      color: #ffffff;
+      font-size: 0.48rem;
+      font-weight: 800;
+      padding: 0.1rem 0.3rem;
+      border-radius: 99px;
+      text-transform: uppercase;
+    }
+
+    .iphone-bubble h4 {
+      margin: 0;
+      font-size: 0.68rem;
+      font-family: "Sora", sans-serif;
+      color: #07111f;
+      font-weight: 800;
+    }
+
+    .iphone-bubble p {
+      margin: 0;
+      font-size: 0.52rem;
+      color: #6b7280;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .iphone-bubble-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.1rem;
+    }
+
+    .iphone-price {
+      color: #075e54;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .iphone-stock {
+      font-size: 0.5rem;
+      color: #10b981;
+      background: #eaf2ff;
+      padding: 0.1rem 0.25rem;
+      border-radius: 3px;
+      font-weight: 800;
+    }
+
+    .iphone-btn {
+      background: #075e54;
+      color: #ffffff;
+      border-radius: 99px;
+      font-size: 0.6rem;
+      font-weight: 800;
+      padding: 0.35rem;
+      text-align: center;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .iphone-user-bubble {
+      background: #d9fdd3;
+      border-radius: 8px;
+      border-top-right-radius: 0.15rem;
+      box-shadow: 0 2px 6px rgba(19, 54, 41, 0.04);
+      align-self: flex-end;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.58rem;
+      font-weight: 800;
+      color: #112a1f;
+      animation: slideInBubble 4s ease-in-out infinite;
+    }
+
+    /* Mockup 3: Meta Business Partner */
+    .pf-visual--meta {
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .meta-badge-card {
+      background: #0064e0;
+      width: 210px;
+      padding: 1.35rem;
+      border-radius: 16px;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      box-shadow: 0 15px 35px rgba(0, 100, 224, 0.4);
+      z-index: 2;
+      transform: scale(1);
+      transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pf-block:hover .meta-badge-card {
+      transform: scale(1.03);
+    }
+
+    .meta-logo-svg {
+      width: 90px;
+      height: auto;
+    }
+
+    .meta-badge-tag {
+      font-size: 0.56rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 0.5rem;
+      width: 100%;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .meta-partner-pill {
+      background: #10b981;
+      color: #ffffff;
+      font-family: "Sora", sans-serif;
+      font-size: 0.76rem;
+      font-weight: 800;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+      z-index: 2;
+    }
+
+    .meta-partner-dot {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 8px #ffffff;
+      animation: blink 1.5s infinite;
+    }
+
+    /* Keyframe Animations */
+    @keyframes floatModal {
+      0%, 100% { transform: translate(-50%, -46%); }
+      50% { transform: translate(-50%, -52%); }
+    }
+
+    @keyframes floatAvatar1 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(3px, -5px); }
+    }
+
+    @keyframes floatAvatar2 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-4px, 4px); }
+    }
+
+    @keyframes floatAvatar3 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(4px, 5px); }
+    }
+
+    @keyframes floatAvatar4 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-3px, -4px); }
+    }
+
+    @keyframes pulseSync {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+
+    @keyframes slideInBubble {
+      0%, 100% { opacity: 0; transform: translateY(6px) scale(0.95); }
+      20%, 80% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Responsive adjustments for Premium Features section */
+    @media (max-width: 1080px) {
+      .pf-block-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .pf-block-grid--reverse {
+        direction: ltr;
+      }
+
+      .pf-visual {
+        order: 1;
+      }
+
+      .pf-card {
+        order: 2;
+      }
+
+      .pf-block-badge--yellow {
+        left: clamp(1.5rem, 3vw, 3.5rem);
+        right: auto;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .premium-features-section {
+        padding-block: 4.5rem;
+      }
+
+      .pf-block {
+        padding: 2.2rem 1.5rem 1.8rem;
+      }
+
+      .broad-win {
+        width: 100%;
+        height: 75%;
+      }
+
+      .iphone-frame {
+        width: 160px;
+        height: 275px;
+      }
+    }
+  
+    .parallax-slow {
+      transform: translateY(calc(var(--scroll-y, 0px) * 0.1));
+      will-change: transform;
+    }
+  
+    a, button {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    a:hover {
+      opacity: 0.85;
+    }
+    button:hover {
+      transform: translateY(-2px);
+    }
+    .broadcast-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .solution-panel {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .feature-line {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .compact-price-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .broadcast-card:hover, .solution-panel:hover, .feature-line:hover, .compact-price-card:hover {
+      transform: translateY(-4px);
+    }
+    
+    .section-heading {
+      align-items: center !important;
+      text-align: center !important;
+      max-width: 100% !important;
+    }
+    .section-heading h2 {
+      text-align: center !important;
+      white-space: normal !important; text-wrap: balance;
+      max-width: 100% !important;
+    }
+    @media (max-width: 1024px) {
+      .section-heading h2 {
+        white-space: normal !important;
+      }
+    }
+    
+    .faq__intro h2, .omnichannel .copy-panel h2 {
+      text-align: left !important;
+      white-space: normal !important;
+    }
+  </style>
+<style>
+    .section-heading {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      max-width: 100% !important;
+    }
+    .section-heading h2 {
+      text-align: center !important;
+      white-space: normal !important; text-wrap: balance;
+      max-width: 100% !important;
+    }
+    @media (max-width: 1024px) {
+      .section-heading h2 {
+        white-space: normal !important;
+      }
+    }
+    
+    .faq__intro h2, .omnichannel .copy-panel h2 {
+      text-align: left !important;
+      white-space: normal !important;
+    }
+  </style>
+  </head>
+
+<body>
+  <div data-site-header></div>
+
+
+  <main class="features-page">
+    <section class="features-hero">
+      <div class="features-hero__grid">
+        <div class="features-hero__copy reveal">
+          <h1>Run every customer conversation from <span>one workspace.</span></h1>
+          <p class="features-hero__lede">
+            Connektly brings WhatsApp marketing, shared inbox, automation, contacts, and performance reporting into a
+            single operating system for growing teams.
+          </p>
+          <div class="features-hero__actions">
+            <a class="button" href="/book-demo/index.html">Book a Demo</a>
+            <a class="button button--ghost" href="/pricing/index.html">View Plans</a>
+          </div>
+          <div class="features-hero__proof">
+            <span><strong>80%</strong>routine queries automated</span>
+            <span><strong>10x</strong>faster support handoffs</span>
+            <span><strong>24/7</strong>customer journeys active</span>
+          </div>
+        </div>
+
+        <div class="product-console reveal">
+          <div class="product-console__bar">
+            <span class="product-console__dots"><i></i><i></i><i></i></span>
+            <span>Connektly command center</span>
+          </div>
+          <div class="product-console__body">
+            <div class="console-sidebar">
+              <span class="is-active">Inbox</span>
+              <span>Broadcast</span>
+              <span>Automation</span>
+              <span>Contacts</span>
+              <span>Reports</span>
+            </div>
+            <div class="console-main">
+              <div class="console-main__header">
+                <strong>Today in WhatsApp</strong>
+                <span>Live</span>
+              </div>
+              <div class="console-grid">
+                <div class="conversation-list">
+                  <div class="conversation-item">
+                    <b>WA</b>
+                    <span><strong>New order query</strong><small>Routed to sales with customer context.</small></span>
+                  </div>
+                  <div class="conversation-item">
+                    <b>IG</b>
+                    <span><strong>Campaign reply</strong><small>Tagged as high intent and assigned.</small></span>
+                  </div>
+                  <div class="conversation-item">
+                    <b>EM</b>
+                    <span><strong>Support follow-up</strong><small>SLA timer active, reply suggested.</small></span>
+                  </div>
+                </div>
+                <div class="campaign-panel">
+                  <div class="campaign-card">
+                    <strong>Festive broadcast</strong>
+                    <p>Template approved, audience synced, delivery in progress.</p>
+                    <div class="progress-line"><span></span></div>
+                  </div>
+                  <div class="metric-strip">
+                    <div><span>Open rate</span><strong>72%</strong></div>
+                    <div><span>Replies</span><strong>1.8k</strong></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="features-section__head reveal">
+        <div>
+          <span class="section-label">Platform capabilities</span>
+          <h2>Everything your team needs to engage, sell, and support.</h2>
+        </div>
+        <p>
+          Replace scattered tools with one clean workflow for customer messages, broadcasts, automations, assignments,
+          and reporting.
+        </p>
+      </div>
+
+      <div class="capability-grid">
+        <article class="capability-card reveal">
+          <span class="capability-card__icon">WA</span>
+          <h3>WhatsApp broadcast campaigns</h3>
+          <p>Send approved campaigns to segmented audiences with delivery tracking, reply capture, and follow-up flows.</p>
+        </article>
+        <article class="capability-card reveal">
+          <span class="capability-card__icon">IN</span>
+          <h3>Shared omnichannel inbox</h3>
+          <p>Handle WhatsApp, Instagram, Messenger, calls, email, and CRM history without switching tabs.</p>
+        </article>
+        <article class="capability-card reveal">
+          <span class="capability-card__icon">AU</span>
+          <h3>No-code automation</h3>
+          <p>Build routing, qualification, reminders, and chatbot journeys with simple drag-and-drop logic.</p>
+        </article>
+        <article class="capability-card reveal">
+          <span class="capability-card__icon">AI</span>
+          <h3>Assisted replies</h3>
+          <p>Give agents faster context, suggested responses, and cleaner handoffs for every active conversation.</p>
+        </article>
+        <article class="capability-card reveal">
+          <span class="capability-card__icon">CRM</span>
+          <h3>Contact intelligence</h3>
+          <p>Unify customer records, tags, notes, lead stages, and campaign history in one searchable profile.</p>
+        </article>
+        <article class="capability-card reveal">
+          <span class="capability-card__icon">BI</span>
+          <h3>Reporting that operators use</h3>
+          <p>Track conversations, response times, campaign outcomes, team workload, and automation impact.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         New Section: Powerful Features that you Need!
+         ========================================================================== -->
+    <section class="features-section premium-features-section reveal">
+      <div class="pf-header">
+        <h2>Powerful Features that you Need!</h2>
+        <p>One Platform for Everything WhatsApp</p>
+      </div>
+
+      <div class="pf-container">
+        <!-- Block 1: Marketing / Broadcast -->
+        <div class="pf-block pf-block--marketing">
+          <span class="pf-block-badge pf-block-badge--blue">Marketing</span>
+          <div class="pf-block-grid">
+            <div class="pf-visual pf-visual--broadcast">
+              <div class="broad-avatar broad-avatar--1"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" alt="Customer 1" /></div>
+              <div class="broad-avatar broad-avatar--2"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" alt="Customer 2" /></div>
+              <div class="broad-avatar broad-avatar--3"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" alt="Customer 3" /></div>
+              <div class="broad-avatar broad-avatar--4"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80" alt="Customer 4" /></div>
+              <div class="broad-win">
+                <div class="broad-win-head">
+                  <span class="broad-win-dots"><i></i><i></i><i></i></span>
+                  <span class="broad-win-title">Broadcast console</span>
+                </div>
+                <div class="broad-win-body">
+                  <div class="broad-win-line"></div>
+                  <div class="broad-win-line broad-win-line--short"></div>
+                  <div class="broad-win-line"></div>
+                </div>
+              </div>
+              <div class="broad-modal">
+                <div class="broad-modal-header">
+                  <span class="broad-modal-icon">✓</span>
+                  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <span class="broad-modal-title">Broadcast Message</span>
+                    <span class="broad-modal-status">Completed Successfully!</span>
+                  </div>
+                </div>
+                <p class="broad-modal-desc">
+                  Scale your business communication effortlessly and reach 1000s of customers.
+                </p>
+                <span class="broad-modal-btn">View Report</span>
+              </div>
+            </div>
+            <div class="pf-card">
+              <span class="pf-card-tag">Broadcast WhatsApp Messages to 1000s in a single click</span>
+              <p class="pf-card-desc">
+                Scale your business communication effortlessly and reach 1000s of customers in one click. Automate up to 80% of queries with Connektly's easy-to-use drag and drop, no-code WhatsApp chatbot builder.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Block 2: E-Commerce -->
+        <div class="pf-block pf-block--ecommerce">
+          <span class="pf-block-badge pf-block-badge--yellow">E-Commerce</span>
+          <div class="pf-block-grid pf-block-grid--reverse">
+            <div class="pf-card">
+              <span class="pf-card-tag">Launch WhatsApp Store & Payments</span>
+              <p class="pf-card-desc">
+                Sync your catalog via Shopify, WooCommerce, or Excel, letting customers browse and buy on the go via WhatsApp Pay.
+              </p>
+            </div>
+            <div class="pf-visual pf-visual--store">
+              <div class="sync-card">
+                <span class="sync-card-label">Platform Sync</span>
+                <div class="sync-platform-row">
+                  <div class="sync-platform-icon" style="color: #95bf47;">S</div>
+                  <span class="sync-arrow">⇆</span>
+                  <div class="sync-platform-icon" style="color: #0b6fff;">W</div>
+                </div>
+                <span class="sync-status">Active</span>
+              </div>
+              
+              <div class="iphone-frame">
+                <div class="iphone-notch"></div>
+                <div class="iphone-screen">
+                  <div class="iphone-header">
+                    <span class="iphone-avatar">A</span>
+                    <div class="iphone-header-text">
+                      <strong>Artful Decor</strong>
+                      <span>Online Store</span>
+                    </div>
+                  </div>
+                  <div class="iphone-body">
+                    <div class="iphone-bubble">
+                      <div class="iphone-prod-img">
+                        <span class="iphone-prod-badge">WhatsApp Shop</span>
+                        <span>🎧</span>
+                      </div>
+                      <h4>Wireless Studio Pro</h4>
+                      <p>Active Noise Cancelling, 40h Battery</p>
+                      <div class="iphone-bubble-meta">
+                        <strong class="iphone-price">$189.00</strong>
+                        <span class="iphone-stock">In stock</span>
+                      </div>
+                      <button class="iphone-btn">Chat with Us</button>
+                    </div>
+                    <div class="iphone-user-bubble">
+                      🛒 Added 1x Wireless Studio Pro
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Block 3: Meta Partner -->
+        <div class="pf-block pf-block--partners">
+          <span class="pf-block-badge pf-block-badge--teal">Official Business Partners!</span>
+          <div class="pf-block-grid">
+            <div class="pf-visual pf-visual--meta">
+              <div class="meta-badge-card">
+                <svg class="meta-logo-svg" viewBox="0 0 100 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.348 24.316V10.684H10.97l3.655 7.643 3.656-7.643h3.585V24.31h-2.915V14.568l-3.376 6.945h-1.921l-3.376-6.945V24.31H7.348zm22.428-3.082c.164.843.913 1.347 1.838 1.347.855 0 1.57-.468 1.77-1.125h2.893c-.34 2.155-2.226 3.626-4.663 3.626-2.92 0-4.839-2.038-4.839-4.992 0-2.955 1.908-5.06 4.793-5.06 2.902 0 4.67 2.073 4.67 4.985v1.219H29.776zm4.723-2.144c-.118-.755-.785-1.248-1.7-1.248-.867 0-1.576.493-1.747 1.248H34.5zm11.758 7.22V15.719h-2.146V13.31h2.146V9.897h2.909v3.413h2.64v2.409h-2.64v6.621c0 .762.387 1.09 1.15 1.09.439 0 .89-.1 1.196-.246v2.41c-.492.204-1.266.304-2.064.304-2.199 0-3.191-.99-3.191-3.178zm13.172.93c-2.47 0-4.048-1.166-4.48-2.625h2.9c.27.533.82.855 1.57.855.75 0 1.272-.34 1.272-.856 0-.585-.592-.825-1.536-1.077-1.745-.468-3.52-.943-3.52-3.1 0-1.956 1.636-3.153 3.996-3.153 2.149 0 3.755 1.036 4.148 2.45h-2.82c-.229-.485-.75-.767-1.322-.767-.615 0-1.066.299-1.066.75 0 .532.551.756 1.488 1.006 1.83.486 3.568 1.001 3.568 3.167 0 2.215-1.722 3.35-4.198 3.35z" fill="#ffffff"/>
+                  <path d="M84.776 21.042c-1.348 0-2.45-1.102-2.45-2.45 0-1.348 1.102-2.45 2.45-2.45 1.348 0 2.45 1.102 2.45 2.45 0 1.348-1.102 2.45-2.45 2.45zm0-7.35c-2.701 0-4.9 2.199-4.9 4.9 0 2.701 2.199 4.9 4.9 4.9 2.701 0 4.9-2.199 4.9-4.9 0-2.701-2.199-4.9-4.9-4.9z" fill="#ffffff"/>
+                  <path d="M91.31 10.684H94.12v13.626H91.31V10.684z" fill="#ffffff"/>
+                </svg>
+                <span class="meta-badge-tag">Official Business Partner</span>
+              </div>
+              <div class="meta-partner-pill">
+                <span class="meta-partner-dot"></span>
+                <span>Powered by Official WhatsApp API</span>
+              </div>
+            </div>
+            <div class="pf-card">
+              <span class="pf-card-tag">Recognized by Meta as a Select Tier Business Partner</span>
+              <p class="pf-card-desc">
+                We're not just another WhatsApp Business Solution Provider; we are a Meta Select Tier Business Partner. This top-tier status means we get priority access to new WhatsApp features, giving you a competitive edge before anyone else.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-section features-section--dark">
+      <div class="feature-showcase">
+        <div class="feature-showcase__copy reveal">
+          <span class="section-label">Omnichannel inbox</span>
+          <h2>One customer record for every channel.</h2>
+          <p class="features-hero__lede">
+            Agents see the conversation, source, ownership, stage, and history in the same place. Teams can assign,
+            tag, respond, and resolve without losing context.
+          </p>
+          <ul class="feature-list">
+            <li>Smart assignment keeps ownership clear across sales and support.</li>
+            <li>Internal notes and tags keep handoffs clean.</li>
+            <li>Templates and suggested replies reduce repetitive typing.</li>
+          </ul>
+        </div>
+        <figure class="omnichannel-frame reveal">
+          <img src="../assets/omnichannel.png"
+            alt="Omnichannel inbox showing customer messages across WhatsApp, calls, Messenger, and email" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="features-section ecosystem-section reveal">
+      <div class="features-section__head">
+        <div>
+          <span class="section-label">Ecosystem Power Suite</span>
+          <h2>Supercharge conversions with Meta & Email integrations.</h2>
+        </div>
+        <p>
+          Unify marketing campaigns, VoIP communication, and interactive catalog systems with official Meta APIs and powerful email marketing tools.
+        </p>
+      </div>
+
+      <div class="ecosystem-grid">
+        <!-- 1. Messenger & Instagram DM Inbox Connection -->
+        <article class="ecosystem-card">
+          <div class="ecosystem-card__content">
+            <span class="ecosystem-card__badge">Messenger & IG DMs</span>
+            <h3>Omnichannel social messaging</h3>
+            <p>Connect your brand pages instantly. Handle Messenger and Instagram DM threads side-by-side with WhatsApp chats with real-time sync, automated sorting, and source labeling.</p>
+          </div>
+          <div class="ecosystem-card__preview preview-inbox">
+            <div class="inbox-header">
+              <span class="inbox-dots"><i></i><i></i><i></i></span>
+              <span class="inbox-title">Social inbox</span>
+            </div>
+            <div class="inbox-thread">
+              <div class="inbox-message msg-messenger">
+                <span class="msg-avatar av-blue">M</span>
+                <div class="msg-bubble-wrap">
+                  <span class="msg-tag tag-messenger">Messenger</span>
+                  <div class="msg-bubble">Hey! Is this product available in black?</div>
+                </div>
+              </div>
+              <div class="inbox-message msg-instagram">
+                <span class="msg-avatar av-pink">I</span>
+                <div class="msg-bubble-wrap">
+                  <span class="msg-tag tag-instagram">Instagram</span>
+                  <div class="msg-bubble">I saw your reel! Can you share the pricing?</div>
+                </div>
+              </div>
+              <div class="inbox-message msg-agent">
+                <span class="msg-avatar av-agent">C</span>
+                <div class="msg-bubble-wrap">
+                  <span class="msg-tag tag-agent">Connektly Agent</span>
+                  <div class="msg-bubble">Yes! It is available, and we just sent the details.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Facebook Ads Manager Connection -->
+        <article class="ecosystem-card">
+          <div class="ecosystem-card__content">
+            <span class="ecosystem-card__badge">Ads Manager Connection</span>
+            <h3>Direct attribution & sync</h3>
+            <p>Bridge the gap between advertising and messaging. Connect Facebook Ads Manager to track custom click-to-chat conversions, view real-time ROAS, and optimize campaign spending.</p>
+          </div>
+          <div class="ecosystem-card__preview preview-ads">
+            <div class="ads-header">
+              <strong>Meta campaign dashboard</strong>
+              <span class="ads-status">Live sync</span>
+            </div>
+            <div class="ads-stats">
+              <div class="ads-stat-item">
+                <span>Ad Spend</span>
+                <strong>$1,240.00</strong>
+              </div>
+              <div class="ads-stat-item">
+                <span>ROAS</span>
+                <strong class="text-glow-blue">4.82x</strong>
+              </div>
+              <div class="ads-stat-item">
+                <span>Conversions</span>
+                <strong class="text-glow-green">+184%</strong>
+              </div>
+            </div>
+            <div class="ads-graph-container">
+              <svg class="ads-graph" viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="glowGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="rgba(47, 134, 255, 0.4)" />
+                    <stop offset="100%" stop-color="rgba(47, 134, 255, 0)" />
+                  </linearGradient>
+                  <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#16b7ff" />
+                    <stop offset="50%" stop-color="#2f86ff" />
+                    <stop offset="100%" stop-color="#2f86ff" />
+                  </linearGradient>
+                </defs>
+                <path d="M 10 90 Q 50 85 90 60 T 170 45 T 250 15 T 290 10" stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round" fill="none" />
+                <path d="M 10 90 Q 50 85 90 60 T 170 45 T 250 15 T 290 10 L 290 90 L 10 90 Z" fill="url(#glowGrad)" />
+                <circle cx="290" cy="10" r="5" fill="#2f86ff" class="ads-dot-pulse" />
+              </svg>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. WhatsApp Calls -->
+        <article class="ecosystem-card">
+          <div class="ecosystem-card__content">
+            <span class="ecosystem-card__badge">WhatsApp Calls</span>
+            <h3>Native VoIP voice calling</h3>
+            <p>Connect directly with high-intent leads using WhatsApp's official audio calling API. Pick up voice calls right inside the shared inbox panel, with automated call logging and recordings.</p>
+          </div>
+          <div class="ecosystem-card__preview preview-calls">
+            <div class="call-panel">
+              <div class="call-status">
+                <span class="status-indicator-dot"></span>
+                <span>Active VoIP Call</span>
+                <span class="call-timer">02:45</span>
+              </div>
+              <div class="call-user">
+                <div class="avatar-pulse-wrapper">
+                  <div class="pulse-ring"></div>
+                  <div class="pulse-ring2"></div>
+                  <div class="call-avatar">JD</div>
+                </div>
+                <strong>Jonathan Doe</strong>
+                <span>+1 (555) 019-2834</span>
+              </div>
+              <div class="call-controls">
+                <button class="ctrl-btn btn-mute" aria-label="Mute">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                </button>
+                <button class="ctrl-btn btn-hangup" aria-label="Hang up">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91"></path></svg>
+                </button>
+                <button class="ctrl-btn btn-speaker" aria-label="Speaker">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. WhatsApp Catalog -->
+        <article class="ecosystem-card">
+          <div class="ecosystem-card__content">
+            <span class="ecosystem-card__badge">WhatsApp Catalog</span>
+            <h3>Interactive products inside chat</h3>
+            <p>Sync your store inventory directly into WhatsApp Business. Allow users to browse collections, add items to cart, and checkout seamlessly without ever closing the chat bubble.</p>
+          </div>
+          <div class="ecosystem-card__preview preview-catalog">
+            <div class="catalog-chat">
+              <div class="catalog-bubble">
+                <div class="catalog-image-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="catalog-svg-icon"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                  <span class="catalog-tag">WhatsApp Shop</span>
+                </div>
+                <div class="catalog-details">
+                  <h4>Wireless Studio Pro</h4>
+                  <span class="catalog-desc">Active Noise Cancelling, 40h Battery</span>
+                  <div class="catalog-meta">
+                    <strong class="catalog-price">$189.00</strong>
+                    <span class="catalog-stock">In stock</span>
+                  </div>
+                  <button class="catalog-btn-add">Add to WhatsApp Cart</button>
+                </div>
+              </div>
+              <div class="catalog-bubble-user">
+                <span>🛒 Added 1x Wireless Studio Pro</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Meta Lead Capture Directly to our Lead List -->
+        <article class="ecosystem-card">
+          <div class="ecosystem-card__content">
+            <span class="ecosystem-card__badge">Meta Lead Capture</span>
+            <h3>Real-time lead ingestion</h3>
+            <p>Capture contact details from Facebook & Instagram lead forms instantly. Sync incoming lead packets straight into your Connektly CRM list with no third-party integrators required.</p>
+          </div>
+          <div class="ecosystem-card__preview preview-leads">
+            <div class="leads-flow">
+              <div class="leads-form-side">
+                <div class="form-title">Meta Lead Form</div>
+                <div class="form-field">
+                  <label>Full name</label>
+                  <div class="form-input">Sarah Jenkins</div>
+                </div>
+                <div class="form-field">
+                  <label>Email address</label>
+                  <div class="form-input">sarah@gmail.com</div>
+                </div>
+                <button class="form-submit-btn">Submit Form</button>
+              </div>
+              <div class="leads-connector">
+                <svg class="leads-connector-arrow" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 20 H35 M25 10 L35 20 L25 30" stroke="#2f86ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div class="leads-list-side">
+                <div class="list-title">CRM Lead List</div>
+                <div class="list-row list-row--header">
+                  <span>Name</span>
+                  <span>Source</span>
+                </div>
+                <div class="list-row list-row--item new-lead-row">
+                  <span class="lead-name">Sarah Jenkins</span>
+                  <span class="lead-source">Meta Ads</span>
+                </div>
+                <div class="list-row list-row--item">
+                  <span class="lead-name">David Miller</span>
+                  <span class="lead-source">WhatsApp</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Email Inbox and Marketing Features -->
+        <article class="ecosystem-card">
+          <div class="ecosystem-card__content">
+            <span class="ecosystem-card__badge">Email & Marketing</span>
+            <h3>Omnichannel visual campaigns</h3>
+            <p>Combine messaging with professional email marketing. Create rich, responsive email newsletters and orchestrate complex multi-channel broadcast automation chains from one place.</p>
+          </div>
+          <div class="ecosystem-card__preview preview-email">
+            <div class="email-composer">
+              <div class="composer-header">
+                <div class="composer-fields">
+                  <span>To: <strong>Summer VIP List</strong></span>
+                  <span>Subject: <strong>Unlock 30% Off Storewide!</strong></span>
+                </div>
+              </div>
+              <div class="composer-body">
+                <div class="email-template-box">
+                  <div class="template-header">Connektly Shop</div>
+                  <div class="template-hero">
+                    <h5>SUMMER VIP SALE</h5>
+                    <p>Exclusive access for our email subscribers</p>
+                    <span class="template-cta-btn">Shop 30% OFF</span>
+                  </div>
+                </div>
+              </div>
+              <div class="composer-status-bar">
+                <span>⚡ Automation Trigger: Clicked -> WhatsApp Follow-up</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="features-section__head reveal">
+        <div>
+          <span class="section-label">How teams work</span>
+          <h2>From campaign to conversion without tool switching.</h2>
+        </div>
+        <p>
+          Connektly connects marketing, automation, sales, and support into one repeatable operating flow.
+        </p>
+      </div>
+
+      <div class="workflow-grid">
+        <article class="workflow-step reveal">
+          <span>01</span>
+          <h3>Capture and segment contacts</h3>
+          <p>Import leads, apply tags, and build audiences from behavior, source, and customer profile data.</p>
+        </article>
+        <article class="workflow-step reveal">
+          <span>02</span>
+          <h3>Launch WhatsApp journeys</h3>
+          <p>Send template campaigns, trigger chatbots, and personalize follow-ups from one workspace.</p>
+        </article>
+        <article class="workflow-step reveal">
+          <span>03</span>
+          <h3>Route replies to the right team</h3>
+          <p>Assign conversations automatically by intent, team, product, or current workload.</p>
+        </article>
+        <article class="workflow-step reveal">
+          <span>04</span>
+          <h3>Measure and improve</h3>
+          <p>Use campaign, inbox, and automation reports to refine the next customer journey.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="features-cta reveal">
+        <div>
+          <h2>Bring your customer conversations into one place.</h2>
+          <p>
+            See how Connektly can simplify WhatsApp marketing, support operations, and automation for your team.
+          </p>
+        </div>
+        <a class="button" href="/book-demo/index.html">Book a Demo</a>
+      </div>
+    </section>
+  </main>
+
+
+  <div data-site-footer></div>
+
+  <script src="../components/global.js"></script>
+  <script>
+    const revealNodes = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      );
+
+      revealNodes.forEach((node) => revealObserver.observe(node));
+    } else {
+      revealNodes.forEach((node) => node.classList.add("is-visible"));
+    }
+  </script>
+</body>
+
+</html>

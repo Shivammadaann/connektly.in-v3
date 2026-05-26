@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WhatsApp Business API Integration & Cloud CRM | Connektly</title>
+  <meta name="description"
+    content="Deploy high-volume WhatsApp Business campaigns, automated chatbots, and direct CRM integrations using official Meta Cloud API endpoints and templates." />
+  <link rel="icon" type="image/png" href="../../connektly-favicon.png" />
+  <link rel="apple-touch-icon" href="../../connektly-favicon.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f5fbf7;
+      --surface: rgba(255, 255, 255, 0.86);
+      --surface-dark: #0b1120;
+      --surface-light: #ffffff;
+      --text: #13241d;
+      --muted: #62766d;
+      --line: rgba(19, 54, 41, 0.12);
+      --green: #0b6fff;
+      --green-bright: #2f86ff;
+      --green-soft: #eaf2ff;
+      --blue: #16b7ff;
+      --shadow: 0 28px 70px rgba(24, 60, 47, 0.12);
+      --radius-lg: 32px;
+      --radius-md: 22px;
+      --radius-sm: 16px;
+      --max-width: clamp(1320px, 88vw, 1640px);
+      --site-header-shell-height: 5rem;
+      --site-header-gap: 0rem;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(11, 111, 255, 0.13), transparent 28rem),
+        radial-gradient(circle at 88% 8%, rgba(22, 183, 255, 0.12), transparent 30rem),
+        linear-gradient(180deg, #ffffff 0%, #f8fcfa 46%, #ffffff 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      cursor: pointer;
+      font: inherit;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    [data-site-header] {
+      display: block;
+      min-height: calc(var(--site-header-shell-height) + var(--site-header-gap, 0px));
+    }
+
+    .site-header {
+      position: fixed;
+      top: var(--site-header-gap, 0px);
+      left: 0;
+      z-index: 35;
+      width: 100%;
+      margin: 0;
+      padding: 1rem max(1.25rem, calc((100vw - var(--max-width)) / 2 + 1.25rem));
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1rem;
+      border: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0;
+      background: #111827;
+      color: #ffffff;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 8px 24px rgba(24, 60, 47, 0.08);
+      transition: background 300ms ease, backdrop-filter 300ms ease, box-shadow 300ms ease;
+    }
+
+    .site-header.is-scrolled {
+      background: #111827;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      min-width: 0;
+      justify-self: start;
+    }
+
+    .brand__mark {
+      position: relative;
+      width: 2.9rem;
+      height: 2.9rem;
+      display: grid;
+      place-items: center;
+      font-family: "Sora", sans-serif;
+      font-weight: 700;
+      color: #082012;
+      background: var(--green);
+      border-radius: 1rem;
+      box-shadow: inset 0 -8px 20px rgba(0, 0, 0, 0.14);
+    }
+
+    .brand__mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand__mark::after {
+      content: "";
+      position: absolute;
+      left: 0.4rem;
+      bottom: -0.28rem;
+      width: 0.8rem;
+      height: 0.8rem;
+      background: inherit;
+      border-radius: 0 0 0.7rem 0;
+      transform: rotate(34deg);
+    }
+
+    .brand__mark--image {
+      padding: 0.08rem;
+      background: #ffffff;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .brand__mark--image::after {
+      display: none;
+    }
+
+    .brand__text {
+      display: grid;
+    }
+
+    .brand__text strong {
+      font-family: "Sora", sans-serif;
+      font-size: 1rem;
+      line-height: 1;
+      color: #ffffff;
+    }
+
+    .brand__text small {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.75rem;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      justify-self: center;
+    }
+
+    .header-actions {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .header-actions .nav-login,
+    .mobile-actions .nav-login {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: color 180ms ease, transform 180ms ease;
+    }
+
+    .header-actions .nav-login:hover,
+    .mobile-actions .nav-login:hover {
+      color: #0b6fff;
+      transform: translateY(-1px);
+    }
+
+    .mobile-actions {
+      display: none;
+    }
+
+    .site-nav>a:not(.button),
+    .nav-dropdown__toggle {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: color 180ms ease, transform 180ms ease;
+    }
+
+    .site-nav>a:not(.button):hover,
+    .site-nav>a:not(.button).is-active,
+    .nav-dropdown__toggle:hover,
+    .nav-dropdown[open]>.nav-dropdown__toggle,
+    .nav-dropdown--current>.nav-dropdown__toggle {
+      color: #0b6fff;
+      transform: translateY(-1px);
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown__toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .nav-dropdown__toggle::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid currentColor;
+      transition: transform 200ms ease;
+    }
+
+    .nav-dropdown[open]>.nav-dropdown__toggle::after {
+      transform: rotate(180deg);
+    }
+
+    .nav-dropdown__menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      z-index: 40;
+      min-width: 220px;
+      padding: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      background: #111827;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 200ms ease, opacity 200ms ease, visibility 200ms ease;
+    }
+
+    .nav-dropdown:hover>.nav-dropdown__menu,
+    .nav-dropdown[open]>.nav-dropdown__menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .nav-dropdown__menu a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+      border-radius: 0.5rem;
+      transition: background 180ms ease, color 180ms ease;
+    }
+
+    .nav-dropdown__menu a:hover,
+    .nav-dropdown__menu a.is-active {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .button--sm {
+      min-height: 2.25rem;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.88rem;
+    }
+
+    .mobile-actions,
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav-toggle {
+      width: 2.7rem;
+      height: 2.7rem;
+      border: 0;
+      border-radius: 999px;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 1rem;
+      height: 2px;
+      margin: 0.18rem auto;
+      border-radius: 999px;
+      background: #ffffff;
+      transition: transform 220ms ease, opacity 220ms ease;
+    }
+
+
+    .reveal {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(40px) scale(0.95);
+      transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1), transform 1000ms cubic-bezier(0.16, 1, 0.3, 1), filter 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0) scale(1);
+    }
+
+    /* Hero Section CSS */
+    .api-hero {
+      position: relative;
+      isolation: isolate;
+      padding: clamp(3.5rem, 7vw, 7rem) max(1.25rem, calc((100vw - var(--max-width)) / 2)) clamp(4.5rem, 8vw, 6.5rem);
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 75% 20%, rgba(47, 134, 255, 0.2), transparent 32rem),
+        linear-gradient(135deg, #0b1120 0%, #111827 50%, #07111f 100%);
+      overflow: hidden;
+    }
+
+    .api-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 -1px;
+      height: 6rem;
+      background: linear-gradient(180deg, transparent, #f8fcfa);
+      pointer-events: none;
+    }
+
+    .api-hero__grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 1.1fr);
+      gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: center;
+    }
+
+    .eyebrow-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--green-bright);
+      background: rgba(47, 134, 255, 0.1);
+      border: 1px solid rgba(47, 134, 255, 0.15);
+      padding: 0.38rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.55rem;
+    }
+
+    .api-hero h1 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(2.8rem, 5.8vw, 5.85rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+    }
+
+    .api-hero h1 span {
+      display: block;
+      color: var(--green-bright);
+    }
+
+    .api-hero__lede {
+      max-width: 58ch;
+      margin: 1.55rem 0 0;
+      color: rgba(226, 232, 240, 0.85);
+      font-size: clamp(0.98rem, 1.3vw, 1.25rem);
+      line-height: 1.65;
+    }
+
+    .api-hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.95rem;
+      margin-top: 2.25rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      padding: 0.8rem 1.45rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: #2f86ff;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.94rem;
+      line-height: 1;
+      box-shadow: 0 12px 28px rgba(11, 111, 255, 0.22);
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(11, 111, 255, 0.32);
+    }
+
+    .button--ghost {
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      box-shadow: none;
+    }
+
+    .button--ghost:hover {
+      border-color: rgba(47, 134, 255, 0.45);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Node Graph Connect Visual CSS */
+    .node-graph {
+      position: relative;
+      display: grid;
+      place-items: center;
+      padding: 2.2rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2rem;
+      box-shadow: 0 32px 88px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .node-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      padding-block: 1rem;
+    }
+
+    .node-block {
+      width: 4.8rem;
+      height: 4.8rem;
+      border-radius: 1.45rem;
+      display: grid;
+      place-items: center;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+    }
+
+    .node-block--connektly {
+      background: #ffffff;
+      border: 1.5px solid rgba(47, 134, 255, 0.25);
+    }
+
+    .node-block--connektly img {
+      width: 60%;
+      height: 60%;
+      object-fit: contain;
+    }
+
+    .node-block--meta {
+      background: linear-gradient(135deg, #006aff, #00c6ff);
+      border: 1.5px solid rgba(0, 106, 255, 0.25);
+    }
+
+    .node-block--meta svg {
+      width: 50%;
+      height: auto;
+      fill: #ffffff;
+    }
+
+    .node-block__verified {
+      position: absolute;
+      top: -0.45rem;
+      right: -0.45rem;
+      width: 1.6rem;
+      height: 1.6rem;
+      background: #0b6fff;
+      border: 2px solid #0b1120;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 10px rgba(11, 111, 255, 0.35);
+    }
+
+    .node-block__verified svg {
+      width: 0.85rem;
+      height: 0.85rem;
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 3.5;
+    }
+
+    .node-connector-line {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      position: relative;
+      margin-inline: -0.25rem;
+    }
+
+    .node-connector-line::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #16b7ff, #2f86ff);
+      transform-origin: left center;
+      animation: signalPipe 3s infinite linear;
+    }
+
+    .node-signal-dot {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 0.72rem;
+      height: 0.72rem;
+      background: #2f86ff;
+      border-radius: 50%;
+      box-shadow: 0 0 14px #2f86ff, 0 0 6px #16b7ff;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      animation: signalDot 3s infinite linear;
+    }
+
+    .node-tag {
+      position: absolute;
+      bottom: -2.35rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.28rem 0.65rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      letter-spacing: 0.03em;
+    }
+
+    /* Features Capabilities CSS */
+    .capabilities-section {
+      padding: clamp(4.5rem, 8vw, 8rem) max(1.25rem, calc((100vw - var(--max-width)) / 2)) clamp(4.5rem, 8vw, 7.5rem);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.48fr);
+      gap: clamp(1.5rem, 4vw, 4rem);
+      align-items: end;
+      margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #084fba;
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      box-shadow: 0 0 0 0.35rem rgba(11, 111, 255, 0.11);
+    }
+
+    .capabilities-section h2 {
+      max-width: 15ch;
+      margin: 0.75rem 0 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(2rem, 3.8vw, 4.2rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+      color: var(--surface-dark);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(0.96rem, 1.22vw, 1.15rem);
+      line-height: 1.7;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.15rem;
+    }
+
+    .benefit-card {
+      position: relative;
+      min-height: 280px;
+      padding: 1.65rem;
+      border: 1px solid var(--line);
+      border-radius: 1.6rem;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 16px 42px rgba(24, 60, 47, 0.05);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      display: flex;
+      flex-direction: column;
+      transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 320ms ease;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(47, 134, 255, 0.32);
+      box-shadow: 0 28px 60px rgba(24, 60, 47, 0.12);
+    }
+
+    .benefit-card__icon {
+      display: grid;
+      place-items: center;
+      width: 2.85rem;
+      height: 2.85rem;
+      margin-bottom: 1.25rem;
+      border-radius: 0.95rem;
+      background: var(--green-soft);
+      color: #084fba;
+      font-size: 1.2rem;
+    }
+
+    .benefit-card h3 {
+      margin: 0 0 0.65rem;
+      font-family: "Sora", sans-serif;
+      font-size: 1.22rem;
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+      color: var(--surface-dark);
+    }
+
+    .benefit-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--muted);
+      flex-grow: 1;
+    }
+
+    /* Template Studio Interactive Showcase CSS */
+    .studio-section {
+      background: linear-gradient(180deg, #f8fcfa 0%, #ffffff 100%);
+      padding-block: clamp(4rem, 7vw, 7rem);
+    }
+
+    .studio-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+      gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: center;
+    }
+
+    .studio-copy h2 {
+      max-width: 14ch;
+      font-family: Sora;
+      font-size: clamp(2rem, 3.6vw, 3.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      margin: 0.65rem 0 0;
+      color: var(--surface-dark);
+    }
+
+    .studio-features {
+      display: grid;
+      gap: 1.25rem;
+      margin-top: 2rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .studio-feature-item {
+      display: grid;
+      grid-template-columns: 2.2rem minmax(0, 1fr);
+      gap: 0.75rem;
+      align-items: start;
+    }
+
+    .studio-feature-item i {
+      display: grid;
+      place-items: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: #084fba;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(11, 111, 255, 0.1);
+    }
+
+    .studio-feature-item strong {
+      display: block;
+      font-size: 0.98rem;
+      color: var(--surface-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .studio-feature-item p {
+      margin: 0;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    /* Template Interactive Board Mockup CSS */
+    .studio-board {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--line);
+      border-radius: 2rem;
+      padding: 1.15rem;
+      box-shadow: 0 24px 64px rgba(24, 60, 47, 0.08);
+      backdrop-filter: blur(20px);
+    }
+
+    .composer-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      background: #f8fafc;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 1.35rem;
+      padding: 1.25rem;
+    }
+
+    .composer-label {
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .composer-variables {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .var-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .var-field label {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .var-field label span {
+      color: #084fba;
+    }
+
+    .var-input {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      border-radius: 8px;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--surface-dark);
+      transition: border-color 200ms, box-shadow 200ms;
+    }
+
+    .var-input:focus {
+      outline: none;
+      border-color: rgba(47, 134, 255, 0.5);
+      box-shadow: 0 0 0 3px rgba(47, 134, 255, 0.12);
+    }
+
+    .whatsapp-phone {
+      background: #efeae2;
+      background-image: radial-gradient(rgba(19, 54, 41, 0.06) 12%, transparent 12%);
+      background-size: 14px 14px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 1.35rem;
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 330px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-hdr {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #075e54;
+      color: #ffffff;
+      padding: 0.45rem 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.7rem;
+      font-weight: 800;
+      z-index: 2;
+    }
+
+    .phone-hdr__av {
+      width: 1.25rem;
+      height: 1.25rem;
+      background: #ffffff;
+      color: #075e54;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.55rem;
+    }
+
+    .phone-bubble {
+      background: #ffffff;
+      border-radius: 0.8rem;
+      border-top-left-radius: 0.15rem;
+      box-shadow: 0 4px 14px rgba(19, 54, 41, 0.07);
+      padding: 0.45rem;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      color: #1f2d24;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      z-index: 1;
+    }
+
+    .phone-bubble__hdr {
+      height: 80px;
+      background: linear-gradient(135deg, #eaf2ff, #dbeafe);
+      border-radius: 0.5rem;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .phone-bubble__hdr svg {
+      width: 1.6rem;
+      height: 1.6rem;
+      color: #084fba;
+    }
+
+    .phone-bubble__body {
+      padding-inline: 0.15rem;
+    }
+
+    .phone-bubble__body p {
+      margin: 0;
+    }
+
+    .phone-bubble__body strong {
+      color: #084fba;
+    }
+
+    .phone-bubble__btn {
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      padding-top: 0.45rem;
+      margin-top: 0.2rem;
+      color: #0080f0;
+      font-weight: 800;
+      font-size: 0.68rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+    }
+
+    /* Developer Webhook Section CSS */
+    .dev-section {
+      background: #0b1120;
+      color: #ffffff;
+      padding-block: clamp(4.5rem, 8vw, 8rem);
+    }
+
+    .dev-grid {
+      display: grid;
+      grid-template-columns: minmax(360px, 1.05fr) minmax(0, 0.95fr);
+      gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: center;
+    }
+
+    .dev-copy h2 {
+      max-width: 15ch;
+      font-family: Sora;
+      font-size: clamp(2rem, 3.6vw, 3.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      margin: 0.65rem 0 0;
+    }
+
+    .dev-copy p {
+      margin: 1.45rem 0 0;
+      color: rgba(203, 213, 225, 0.76);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .dev-console {
+      background: #070a13;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.8rem;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    }
+
+    .console-hdr {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .console-dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .console-dots i {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .console-dots i:nth-child(1) { background: #ef4444; }
+    .console-dots i:nth-child(2) { background: #f59e0b; }
+    .console-dots i:nth-child(3) { background: #10b981; }
+
+    .console-title {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .console-indicator {
+      width: 0.38rem;
+      height: 0.38rem;
+      border-radius: 50%;
+      background: #2f86ff;
+      box-shadow: 0 0 8px #2f86ff;
+      animation: blink 1.6s infinite;
+    }
+
+    .console-body {
+      padding: 1.45rem;
+      margin: 0;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      color: #94a3b8;
+      overflow-x: auto;
+    }
+
+    .console-body .keyword { color: #f472b6; }
+    .console-body .string { color: #0b6fff; }
+    .console-body .number { color: #60a5fa; }
+    .console-body .key { color: #e2e8f0; }
+
+    /* Trust / Enterprise Section CSS */
+    .trust-section {
+      padding-block: clamp(4.5rem, 8vw, 8rem);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .trust-card {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid var(--line);
+      border-radius: 1.6rem;
+      padding: 2.2rem;
+      box-shadow: 0 16px 42px rgba(24, 60, 47, 0.04);
+    }
+
+    .trust-card h3 {
+      font-family: Sora;
+      font-size: 1.35rem;
+      letter-spacing: -0.04em;
+      margin: 0 0 0.75rem;
+      color: var(--surface-dark);
+    }
+
+    .trust-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.68;
+      color: var(--muted);
+    }
+
+    /* CTA Section CSS */
+    .api-cta-section {
+      padding: clamp(3rem, 6vw, 6rem) max(1.25rem, calc((100vw - var(--max-width)) / 2));
+    }
+
+    .api-cta-card {
+      background:
+        radial-gradient(circle at 86% 16%, rgba(47, 134, 255, 0.25), transparent 22rem),
+        linear-gradient(135deg, #0b1120, #13241d);
+      border-radius: 2rem;
+      padding: clamp(2rem, 5vw, 4rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 2.5rem;
+      align-items: center;
+      box-shadow: 0 30px 84px rgba(8, 13, 24, 0.22);
+      color: #ffffff;
+    }
+
+    .api-cta-card h2 {
+      font-family: Sora;
+      font-size: clamp(2rem, 3.8vw, 3.65rem);
+      letter-spacing: -0.06em;
+      margin: 0 0 0.85rem;
+      line-height: 1.05;
+    }
+
+    .api-cta-card p {
+      margin: 0;
+      color: rgba(203, 213, 225, 0.78);
+      font-size: 1.08rem;
+      line-height: 1.65;
+      max-width: 60ch;
+    }
+
+    /* Animations Declarations */
+    @keyframes signalPipe {
+      0% { transform: scaleX(0); opacity: 0.4; }
+      20% { transform: scaleX(1); opacity: 1; }
+      100% { transform: scaleX(1); opacity: 0; }
+    }
+
+    @keyframes signalDot {
+      0% { left: 0%; opacity: 0; }
+      8% { opacity: 1; }
+      75% { left: 100%; opacity: 1; }
+      80%, 100% { left: 100%; opacity: 0; }
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    /* Responsive Breakpoints CSS */
+    @media (max-width: 1180px) {
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .trust-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .api-hero__grid,
+      .section-head,
+      .studio-grid,
+      .dev-grid,
+      .api-cta-card {
+        grid-template-columns: 1fr;
+      }
+      .api-cta-card .button {
+        justify-self: start;
+      }
+      .node-graph {
+        margin-top: 2rem;
+      }
+      .studio-board {
+        margin-top: 2.2rem;
+      }
+      .dev-console {
+        margin-top: 2.2rem;
+      }
+      .dev-grid {
+        grid-template-columns: 1fr;
+      }
+      .dev-grid > :first-child {
+        order: 1;
+      }
+      .dev-grid > :last-child {
+        order: 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .api-hero {
+        padding-top: 2.5rem;
+        padding-bottom: 4.5rem;
+      }
+      .api-hero h1 {
+        font-size: clamp(2.4rem, 10vw, 3.25rem);
+      }
+      .api-hero__actions {
+        flex-direction: column;
+      }
+      .api-hero__actions .button,
+      .api-cta-card .button {
+        width: 100%;
+      }
+      .card-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .studio-board {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Custom Footer fallbacks */
+    .site-footer.custom-footer {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 5rem max(1.25rem, calc((100vw - var(--max-width, 1400px)) / 2)) 2rem;
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0;
+      background-color: #0b1120;
+      box-shadow: none;
+    }
+
+    .custom-footer .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .custom-footer .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .custom-footer .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .custom-footer .footer-brand-logo {
+      flex-shrink: 0;
+    }
+
+    .custom-footer .footer-brand-text {
+      color: #ffffff;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .custom-footer .footer-desc,
+    .custom-footer .footer-copy,
+    .custom-footer .footer-nav-col ul li a,
+    .custom-footer .footer-legal li a {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .custom-footer .footer-desc {
+      max-width: 320px;
+      margin: 0;
+      text-align: left;
+    }
+
+    .custom-footer .footer-socials,
+    .custom-footer .footer-bottom-flex,
+    .custom-footer .footer-legal {
+      display: flex;
+      align-items: center;
+    }
+
+    .custom-footer .footer-socials {
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .custom-footer .social-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.7;
+      transition: opacity 200ms;
+    }
+
+    .custom-footer .social-icon:hover {
+      opacity: 1;
+    }
+
+    .custom-footer .social-icon img {
+      width: 100%;
+      height: auto;
+    }
+
+    .custom-footer .footer-nav-col h3 {
+      margin: 0 0 1.25rem;
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .custom-footer .footer-nav-col ul,
+    .custom-footer .footer-legal {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .custom-footer .footer-nav-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .custom-footer .footer-nav-col ul li a,
+    .custom-footer .footer-legal li a {
+      transition: color 200ms;
+      text-decoration: none;
+    }
+
+    .custom-footer .footer-nav-col ul li a:hover,
+    .custom-footer .footer-legal li a:hover {
+      color: #ffffff;
+    }
+
+    .custom-footer .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin: 2rem auto 0;
+    }
+
+    .custom-footer .footer-bottom-flex {
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .custom-footer .footer-copy {
+      margin: 0;
+    }
+
+    .custom-footer .footer-legal {
+      gap: 1.5rem;
+    }
+
+    .custom-footer .footer-disclaimer {
+      margin: 0;
+      color: #475569;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    @media (max-width: 1080px) {
+      .custom-footer .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem 2rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .custom-footer .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .custom-footer .footer-bottom-flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+  
+    .parallax-slow {
+      transform: translateY(calc(var(--scroll-y, 0px) * 0.1));
+      will-change: transform;
+    }
+    .section-heading {
+      align-items: center !important;
+      text-align: center !important;
+      max-width: 100% !important;
+    }
+    .section-heading h2 {
+      text-align: center !important;
+      white-space: normal !important; text-wrap: balance;
+      max-width: 100% !important;
+    }
+    @media (max-width: 1024px) {
+      .section-heading h2 {
+        white-space: normal !important;
+      }
+    }
+    
+    .faq__intro h2, .omnichannel .copy-panel h2 {
+      text-align: left !important;
+      white-space: normal !important;
+    }
+  </style>
+<style>
+    .section-heading {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      max-width: 100% !important;
+    }
+    .section-heading h2 {
+      text-align: center !important;
+      white-space: normal !important; text-wrap: balance;
+      max-width: 100% !important;
+    }
+    @media (max-width: 1024px) {
+      .section-heading h2 {
+        white-space: normal !important;
+      }
+    }
+    
+    .faq__intro h2, .omnichannel .copy-panel h2 {
+      text-align: left !important;
+      white-space: normal !important;
+    }
+  </style>
+  </head>
+
+<body>
+  <div data-site-header></div>
+
+  <main>
+    <!-- HERO SEGMENT -->
+    <section class="api-hero">
+      <div class="api-hero__grid">
+        <div class="api-hero__copy reveal">
+          <span class="eyebrow-badge">Official WhatsApp Cloud API</span>
+          <h1>Official API. <span>Unlimited scale.</span></h1>
+          <p class="api-hero__lede">
+            Connect directly with official Meta pathways. Launch automated customer support chatbots, distribute personalized broadcasts, and secure green-badge profiles in minutes.
+          </p>
+          <div class="api-hero__actions">
+            <a class="button" href="https://app.connektly.in/signup" target="_blank" rel="noopener noreferrer">Get API Key</a>
+            <a class="button button--ghost" href="/book-demo/index.html">Book a Demo</a>
+          </div>
+        </div>
+
+        <div class="node-graph reveal">
+          <div class="node-container">
+            <!-- Connektly Node -->
+            <div class="node-block node-block--connektly">
+              <img src="../../logo.svg" alt="Connektly Engine" />
+              <span class="node-tag">Connektly Hub</span>
+            </div>
+
+            <!-- Signal Pipe -->
+            <div class="node-connector-line"></div>
+            <div class="node-signal-dot"></div>
+
+            <!-- Meta Node -->
+            <div class="node-block node-block--meta">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              <div class="node-block__verified">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 12.5l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="node-tag">Meta Cloud API</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE CAPABILITIES GRID -->
+    <section class="capabilities-section">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-label">Solutions Infrastructure</span>
+          <h2>Build enterprise communication pipelines.</h2>
+        </div>
+        <p>
+          Gain high-volume scalability, robust automation setups, and direct database synchronizations with native official API capabilities.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <!-- 1. Verified Profile -->
+        <article class="benefit-card reveal">
+          <span class="benefit-card__icon">✓</span>
+          <h3>Verified Brand Identity</h3>
+          <p>Display your official business name and green checkmark badge in chats, establishing trust and visual credibility instantly.</p>
+        </article>
+
+        <!-- 2. Rich Template Alerts -->
+        <article class="benefit-card reveal">
+          <span class="benefit-card__icon">✉</span>
+          <h3>Rich Utility Templates</h3>
+          <p>Integrate pre-approved transactional templates featuring dynamic variables, rich media headers, and quick-reply action buttons.</p>
+        </article>
+
+        <!-- 3. Immediate Webhooks -->
+        <article class="benefit-card reveal">
+          <span class="benefit-card__icon">⚡</span>
+          <h3>Real-Time Webhooks</h3>
+          <p>Get instant status streams for message deliveries, read receipts, template approval stages, and incoming customer inquiries.</p>
+        </article>
+
+        <!-- 4. High Throughput Cloud -->
+        <article class="benefit-card reveal">
+          <span class="benefit-card__icon">⚙</span>
+          <h3>100+ msg/sec Scale</h3>
+          <p>Distribute high-volume marketing and alert broadcasts effortlessly under official Meta session pathways with 99.9% uptime.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE TEMPLATE BUILDER SHOWCASE -->
+    <section class="studio-section">
+      <div class="studio-section__container" style="width: min(calc(100% - clamp(2rem, 5vw, 6rem)), min(var(--max-width), 1360px)); margin: 0 auto;">
+        <div class="studio-grid">
+          <div class="studio-copy reveal">
+            <span class="section-label">Visual Template Builder</span>
+            <h2>Write once. Personalize forever.</h2>
+            <ul class="studio-features">
+              <li class="studio-feature-item">
+                <i>🎚</i>
+                <div>
+                  <strong>Dynamic Variables Matching</strong>
+                  <p>Incorporate template brackets like {{1}} and {{2}} to sync custom names, ticket stages, order numbers, and tracking links dynamically.</p>
+                </div>
+              </li>
+              <li class="studio-feature-item">
+                <i>📸</i>
+                <div>
+                  <strong>Interactive Media Headers</strong>
+                  <p>Enhance click-through rates by appending customized PDFs, invoice sheets, image assets, or promo banners directly inside message headers.</p>
+                </div>
+              </li>
+              <li class="studio-feature-item">
+                <i>🔗</i>
+                <div>
+                  <strong>Interactive Quick Replies</strong>
+                  <p>Add quick action triggers enabling users to visit your site, phone support, or click answers without typing.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="studio-board reveal">
+            <!-- Template Composer Simulator -->
+            <div class="composer-panel">
+              <span class="composer-label">Dynamic Variables</span>
+              <div class="composer-variables">
+                <div class="var-field">
+                  <label>Customer Name <span>{{1}}</span></label>
+                  <input type="text" class="var-input" id="input-name" value="Alexander" placeholder="Customer Name" />
+                </div>
+                <div class="var-field">
+                  <label>Order Number <span>{{2}}</span></label>
+                  <input type="text" class="var-input" id="input-order" value="#CK-90184" placeholder="Order ID" />
+                </div>
+                <div class="var-field">
+                  <label>Shipment Status <span>{{3}}</span></label>
+                  <input type="text" class="var-input" id="input-status" value="Shipped & In Transit" placeholder="Status" />
+                </div>
+              </div>
+            </div>
+
+            <!-- WhatsApp Live Phone Screen Simulator -->
+            <div class="whatsapp-phone">
+              <div class="phone-hdr">
+                <span class="phone-hdr__av">C</span>
+                <span>Connektly Support</span>
+              </div>
+              <div class="phone-bubble">
+                <div class="phone-bubble__hdr">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                </div>
+                <div class="phone-bubble__body">
+                  <p>Hi <strong id="preview-name">Alexander</strong>,</p>
+                  <p>Your order <strong id="preview-order">#CK-90184</strong> status is: <strong id="preview-status">Shipped & In Transit</strong>.</p>
+                  <p>Track delivery right inside your CRM account!</p>
+                </div>
+                <div class="phone-bubble__btn">
+                  <span>🔗</span> Track Shipment
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEVELOPER WEBHOOK LOG CONSOLE -->
+    <section class="dev-section">
+      <div class="dev-section__container" style="width: min(calc(100% - clamp(2rem, 5vw, 6rem)), min(var(--max-width), 1360px)); margin: 0 auto;">
+        <div class="dev-grid">
+          <!-- Terminal Code Log Simulator -->
+          <div class="dev-console reveal">
+            <div class="console-hdr">
+              <span class="console-dots"><i></i><i></i><i></i></span>
+              <span class="console-title">
+                <span class="console-indicator"></span>
+                Webhook listener: status_sync
+              </span>
+            </div>
+            <pre class="console-body">
+{
+  <span class="keyword">"event"</span>: <span class="string">"message_status"</span>,
+  <span class="keyword">"data"</span>: {
+    <span class="key">"message_id"</span>: <span class="string">"wamid.HBgLMTI4OTkwNzA2MTAVAg=="</span>,
+    <span class="key">"recipient"</span>: <span class="string">"+15550192834"</span>,
+    <span class="key">"status"</span>: <span class="string">"read"</span>,
+    <span class="key">"timestamp"</span>: <span class="number">1782390192</span>,
+    <span class="key">"conversation"</span>: {
+      <span class="key">"id"</span>: <span class="string">"b78fc44028e219ba"</span>,
+      <span class="key">"origin"</span>: <span class="string">"utility"</span>
+    }
+  }
+}</pre>
+          </div>
+
+          <div class="dev-copy reveal">
+            <span class="section-label" style="color: var(--green-bright); border-color: rgba(47, 134, 255, 0.2);">Developer API Access</span>
+            <h2>Built for developers. Powered by webhooks.</h2>
+            <p>
+              Listen directly to custom alert events. Capture read status indicators, client replies, opt-out triggers, and deliver payloads back to your database infrastructure with automated, zero-latency listeners.
+            </p>
+            <div class="api-hero__actions">
+              <a class="button button--ghost" href="/help" style="border-color: rgba(255,255,255,0.15);">Explore API Docs</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST & COMPLIANCE -->
+    <section class="trust-section">
+      <div class="trust-section__container" style="width: min(calc(100% - clamp(2rem, 5vw, 6rem)), min(var(--max-width), 1360px)); margin: 0 auto;">
+        <div class="section-head reveal" style="margin-bottom: 2rem;">
+          <div>
+            <span class="section-label">Enterprise Shield</span>
+            <h2>Official scaling infrastructure.</h2>
+          </div>
+          <p>
+            Deploy mission-critical client communications backed by official Meta Business Partner security layers and SLA assurances.
+          </p>
+        </div>
+
+        <div class="trust-grid reveal">
+          <div class="trust-card">
+            <h3>99.9% API Uptime</h3>
+            <p>Direct routes to Meta's global data clusters guarantee high availability, prompt delivery speeds, and robust infrastructure resilience.</p>
+          </div>
+          <div class="trust-card">
+            <h3>GDPR & Compliance Shield</h3>
+            <p>End-to-end data encryption protocols keep lead files, customer conversations, and metadata registers compliant with international standards.</p>
+          </div>
+          <div class="trust-card">
+            <h3>Dedicated Meta Setup</h3>
+            <p>Direct access to Sandbox developer endpoints guarantees clean, testable configurations before taking your messaging live.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SANDBOX -->
+    <section class="api-cta-section reveal">
+      <div class="api-cta-card">
+        <div>
+          <h2>Ready to unlock the official API?</h2>
+          <p>Claim your official WhatsApp Business sandbox token today and run your first broadcast test inside Connektly in under five minutes.</p>
+        </div>
+        <a class="button" href="https://app.connektly.in/signup" target="_blank" rel="noopener noreferrer">Get Started Free</a>
+      </div>
+    </section>
+  </main>
+
+  <div data-site-footer></div>
+
+  <!-- Shared Global Script injection -->
+  <script src="../../components/global.js"></script>
+
+  <!-- Interactive Simulator logic & Reveal logic -->
+  <script>
+    // Live template preview syncing
+    const nameInput = document.getElementById("input-name");
+    const orderInput = document.getElementById("input-order");
+    const statusInput = document.getElementById("input-status");
+
+    const namePreview = document.getElementById("preview-name");
+    const orderPreview = document.getElementById("preview-order");
+    const statusPreview = document.getElementById("preview-status");
+
+    function updatePreview() {
+      namePreview.textContent = nameInput.value || "Customer";
+      orderPreview.textContent = orderInput.value || "#CK-XXXXX";
+      statusPreview.textContent = statusInput.value || "Pending";
+    }
+
+    if (nameInput && orderInput && statusInput) {
+      nameInput.addEventListener("input", updatePreview);
+      orderInput.addEventListener("input", updatePreview);
+      statusInput.addEventListener("input", updatePreview);
+    }
+
+    // Scroll reveal observer
+    const revealNodes = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
+      );
+
+      revealNodes.forEach((node) => revealObserver.observe(node));
+    } else {
+      revealNodes.forEach((node) => node.classList.add("is-visible"));
+    }
+  </script>
+</body>
+
+</html>
