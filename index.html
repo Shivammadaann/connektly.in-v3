@@ -6238,7 +6238,7 @@
       font-family: "Sora", sans-serif !important;
       font-size: clamp(1.55rem, 2.4vw, 2.6rem) !important;
       line-height: 1.08 !important;
-      letter-spacing: -0.035em !important;
+      letter-spacing: 0 !important;
     }
 
     .problem-section h2 span {
@@ -6462,6 +6462,162 @@
       }
     }
 
+    .core-features {
+      position: relative !important;
+      overflow: hidden !important;
+      background:
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 52%, #ffffff 100%) !important;
+    }
+
+    .core-features__inner {
+      max-width: 1280px !important;
+      margin-inline: auto !important;
+    }
+
+    .core-features__heading {
+      max-width: 860px !important;
+      margin-inline: auto !important;
+      text-align: center !important;
+    }
+
+    .core-features__heading h2 {
+      margin: 0 !important;
+      color: #07111f !important;
+      font-family: "Sora", sans-serif !important;
+      font-size: clamp(1.55rem, 2.4vw, 2.6rem) !important;
+      line-height: 1.08 !important;
+      letter-spacing: -0.035em !important;
+    }
+
+    .core-features__heading p {
+      max-width: 68ch !important;
+      margin: 1rem auto 0 !important;
+      color: #50627d !important;
+      line-height: 1.65 !important;
+    }
+
+    .core-feature-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: clamp(1rem, 2vw, 1.4rem) !important;
+      margin-top: clamp(1.6rem, 3vw, 2.4rem) !important;
+    }
+
+    .core-feature-card {
+      position: relative !important;
+      display: grid !important;
+      align-content: start !important;
+      gap: 1rem !important;
+      min-height: 100% !important;
+      padding: clamp(1.25rem, 2.2vw, 2rem) !important;
+      border: 1px solid rgba(12, 31, 59, 0.08) !important;
+      border-radius: 1.35rem !important;
+      background:
+        radial-gradient(circle at 94% 10%, rgba(11, 111, 255, 0.1), transparent 10rem),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.98)) !important;
+      box-shadow: 0 18px 48px rgba(24, 78, 146, 0.08) !important;
+      overflow: hidden !important;
+      transition:
+        transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 260ms ease,
+        box-shadow 260ms ease !important;
+    }
+
+    .core-feature-card::before {
+      content: attr(data-index) !important;
+      position: absolute !important;
+      top: 0.85rem !important;
+      right: 1rem !important;
+      color: rgba(11, 111, 255, 0.08) !important;
+      font-family: "Sora", sans-serif !important;
+      font-size: clamp(3.4rem, 6vw, 5.5rem) !important;
+      font-weight: 900 !important;
+      line-height: 1 !important;
+      pointer-events: none !important;
+    }
+
+    .core-feature-card:hover,
+    .core-feature-card:focus-within {
+      transform: translateY(-0.42rem) !important;
+      border-color: rgba(11, 111, 255, 0.22) !important;
+      box-shadow: 0 28px 72px rgba(24, 78, 146, 0.14) !important;
+    }
+
+    .core-feature-card__badge {
+      position: relative !important;
+      z-index: 1 !important;
+      display: inline-flex !important;
+      width: fit-content !important;
+      align-items: center !important;
+      gap: 0.5rem !important;
+      padding: 0.38rem 0.75rem !important;
+      border-radius: 999px !important;
+      background: #eaf2ff !important;
+      color: #0b6fff !important;
+      font-size: 0.75rem !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.06em !important;
+      text-transform: uppercase !important;
+    }
+
+    .core-feature-card h3 {
+      position: relative !important;
+      z-index: 1 !important;
+      max-width: 18ch !important;
+      margin: 0 !important;
+      color: #07111f !important;
+      font-family: "Sora", sans-serif !important;
+      font-size: clamp(1.35rem, 2vw, 2rem) !important;
+      line-height: 1.12 !important;
+      letter-spacing: 0 !important;
+    }
+
+    .core-feature-card p {
+      position: relative !important;
+      z-index: 1 !important;
+      margin: 0 !important;
+      color: #50627d !important;
+      line-height: 1.65 !important;
+    }
+
+    .core-feature-card ul {
+      position: relative !important;
+      z-index: 1 !important;
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 0.65rem 0.85rem !important;
+      margin: 0.25rem 0 0 !important;
+      padding: 0 !important;
+      list-style: none !important;
+    }
+
+    .core-feature-card li {
+      display: flex !important;
+      gap: 0.55rem !important;
+      align-items: flex-start !important;
+      color: #31445f !important;
+      font-size: 0.94rem !important;
+      line-height: 1.45 !important;
+    }
+
+    .core-feature-card li::before {
+      content: "" !important;
+      flex: 0 0 auto !important;
+      width: 0.48rem !important;
+      height: 0.48rem !important;
+      margin-top: 0.45rem !important;
+      border-radius: 999px !important;
+      background: #0b6fff !important;
+      box-shadow: 0 0 0 0.25rem rgba(11, 111, 255, 0.1) !important;
+    }
+
+    @media (max-width: 980px) {
+      .core-feature-grid,
+      .core-feature-card ul {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
     .omnichannel-media {
       min-height: auto !important;
       background: transparent !important;
@@ -6666,6 +6822,100 @@
             <li>Team assignment and role-based access</li>
           </ul>
         </article>
+      </div>
+    </section>
+
+    <section class="core-features section" id="core-features">
+      <div class="core-features__inner reveal">
+        <div class="core-features__heading">
+          <span class="eyebrow">Core Features</span>
+          <h2>Core Feature Blocks</h2>
+          <p>The main workspace for managing conversations, leads, campaigns, automations, templates, flows, and Meta lead capture.</p>
+        </div>
+
+        <div class="core-feature-grid">
+          <article class="core-feature-card" data-index="01" tabindex="0">
+            <span class="core-feature-card__badge">Unified Inbox</span>
+            <h3>One inbox for every customer conversation</h3>
+            <p>Manage WhatsApp, Instagram, and Messenger conversations from one clean, searchable inbox. Track unread messages, view contact details, and reply faster.</p>
+            <ul>
+              <li>WhatsApp, Instagram, and Messenger inbox</li>
+              <li>Real-time conversation updates</li>
+              <li>Delivery and read-status tracking</li>
+              <li>Searchable conversation list</li>
+              <li>Contact side panel inside inbox</li>
+            </ul>
+          </article>
+
+          <article class="core-feature-card" data-index="02" tabindex="0">
+            <span class="core-feature-card__badge">WhatsApp CRM</span>
+            <h3>Turn conversations into organized leads</h3>
+            <p>Capture every customer interaction inside a CRM built around WhatsApp-first businesses. Manage contacts, leads, labels, statuses, sources, owners, and timelines.</p>
+            <ul>
+              <li>Contact and lead management</li>
+              <li>Lead statuses and labels</li>
+              <li>Contact owner assignment</li>
+              <li>Lead source tracking</li>
+              <li>Lead timeline with message history</li>
+              <li>Custom contact attributes</li>
+            </ul>
+          </article>
+
+          <article class="core-feature-card" data-index="03" tabindex="0">
+            <span class="core-feature-card__badge">Campaigns</span>
+            <h3>Send WhatsApp campaigns that reach the right audience</h3>
+            <p>Create targeted WhatsApp broadcasts using approved templates. Send campaigns to selected contacts or upload CSV recipient lists.</p>
+            <ul>
+              <li>WhatsApp marketing broadcasts</li>
+              <li>Send approved templates to contacts</li>
+              <li>CSV-based campaign sending</li>
+              <li>Marketing opt-out protection</li>
+              <li>Scheduled WhatsApp campaigns</li>
+            </ul>
+          </article>
+
+          <article class="core-feature-card" data-index="04" tabindex="0">
+            <span class="core-feature-card__badge">Automations</span>
+            <h3>Automate replies, follow-ups, and lead actions</h3>
+            <p>Create rule-based WhatsApp automations for common customer journeys. Trigger actions using keywords, lead events, and conditional rules.</p>
+            <ul>
+              <li>Keyword-based automation triggers</li>
+              <li>Lead-created triggers</li>
+              <li>Conditional automation rules</li>
+              <li>Send text or template messages</li>
+              <li>Visual automation builder</li>
+              <li>Execution tracking</li>
+            </ul>
+          </article>
+
+          <article class="core-feature-card" data-index="05" tabindex="0">
+            <span class="core-feature-card__badge">Templates &amp; Flows</span>
+            <h3>Create templates and interactive WhatsApp Flows</h3>
+            <p>Manage WhatsApp templates and build interactive Flow-based customer journeys for lead capture, forms, bookings, and structured responses.</p>
+            <ul>
+              <li>Template sync and creation</li>
+              <li>Template previews</li>
+              <li>Media headers and buttons</li>
+              <li>WhatsApp Flow builder</li>
+              <li>Flow publishing</li>
+              <li>Flow response capture</li>
+            </ul>
+          </article>
+
+          <article class="core-feature-card" data-index="06" tabindex="0">
+            <span class="core-feature-card__badge">Meta Lead Capture &amp; Ads</span>
+            <h3>Capture Meta leads and manage ad performance</h3>
+            <p>Connect Meta Lead Forms and automatically create leads inside Connektly. Track ad campaign performance and manage campaigns from one place.</p>
+            <ul>
+              <li>Meta Lead Capture integration</li>
+              <li>Facebook form lead capture</li>
+              <li>Auto-create CRM leads</li>
+              <li>Meta Ads account connection</li>
+              <li>Campaign performance metrics</li>
+              <li>Pause/resume Meta Ads campaigns</li>
+            </ul>
+          </article>
+        </div>
       </div>
     </section>
 

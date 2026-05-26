@@ -185,7 +185,7 @@
 
       .header-actions .nav-login:hover,
       .mobile-actions .nav-login:hover {
-        color: ##0b6fff;
+        color: #0b6fff;
         transform: translateY(-1px);
       }
 
@@ -206,7 +206,7 @@
       .nav-dropdown__toggle:hover,
       .nav-dropdown[open]>.nav-dropdown__toggle,
       .nav-dropdown--current>.nav-dropdown__toggle {
-        color: ##0b6fff;
+        color: #0b6fff;
         transform: translateY(-1px);
       }
 
@@ -317,7 +317,7 @@
 
       .nav-dropdown__menu a:hover .dropdown-item-label,
       .nav-dropdown__menu a.is-active .dropdown-item-label {
-        color: ##0b6fff;
+        color: #0b6fff;
       }
 
       .nav-dropdown__menu a:hover .dropdown-item-desc,
@@ -2650,6 +2650,149 @@
         opacity: 0.28;
       }
 
+      body {
+        font-family: "Manrope", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+        overflow-x: hidden !important;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: geometricPrecision;
+      }
+
+      .features-hero,
+      .contact-hero,
+      .demo-hero,
+      .faq-hero,
+      .api-hero,
+      .messenger-hero,
+      .policy-hero,
+      .features-section,
+      .capabilities-section,
+      .studio-section,
+      .dev-section,
+      .trust-section,
+      .feature-grid-section,
+      .messenger-intro,
+      .faq-section,
+      .support-panel,
+      .sales-cta,
+      .policy-shell,
+      .thank-you-panel {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+        padding-block: 2rem !important;
+      }
+
+      .features-hero,
+      .contact-hero,
+      .demo-hero,
+      .faq-hero,
+      .api-hero,
+      .messenger-hero,
+      .policy-hero,
+      .features-section,
+      .capabilities-section,
+      .studio-section,
+      .dev-section,
+      .trust-section,
+      .feature-grid-section,
+      .messenger-intro,
+      .faq-section,
+      .support-panel,
+      .sales-cta,
+      .policy-shell {
+        width: min(calc(100% - clamp(1.5rem, 5vw, 6rem)), min(var(--max-width, 1200px), 1280px)) !important;
+        margin-inline: auto !important;
+      }
+
+      .features-hero h1,
+      .contact-hero h1,
+      .demo-hero h1,
+      .faq-hero h1,
+      .api-hero h1,
+      .messenger-hero h1,
+      .policy-hero h1,
+      .thank-you-panel h1 {
+        max-width: 25ch !important;
+        margin-inline: auto !important;
+        color: #071226 !important;
+        font-family: "Sora", sans-serif !important;
+        font-size: clamp(2.05rem, 4.2vw, 4.45rem) !important;
+        line-height: 1.14 !important;
+        letter-spacing: 0 !important;
+        text-wrap: balance;
+      }
+
+      .features-hero h1 span,
+      .contact-hero h1 span,
+      .demo-hero h1 span,
+      .faq-hero h1 span,
+      .api-hero h1 span,
+      .messenger-hero h1 span,
+      .policy-hero h1 span,
+      .thank-you-panel h1 span,
+      .blue-text {
+        color: #0b6fff !important;
+      }
+
+      .features-section__head,
+      .section-head,
+      .intro-header,
+      .faq-section,
+      .features-cta,
+      .final-cta__inner,
+      .contact-band__content {
+        text-align: center !important;
+      }
+
+      .features-section h2,
+      .features-section__head h2,
+      .section-head h2,
+      .intro-header h2,
+      .faq-section h2,
+      .capabilities-section h2,
+      .studio-section h2,
+      .dev-section h2,
+      .trust-section h2,
+      .api-cta-card h2,
+      .contact-form-panel h2,
+      .demo-form-panel h2,
+      .sales-cta h2,
+      .policy-section h2,
+      .policy-card h2,
+      .contact-band h2 {
+        max-width: 18ch !important;
+        margin-inline: auto !important;
+        color: #071226 !important;
+        font-family: "Sora", sans-serif !important;
+        font-size: clamp(1.55rem, 2.4vw, 2.6rem) !important;
+        line-height: 1.08 !important;
+        letter-spacing: 0 !important;
+        text-wrap: balance;
+      }
+
+      .features-hero__lede,
+      .contact-hero__lede,
+      .demo-hero__lede,
+      .faq-hero__lede,
+      .api-hero__lede,
+      .policy-hero__lede,
+      .messenger-card p,
+      .intro-header p,
+      .intro-content p,
+      .section-head p,
+      .features-section__head p,
+      .api-cta-card p,
+      .thank-you-panel p {
+        color: #50627d !important;
+        line-height: 1.65 !important;
+      }
+
+      .features-hero__actions,
+      .api-hero__actions,
+      .sales-cta__actions,
+      .contact-band__actions {
+        justify-content: center !important;
+      }
+
       [data-site-header] {
         min-height: 5.25rem !important;
       }
@@ -2749,6 +2892,12 @@
       .price-card__action,
       .compact-price-card__btn,
       .pricing-plan__action,
+      .messenger-cta,
+      .template-cta-btn,
+      .form-submit-btn,
+      .contact-form__submit,
+      .broad-modal-btn,
+      .catalog-btn-add,
       .site-header .nav-cta,
       .site-header.is-scrolled .nav-cta {
         border-radius: 999px !important;
@@ -2763,6 +2912,12 @@
       .price-card__action:hover,
       .compact-price-card__btn:hover,
       .pricing-plan__action:hover,
+      .messenger-cta:hover,
+      .template-cta-btn:hover,
+      .form-submit-btn:hover,
+      .contact-form__submit:hover,
+      .broad-modal-btn:hover,
+      .catalog-btn-add:hover,
       .site-header .nav-cta:hover {
         box-shadow: 0 18px 40px rgba(11, 111, 255, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
         transform: translateY(-2px) !important;
@@ -2933,17 +3088,120 @@
       .compact-price-card,
       .included-card,
       .faq-card,
+      .faq-item,
+      .faq-category,
       .feature-card,
+      .capability-card,
+      .pc-card,
+      .pf-card,
+      .pf-block,
+      .summary-card,
+      .sync-card,
+      .campaign-card,
+      .broadcast-card,
+      .meta-badge-card,
+      .template-hero,
+      .composer-panel,
+      .email-composer,
+      .dev-console,
+      .studio-board,
+      .product-console,
+      .platform-compare,
+      .whatsapp-phone,
       .ecosystem-card,
+      .workflow-step,
+      .benefit-card,
+      .trust-card,
+      .api-cta-card,
+      .messenger-card,
+      .contact-form-panel,
+      .demo-form-panel,
+      .support-card,
+      .sales-cta__inner,
       .solution-card,
       .contact-card,
+      .contact__card,
+      .policy-status,
+      .policy-nav,
       .policy-card,
+      .policy-section,
       .pricing-plan,
       .compare-table-wrap {
         border: 1px solid rgba(12, 31, 59, 0.08) !important;
         border-radius: 1rem !important;
         background: rgba(255, 255, 255, 0.9) !important;
         box-shadow: 0 18px 50px rgba(24, 78, 146, 0.1) !important;
+      }
+
+      .feature-card:hover,
+      .capability-card:hover,
+      .pc-card:hover,
+      .pf-card:hover,
+      .pf-block:hover,
+      .summary-card:hover,
+      .sync-card:hover,
+      .campaign-card:hover,
+      .broadcast-card:hover,
+      .meta-badge-card:hover,
+      .template-hero:hover,
+      .ecosystem-card:hover,
+      .workflow-step:hover,
+      .benefit-card:hover,
+      .trust-card:hover,
+      .faq-item:hover,
+      .support-card:hover,
+      .policy-section:hover {
+        transform: translateY(-0.25rem) !important;
+        border-color: rgba(11, 111, 255, 0.22) !important;
+        box-shadow: 0 24px 64px rgba(24, 78, 146, 0.14) !important;
+      }
+
+      .feature-card,
+      .capability-card,
+      .pc-card,
+      .pf-card,
+      .pf-block,
+      .summary-card,
+      .sync-card,
+      .campaign-card,
+      .broadcast-card,
+      .meta-badge-card,
+      .template-hero,
+      .ecosystem-card,
+      .workflow-step,
+      .benefit-card,
+      .trust-card,
+      .faq-item,
+      .support-card,
+      .policy-section {
+        transition:
+          transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 240ms ease,
+          box-shadow 240ms ease !important;
+      }
+
+      .form-field input,
+      .form-field select,
+      .form-field textarea,
+      .search-input,
+      .var-input,
+      .form-input {
+        border: 1px solid rgba(12, 31, 59, 0.12) !important;
+        border-radius: 0.9rem !important;
+        background: rgba(255, 255, 255, 0.92) !important;
+        color: #071226 !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+      }
+
+      .form-field input:focus,
+      .form-field select:focus,
+      .form-field textarea:focus,
+      .search-input:focus,
+      .var-input:focus,
+      .form-input:focus {
+        border-color: rgba(11, 111, 255, 0.45) !important;
+        box-shadow: 0 0 0 0.25rem rgba(11, 111, 255, 0.12) !important;
+        outline: none !important;
       }
 
       .price-card,
