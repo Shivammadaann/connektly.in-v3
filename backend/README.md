@@ -150,7 +150,7 @@ Start Command: npm start
 Add all required environment variables in Render. Then connect the custom domain:
 
 ```text
-api.connektly.in
+backend.connektly.in
 ```
 
 Point the DNS CNAME for `api` to the Render-provided hostname.
@@ -160,7 +160,7 @@ Point the DNS CNAME for `api` to the Render-provided hostname.
 Website forms submit to:
 
 ```text
-https://api.connektly.in/api/leads
+https://backend.connektly.in/api/leads
 ```
 
 The admin panel is available at:
@@ -169,4 +169,4 @@ The admin panel is available at:
 https://www.connektly.in/admin
 ```
 
-For local development, change the one `API_BASE_URL` constant in `components/lead-forms.js` or `admin/index.html` from `https://api.connektly.in` to `http://localhost:5000`.
+For local development, change the one `API_BASE_URL` constant in `components/lead-forms.js` or `admin/index.html` from `https://backend.connektly.in` to `http://localhost:5000`.

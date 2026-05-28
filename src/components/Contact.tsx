@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from "react";
 
-const API_BASE_URL = "https://api.connektly.in";
+const API_BASE_URL = "https://backend.connektly.in";
 const ATTRIBUTION_KEY = "connektly_attribution";
 
 function getAttribution() {

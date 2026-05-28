@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const API_BASE_URL = "https://api.connektly.in";
+  const API_BASE_URL = "https://backend.connektly.in";
   const LEAD_ENDPOINT = `${API_BASE_URL}/api/leads`;
   const ATTRIBUTION_KEY = "connektly_attribution";
   const SUCCESS_MESSAGE =
