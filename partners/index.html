@@ -697,7 +697,7 @@
 
         <div class="partner-form-panel">
           <h2>Partner details</h2>
-          <form class="partner-form" id="partner-form" novalidate>
+          <form class="partner-form" id="partner-form" data-lead-form data-form-type="partner_application" novalidate>
             <input type="hidden" name="formType" value="partner_application" />
             <div class="form-grid">
               <div class="form-field">
@@ -802,6 +802,7 @@
   <div data-site-footer></div>
 
   <script src="../components/global.js"></script>
+  <script src="../components/lead-forms.js"></script>
   <script>
     const revealNodes = document.querySelectorAll(".reveal");
 
@@ -823,42 +824,6 @@
       revealNodes.forEach((node) => node.classList.add("is-visible"));
     }
 
-    const partnerForm = document.getElementById("partner-form");
-    const partnerStatus = document.getElementById("partner-form-status");
-
-    if (partnerForm && partnerStatus) {
-      partnerForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        partnerStatus.classList.remove("is-error");
-
-        if (!partnerForm.checkValidity()) {
-          partnerStatus.textContent = "Please complete the required fields before submitting.";
-          partnerStatus.classList.add("is-error");
-          partnerForm.reportValidity();
-          return;
-        }
-
-        const submitButton = partnerForm.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
-        submitButton.textContent = "Submitting...";
-        partnerStatus.textContent = "Submitting your application...";
-
-        try {
-          const payload = Object.fromEntries(new FormData(partnerForm).entries());
-          // TODO: Send payload to the production lead capture endpoint when the partner backend is ready.
-          await new Promise((resolve) => window.setTimeout(resolve, 700));
-          console.info("Partner application placeholder submission", payload);
-          partnerForm.reset();
-          partnerStatus.textContent = "Thank you for applying to become a Connektly Partner. Our team will review your application and contact you shortly.";
-        } catch (error) {
-          partnerStatus.textContent = "Something went wrong while submitting your application. Please try again.";
-          partnerStatus.classList.add("is-error");
-        } finally {
-          submitButton.disabled = false;
-          submitButton.textContent = "Submit Partner Application";
-        }
-      });
-    }
   </script>
 </body>
 

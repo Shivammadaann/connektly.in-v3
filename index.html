@@ -7442,7 +7442,7 @@
 
         <div class="contact-form-panel home-contact__form-panel reveal">
           <h2>Send us a message</h2>
-          <form class="contact-form" id="contact-form">
+          <form class="contact-form" id="contact-form" data-lead-form data-form-type="homepage_lead">
             <div class="form-grid">
               <div class="form-field">
                 <label for="name">Full Name</label>
@@ -7550,7 +7550,7 @@
     const pointsNode = document.getElementById("solution-points");
     const metricsNode = document.getElementById("solution-metrics");
     const accordionItems = document.querySelectorAll(".accordion__item");
-    const forms = document.querySelectorAll("form");
+    const forms = document.querySelectorAll("form:not([data-lead-form])");
     const revealNodes = document.querySelectorAll(".reveal");
     const sectionNodes = document.querySelectorAll("main section[id]");
     const tocLinks = document.querySelectorAll("[data-toc-link]");
@@ -7934,30 +7934,6 @@
       return formNode.querySelector(".contact-form__status") || document.getElementById("form-status");
     }
 
-    function getRedirectPath(type) {
-      return "/thank-you/";
-    }
-
-
-
-    async function submitWebsiteForm(formNode) {
-      const fields = readFormFields(formNode);
-      const type = inferFormType(formNode, fields);
-      const statusNode = getFormStatusNode(formNode);
-      const submitButton = formNode.querySelector('[type="submit"]');
-
-      if (statusNode) {
-        statusNode.textContent = "Submitted. Redirecting...";
-      }
-      if (submitButton) {
-        submitButton.disabled = true;
-      }
-
-      window.location.assign(getRedirectPath(type));
-    }
-
-
-
     function setActiveSectionLink() {
       if (!sectionNodes.length) {
         return;
@@ -8163,13 +8139,6 @@
       });
     });
 
-    forms.forEach((formNode) => {
-      formNode.addEventListener("submit", (event) => {
-        event.preventDefault();
-        void submitWebsiteForm(formNode);
-      });
-    });
-
     if ("IntersectionObserver" in window && revealNodes.length) {
       const revealObserver = new IntersectionObserver(
         (entries) => {
@@ -8317,6 +8286,7 @@
 
   </script>
   <script src="components/global.js"></script>
+  <script src="components/lead-forms.js"></script>
 </body>
 
 </html>

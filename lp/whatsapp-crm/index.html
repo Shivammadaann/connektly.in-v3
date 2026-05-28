@@ -172,26 +172,7 @@
                             <p class="text-sm text-gray-500 mt-2">Our team will help you understand the right setup for your business.</p>
                         </div>
 
-                        <form class="space-y-4" action="https://api.web3forms.com/submit" method="POST">
-                            <input type="hidden" name="access_key" value="172215ed-8d99-4637-be34-9884fc69b47e">
-                            <input type="hidden" name="subject" value="New Connektly WhatsApp CRM demo request">
-                            <input type="hidden" name="redirect" value="https://www.connektly.in/thank-you/">
-                            <input type="hidden" name="form_type" value="whatsapp_crm_demo">
-                            <input type="hidden" name="utm_source">
-                            <input type="hidden" name="utm_medium">
-                            <input type="hidden" name="utm_campaign">
-                            <input type="hidden" name="utm_term">
-                            <input type="hidden" name="utm_content">
-                            <input type="hidden" name="first_utm_source">
-                            <input type="hidden" name="first_utm_medium">
-                            <input type="hidden" name="first_utm_campaign">
-                            <input type="hidden" name="first_utm_term">
-                            <input type="hidden" name="first_utm_content">
-                            <input type="hidden" name="landing_page">
-                            <input type="hidden" name="first_landing_page">
-                            <input type="hidden" name="referrer">
-                            <input type="hidden" name="first_referrer">
-                            <input type="hidden" name="user_agent">
+                        <form class="space-y-4" data-lead-form data-form-type="landing_page_lead">
                             <div>
                                 <label class="sr-only">Name</label>
                                 <input type="text" name="name" autocomplete="name" placeholder="Full Name" class="w-full px-5 py-3.5 rounded-full border border-gray-200 focus:ring-4 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition-all bg-white/60 focus:bg-white" required>
@@ -662,105 +643,8 @@
         </div>
     </footer>
 
+    <script src="../../components/lead-forms.js"></script>
     <script>
-        (function () {
-            const utmKeys = [
-                "utm_source",
-                "utm_medium",
-                "utm_campaign",
-                "utm_term",
-                "utm_content"
-            ];
-            const params = new URLSearchParams(window.location.search);
-
-            function storageGet(key) {
-                try {
-                    return localStorage.getItem(key) || "";
-                } catch (error) {
-                    return "";
-                }
-            }
-
-            function storageSet(key, value, preserveExisting) {
-                if (!value) {
-                    return;
-                }
-
-                try {
-                    if (preserveExisting && localStorage.getItem(key)) {
-                        return;
-                    }
-
-                    localStorage.setItem(key, value);
-                } catch (error) {
-                    // Storage can be blocked in private or restricted browser modes.
-                }
-            }
-
-            function captureAttribution() {
-                utmKeys.forEach((key) => {
-                    const value = params.get(key);
-
-                    if (value) {
-                        storageSet(key, value, false);
-                        storageSet(`first_${key}`, value, true);
-                    }
-                });
-
-                storageSet("landing_page", window.location.href, false);
-                storageSet("first_landing_page", window.location.href, true);
-
-                if (document.referrer) {
-                    storageSet("referrer", document.referrer, false);
-                    storageSet("first_referrer", document.referrer, true);
-                }
-
-                storageSet("user_agent", navigator.userAgent, false);
-            }
-
-            function ensureHiddenInput(form, name) {
-                let input = form.querySelector(`input[name="${name}"]`);
-
-                if (!input) {
-                    input = document.createElement("input");
-                    input.type = "hidden";
-                    input.name = name;
-                    form.appendChild(input);
-                }
-
-                return input;
-            }
-
-            function populateAttributionFields() {
-                const fieldNames = [
-                    ...utmKeys,
-                    ...utmKeys.map((key) => `first_${key}`),
-                    "landing_page",
-                    "first_landing_page",
-                    "referrer",
-                    "first_referrer",
-                    "user_agent"
-                ];
-
-                document.querySelectorAll("form").forEach((form) => {
-                    fieldNames.forEach((name) => {
-                        const input = ensureHiddenInput(form, name);
-                        input.value = storageGet(name);
-                    });
-                });
-            }
-
-            captureAttribution();
-
-            document.addEventListener("DOMContentLoaded", function () {
-                populateAttributionFields();
-
-                document.querySelectorAll("form").forEach((form) => {
-                    form.addEventListener("submit", populateAttributionFields);
-                });
-            });
-        })();
-
         // Intersection Observer for Scroll Animations
         document.addEventListener("DOMContentLoaded", function() {
             const reveals = document.querySelectorAll('.reveal');

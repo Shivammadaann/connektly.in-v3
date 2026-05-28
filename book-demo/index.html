@@ -1039,11 +1039,7 @@
 
           <div class="demo-form-panel reveal">
             <h2>Request your demo</h2>
-            <form class="demo-form" action="https://api.web3forms.com/submit" method="POST">
-              <input type="hidden" name="access_key" value="172215ed-8d99-4637-be34-9884fc69b47e" />
-              <input type="hidden" name="subject" value="New Connektly demo request" />
-              <input type="hidden" name="redirect" value="https://www.connektly.in/thank-you/" />
-
+            <form class="demo-form" data-lead-form data-form-type="book_demo">
               <div class="form-grid">
                 <div class="form-field">
                   <label for="first-name">First Name</label>
@@ -1088,6 +1084,7 @@
     <div data-site-footer></div>
 
     <script src="../components/global.js"></script>
+    <script src="../components/lead-forms.js"></script>
     <script>
       const revealNodes = document.querySelectorAll(".reveal");
 

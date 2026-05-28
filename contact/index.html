@@ -1186,7 +1186,7 @@
 
           <div class="contact-form-panel reveal">
             <h2>Send us a message</h2>
-            <form class="contact-form" action="#" method="post">
+            <form class="contact-form" data-lead-form data-form-type="contact_us">
               <div class="form-grid">
                 <div class="form-field">
                   <label for="contact-name">Full Name</label>
@@ -1267,6 +1267,7 @@
     <div data-site-footer></div>
 
     <script src="../components/global.js"></script>
+    <script src="../components/lead-forms.js"></script>
     <script>
       const revealNodes = document.querySelectorAll(".reveal");
 
@@ -1288,22 +1289,6 @@
         revealNodes.forEach((node) => node.classList.add("is-visible"));
       }
 
-      const contactForm = document.querySelector(".contact-form");
-      if (contactForm) {
-        contactForm.addEventListener("submit", (event) => {
-          event.preventDefault();
-
-          const submitBtn = contactForm.querySelector('button[type="submit"]');
-          if (submitBtn) {
-            submitBtn.textContent = "Message sent. Redirecting...";
-            submitBtn.disabled = true;
-          }
-
-          setTimeout(() => {
-            window.location.assign("/thank-you/");
-          }, 400);
-        });
-      }
     </script>
   </body>
 </html>
