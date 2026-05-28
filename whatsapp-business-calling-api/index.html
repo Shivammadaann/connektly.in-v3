@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WhatsApp Business Calling API | Connektly</title>
+  <meta name="description" content="Bring WhatsApp Business Calling API voice conversations into Connektly with Meta's official API." />
+  <link rel="icon" type="image/png" href="../connektly-favicon.png" />
+  <link rel="apple-touch-icon" href="../connektly-favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #07111f;
+      --muted: #526174;
+      --blue: #0b6fff;
+      --blue-soft: #eaf2ff;
+      --green: #25d366;
+      --line: rgba(15, 23, 42, 0.1);
+      --shadow: 0 30px 80px rgba(24, 60, 47, 0.14);
+      --max-width: clamp(1180px, 88vw, 1480px);
+      --site-header-shell-height: 5rem;
+      --site-header-gap: 0rem;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 18%, rgba(11, 111, 255, 0.12), transparent 28rem),
+        radial-gradient(circle at 82% 12%, rgba(37, 211, 102, 0.12), transparent 28rem),
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 48%, #ffffff 100%);
+      font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    [data-site-header] {
+      display: block;
+      min-height: calc(var(--site-header-shell-height) + var(--site-header-gap));
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .calling-hero {
+      position: relative;
+      width: min(calc(100% - clamp(2rem, 5vw, 6rem)), var(--max-width));
+      min-height: calc(100vh - var(--site-header-shell-height));
+      margin: 0 auto;
+      padding: clamp(4rem, 7vw, 7rem) 0 clamp(4rem, 7vw, 6.5rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(340px, 0.78fr);
+      gap: clamp(2.5rem, 6vw, 7rem);
+      align-items: center;
+    }
+
+    .calling-hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -8% 8% 48%;
+      height: 48%;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(11, 111, 255, 0.12), rgba(37, 211, 102, 0.12));
+      filter: blur(42px);
+      pointer-events: none;
+    }
+
+    .calling-hero__content,
+    .calling-hero__visual {
+      position: relative;
+      z-index: 1;
+    }
+
+    .calling-hero__badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: clamp(1.35rem, 2.5vw, 2rem);
+    }
+
+    .calling-hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 2.2rem;
+      padding: 0.52rem 0.82rem;
+      border: 1px solid rgba(11, 111, 255, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      color: #0a58c9;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 28px rgba(24, 60, 47, 0.08);
+    }
+
+    .calling-hero__badge::before {
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      box-shadow: 0 0 0 0.34rem rgba(11, 111, 255, 0.1);
+    }
+
+    .calling-hero h1 {
+      max-width: 11.8ch;
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.5rem, 3.1vw, 3.3rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+      color: #07111f;
+    }
+
+    .calling-hero h1 span {
+      color: var(--blue);
+    }
+
+    .calling-hero__lede {
+      max-width: 64ch;
+      margin: clamp(1.35rem, 2.5vw, 2rem) 0 0;
+      color: #314158;
+      font-size: clamp(1rem, 1.3vw, 1.18rem);
+      line-height: 1.72;
+    }
+
+    .calling-hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: clamp(1.8rem, 3vw, 2.5rem);
+    }
+
+    .calling-hero__button {
+      min-height: 3.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.9rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 900;
+      box-shadow: 0 16px 34px rgba(11, 111, 255, 0.14);
+    }
+
+    .calling-hero__button--primary {
+      background: #0b6fff;
+      color: #ffffff;
+    }
+
+    .calling-hero__button--secondary {
+      border: 1px solid rgba(11, 111, 255, 0.18);
+      background: #ffffff;
+      color: #0b6fff;
+    }
+
+    .calling-api-intro {
+      width: min(calc(100% - clamp(2rem, 5vw, 6rem)), var(--max-width));
+      margin: 0 auto;
+      padding: clamp(4rem, 7vw, 6.5rem) 0;
+    }
+
+    .calling-api-intro__inner {
+      max-width: 980px;
+    }
+
+    .calling-api-intro h2 {
+      max-width: min(100%, 1180px);
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.55rem, 2.4vw, 2.6rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+      color: #07111f;
+    }
+
+    .calling-api-intro h2 span {
+      color: var(--blue);
+    }
+
+    .calling-api-intro__body {
+      display: grid;
+      gap: 1.2rem;
+      max-width: 82ch;
+      margin-top: clamp(1.5rem, 3vw, 2.25rem);
+      color: #314158;
+      font-size: clamp(1rem, 1.25vw, 1.18rem);
+      line-height: 1.78;
+    }
+
+    .calling-api-intro__body p {
+      margin: 0;
+    }
+
+    .calling-api-features {
+      width: min(calc(100% - clamp(2rem, 5vw, 6rem)), var(--max-width));
+      margin: 0 auto;
+      padding: clamp(3.5rem, 7vw, 6.5rem) 0 clamp(4.5rem, 8vw, 7rem);
+    }
+
+    .calling-api-features h2 {
+      max-width: min(100%, 1180px);
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.55rem, 2.4vw, 2.6rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+      color: #07111f;
+    }
+
+    .calling-api-features__grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1rem, 2vw, 1.4rem);
+      margin-top: clamp(1.8rem, 3.5vw, 3rem);
+    }
+
+    .calling-api-feature-card {
+      min-height: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(15, 23, 42, 0.09);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 18px 46px rgba(24, 60, 47, 0.09);
+    }
+
+    .calling-api-feature-card__media {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 16 / 10;
+      padding: clamp(1.25rem, 2.6vw, 2rem);
+      background: linear-gradient(135deg, rgba(234, 242, 255, 0.95), rgba(238, 255, 245, 0.92));
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .calling-api-feature-card__media img {
+      width: min(100%, 360px);
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .calling-api-feature-card__content {
+      padding: clamp(1.1rem, 2vw, 1.45rem);
+    }
+
+    .calling-api-feature-card h3 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.05rem, 1.45vw, 1.28rem);
+      line-height: 1.22;
+      letter-spacing: 0;
+      color: #07111f;
+    }
+
+    .calling-api-feature-card p {
+      margin: 0.75rem 0 0;
+      color: #526174;
+      font-size: clamp(0.96rem, 1vw, 1.04rem);
+      line-height: 1.65;
+    }
+
+    .calling-info-section {
+      width: min(calc(100% - clamp(2rem, 5vw, 6rem)), var(--max-width));
+      margin: 0 auto;
+      padding: clamp(3.5rem, 7vw, 6.5rem) 0;
+    }
+
+    .calling-info-section h2,
+    .calling-cta h2 {
+      max-width: min(100%, 1180px);
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.55rem, 2.4vw, 2.6rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+      color: #07111f;
+    }
+
+    .calling-info-section h2 span,
+    .calling-cta h2 span {
+      color: var(--blue);
+    }
+
+    .calling-kpi-grid,
+    .calling-pricing-grid {
+      display: grid;
+      gap: clamp(1rem, 2vw, 1.4rem);
+      margin-top: clamp(1.8rem, 3.5vw, 3rem);
+    }
+
+    .calling-kpi-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .calling-pricing-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .calling-kpi-card,
+    .calling-pricing-card {
+      min-height: 100%;
+      border: 1px solid rgba(15, 23, 42, 0.09);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 18px 46px rgba(24, 60, 47, 0.08);
+    }
+
+    .calling-kpi-card {
+      padding: clamp(1.2rem, 2vw, 1.6rem);
+    }
+
+    .calling-kpi-card__icon {
+      width: 3rem;
+      height: 3rem;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1.1rem;
+      border-radius: 8px;
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .calling-kpi-card__icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .calling-kpi-card p,
+    .calling-pricing-card p,
+    .calling-cta p {
+      margin: 0;
+      color: #526174;
+      font-size: clamp(0.96rem, 1vw, 1.04rem);
+      line-height: 1.65;
+    }
+
+    .calling-pricing-card {
+      padding: clamp(1.15rem, 2vw, 1.45rem);
+    }
+
+    .calling-pricing-card h3 {
+      margin: 0 0 0.75rem;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1rem, 1.25vw, 1.16rem);
+      line-height: 1.24;
+      letter-spacing: 0;
+      color: #07111f;
+    }
+
+    .calling-cta {
+      width: min(calc(100% - clamp(2rem, 5vw, 6rem)), var(--max-width));
+      margin: 0 auto clamp(4rem, 7vw, 6.5rem);
+      padding: clamp(2rem, 5vw, 3.2rem);
+      border: 1px solid rgba(11, 111, 255, 0.16);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(234, 242, 255, 0.96), rgba(238, 255, 245, 0.92)),
+        #ffffff;
+      box-shadow: 0 24px 60px rgba(24, 60, 47, 0.12);
+    }
+
+    .calling-cta p {
+      max-width: 70ch;
+      margin-top: 1rem;
+      color: #314158;
+    }
+
+    .calling-cta__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: clamp(1.5rem, 3vw, 2.2rem);
+    }
+
+    .calling-hero__visual {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      min-height: 540px;
+    }
+
+    .call-orbit {
+      position: absolute;
+      inset: 7% 0 0;
+      border-radius: 2rem;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.76), rgba(234, 242, 255, 0.68)),
+        radial-gradient(circle at 72% 18%, rgba(37, 211, 102, 0.16), transparent 28%);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .call-widget {
+      position: relative;
+      width: min(100%, 320px);
+      background: linear-gradient(145deg, #23272a, #1a1d20);
+      border-radius: 24px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .call-widget__header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 24px 0;
+      font-size: 13px;
+      color: #a0aab2;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .call-widget__header-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .call-widget__header-icon svg {
+      fill: #a0aab2;
+      width: 16px;
+      height: 16px;
+    }
+
+    .call-widget__caller {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px 24px;
+    }
+
+    .call-widget__avatar-wrap {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 24px;
+    }
+
+    .call-widget__avatar {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      background: #363a3f;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      font-size: 32px;
+      font-weight: 500;
+      color: #a0aab2;
+      letter-spacing: 1px;
+    }
+
+    .call-widget__ripple {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid var(--green);
+      animation: ripple-animation 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+      z-index: 1;
+    }
+
+    .call-widget__ripple:nth-child(2) {
+      animation-delay: 1s;
+    }
+
+    @keyframes ripple-animation {
+      0% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    .call-widget__name {
+      margin: 0 0 4px;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-align: center;
+          color: #ffffff;
+    }
+
+    .call-widget__number {
+      margin: 0 0 16px;
+      font-size: 14px;
+      color: #a0aab2;
+      letter-spacing: 0.5px;
+    }
+
+    .call-widget__status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      font-size: 15px;
+    }
+
+    .call-widget__actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 0 24px 32px;
+    }
+
+    .call-widget__button {
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s ease;
+      flex: 1;
+      height: 56px;
+      border-radius: 28px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      letter-spacing: 0.5px;
+      gap: 8px;
+    }
+
+    .call-widget__button svg {
+      fill: #ffffff;
+      width: 22px;
+      height: 22px;
+    }
+
+    .call-widget__button--decline {
+      background: #ea4335;
+      box-shadow: 0 6px 20px rgba(234, 67, 53, 0.2);
+    }
+
+    .call-widget__button--decline:hover {
+      background: #d33828;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(234, 67, 53, 0.35);
+    }
+
+    .call-widget__button--accept {
+      background: var(--green);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.2);
+      animation: gentle-bounce 2s infinite;
+    }
+
+    .call-widget__button--accept:hover {
+      background: #20bd5a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+      animation: none;
+    }
+
+    @keyframes gentle-bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .calling-hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-top: clamp(3rem, 8vw, 5rem);
+      }
+
+      .calling-hero h1 {
+        max-width: 12ch;
+      }
+
+      .calling-api-intro h2 {
+        max-width: min(100%, 1180px);
+      }
+
+      .calling-api-features__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .calling-kpi-grid,
+      .calling-pricing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .calling-hero__visual {
+        min-height: 470px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .calling-hero {
+        width: min(calc(100% - 1.25rem), var(--max-width));
+        gap: 2rem;
+      }
+
+      .calling-hero h1 {
+        font-size: clamp(1.25rem, 7.5vw, 2rem);
+      }
+
+      .calling-api-intro {
+        width: min(calc(100% - 1.25rem), var(--max-width));
+      }
+
+      .calling-api-features {
+        width: min(calc(100% - 1.25rem), var(--max-width));
+      }
+
+      .calling-info-section,
+      .calling-cta {
+        width: min(calc(100% - 1.25rem), var(--max-width));
+      }
+
+      .calling-api-features__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .calling-kpi-grid,
+      .calling-pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .calling-cta__actions .calling-hero__button {
+        width: 100%;
+      }
+
+      .calling-hero__button {
+        width: 100%;
+      }
+
+      .calling-hero__visual {
+        min-height: 430px;
+      }
+
+      .call-orbit {
+        inset: 3% -0.35rem 0;
+      }
+
+      .call-widget {
+        width: min(100%, 304px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div data-site-header></div>
+
+  <main>
+    <section class="calling-hero">
+      <div class="calling-hero__content reveal">
+        <div class="calling-hero__badges" aria-label="Calling API highlights">
+          <span class="calling-hero__badge">Free Incoming Calls</span>
+          <span class="calling-hero__badge">Powered by Meta's Official API</span>
+        </div>
+        <h1>WhatsApp Business <span>Calling:</span> Where Conversations Meet Voice</h1>
+        <p class="calling-hero__lede">
+          Turn WhatsApp into your full-fledged voice channel. Connektly brings the WhatsApp Business Calling API to your team, so you can resolve complex issues faster, build trust with a verified caller ID, and close deals through high-quality voice calls inside the same WhatsApp thread your customers already trust.
+        </p>
+        <div class="calling-hero__actions">
+          <a class="calling-hero__button calling-hero__button--primary" href="/book-demo/index.html">Book Demo</a>
+          <a class="calling-hero__button calling-hero__button--secondary" href="#calling-features">Explore Calling Features</a>
+        </div>
+      </div>
+
+      <div class="calling-hero__visual reveal" aria-label="Incoming WhatsApp audio call preview">
+        <div class="call-orbit" aria-hidden="true"></div>
+        <div class="call-widget">
+          <div class="call-widget__header">
+            <div class="call-widget__header-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" /></svg>
+              WhatsApp Audio
+            </div>
+          </div>
+
+          <div class="call-widget__caller">
+            <div class="call-widget__avatar-wrap">
+              <div class="call-widget__ripple"></div>
+              <div class="call-widget__ripple"></div>
+              <div class="call-widget__avatar">JD</div>
+            </div>
+
+            <h2 class="call-widget__name">John Doe</h2>
+            <div class="call-widget__number">+91 9953312342</div>
+            <div class="call-widget__status">Incoming...</div>
+          </div>
+
+          <div class="call-widget__actions">
+            <button class="call-widget__button call-widget__button--decline" aria-label="Decline Call">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z" /></svg>
+              Decline
+            </button>
+
+            <button class="call-widget__button call-widget__button--accept" aria-label="Accept Call">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" /></svg>
+              Accept
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="calling-api-intro reveal" id="calling-api-intro">
+      <div class="calling-api-intro__inner">
+        <h2>What is the <span>WhatsApp Business Calling API?</span></h2>
+        <div class="calling-api-intro__body">
+          <p>
+            The WhatsApp Business Calling API is Meta's official voice extension to the WhatsApp Business Platform. It allows businesses to make and receive voice calls inside the same WhatsApp thread customers already use to message, with no separate phone line, no app switching, and no carrier charges on incoming calls.
+          </p>
+          <p>
+            Connektly is one of the official WhatsApp Tech Partners authorized by Meta to bring the WhatsApp Business Calling API to your team. Once your verified WhatsApp number is connected, your customers can tap the call icon in WhatsApp to reach you, and you can call them back with consent, using your verified business name and badge on display.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="calling-api-features reveal" id="calling-features">
+      <h2>Powerful WhatsApp Business Calling API Features</h2>
+      <div class="calling-api-features__grid">
+        <article class="calling-api-feature-card">
+          <div class="calling-api-feature-card__media">
+            <img src="../assets/calling-api/oneclickcall.jpg" alt="One-click WhatsApp voice call from chat" loading="lazy" />
+          </div>
+          <div class="calling-api-feature-card__content">
+            <h3>One-Click Call from Chat</h3>
+            <p>Start a voice call directly within WhatsApp. No switching apps, no missed opportunities.</p>
+          </div>
+        </article>
+
+        <article class="calling-api-feature-card">
+          <div class="calling-api-feature-card__media">
+            <img src="../assets/calling-api/userandbusiness.jpg" alt="User and business initiated WhatsApp calling" loading="lazy" />
+          </div>
+          <div class="calling-api-feature-card__content">
+            <h3>User- &amp; Business-Initiated Calls</h3>
+            <p>Allow customers to call you, or initiate outbound calls yourself, both fully supported by the WhatsApp Business Calling API.</p>
+          </div>
+        </article>
+
+        <article class="calling-api-feature-card">
+          <div class="calling-api-feature-card__media">
+            <img src="../assets/calling-api/clicktocall.jpg" alt="Click-to-call button in WhatsApp messages" loading="lazy" />
+          </div>
+          <div class="calling-api-feature-card__content">
+            <h3>Click-to-Call Buttons</h3>
+            <p>Add a "Call Now" button to WhatsApp messages, catalogs, or broadcasts.</p>
+          </div>
+        </article>
+
+        <article class="calling-api-feature-card">
+          <div class="calling-api-feature-card__media">
+            <img src="../assets/calling-api/interactive.jpg" alt="Interactive WhatsApp call consent template" loading="lazy" />
+          </div>
+          <div class="calling-api-feature-card__content">
+            <h3>Interactive Call Templates</h3>
+            <p>Request consent before calling with Meta-approved interactive templates; the WhatsApp Business Calling API requires explicit opt-in for outbound calls.</p>
+          </div>
+        </article>
+
+        <article class="calling-api-feature-card">
+          <div class="calling-api-feature-card__media">
+            <img src="../assets/calling-api/verifiedbadge.jpg" alt="Verified WhatsApp business badge" loading="lazy" />
+          </div>
+          <div class="calling-api-feature-card__content">
+            <h3>Verified Business Badge</h3>
+            <p>Show customers they're speaking to the official, trusted account of your brand.</p>
+          </div>
+        </article>
+
+        <article class="calling-api-feature-card">
+          <div class="calling-api-feature-card__media">
+            <img src="../assets/calling-api/calllogs.jpg" alt="WhatsApp call logs and analytics dashboard" loading="lazy" />
+          </div>
+          <div class="calling-api-feature-card__content">
+            <h3>Call Logs &amp; Analytics</h3>
+            <p>View call outcomes, durations, and missed calls directly in Wati's dashboard.</p>
+          </div>
+        </article>
+
+        <article class="calling-api-feature-card">
+          <div class="calling-api-feature-card__media">
+            <img src="../assets/calling-api/deeplinks.jpg" alt="Tap to call deep link for WhatsApp calling" loading="lazy" />
+          </div>
+          <div class="calling-api-feature-card__content">
+            <h3>Call Deep Links</h3>
+            <p>Include "Tap to call" links in messages, websites, or emails.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="calling-info-section reveal">
+      <h2>What Makes <span>Connektly</span> Different for WhatsApp Business Calling?</h2>
+      <div class="calling-kpi-grid">
+        <article class="calling-kpi-card">
+          <div class="calling-kpi-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="7" width="18" height="10" rx="5"></rect>
+              <circle cx="16" cy="12" r="3"></circle>
+            </svg>
+          </div>
+          <p>One-toggle activation: no separate developer integration, no Meta paperwork beyond your existing verification. Most teams are live within 24 hours.</p>
+        </article>
+
+        <article class="calling-kpi-card">
+          <div class="calling-kpi-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <path d="M3 10h18"></path>
+              <path d="M9 14l4 4"></path>
+              <path d="M13 14l-4 4"></path>
+            </svg>
+          </div>
+          <p>No setup fee, no hosting fee, no per-call surcharge.</p>
+        </article>
+
+        <article class="calling-kpi-card">
+          <div class="calling-kpi-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
+              <path d="M8 9h8"></path>
+              <path d="M8 13h5"></path>
+            </svg>
+          </div>
+          <p>Voice and chat in the same team inbox: calls, messages, recordings, and customer history live in one Connektly dashboard, not split across separate tools.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="calling-info-section reveal">
+      <h2>WhatsApp Business Calling API: <span>Pricing &amp; Permissions</span></h2>
+      <div class="calling-pricing-grid">
+        <article class="calling-pricing-card">
+          <h3>Incoming calls</h3>
+          <p>Free for both your business and the customer, in every supported country.</p>
+        </article>
+
+        <article class="calling-pricing-card">
+          <h3>Outgoing calls</h3>
+          <p>Billed per minute by Meta in 6-second increments. The rate depends on the destination country and your monthly volume tier.</p>
+        </article>
+
+        <article class="calling-pricing-card">
+          <h3>Permission rules</h3>
+          <p>One outbound call request per customer per 24 hours, max two in 7 days. Once approved, the call must happen within 72 hours.</p>
+        </article>
+
+        <article class="calling-pricing-card">
+          <h3>Connektly fees</h3>
+          <p>No per-call setup fee, no hidden hosting charge.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="calling-cta reveal">
+      <h2>Add Voice to Your WhatsApp Experience</h2>
+      <p>Let customers connect instantly through trusted WhatsApp voice calls &mdash; build trust, close faster, and resolve issues quicker.</p>
+      <div class="calling-cta__actions">
+        <a class="calling-hero__button calling-hero__button--primary" href="https://app.connektly.in/signup" target="_blank" rel="noopener noreferrer">Try for Free</a>
+        <a class="calling-hero__button calling-hero__button--secondary" href="/book-demo/index.html">Book Free Demo</a>
+      </div>
+    </section>
+  </main>
+
+  <div data-site-footer></div>
+
+  <script src="../components/global.js"></script>
+  <script>
+    const revealNodes = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      );
+
+      revealNodes.forEach((node) => revealObserver.observe(node));
+    } else {
+      revealNodes.forEach((node) => node.classList.add("is-visible"));
+    }
+  </script>
+</body>
+
+</html>

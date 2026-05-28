@@ -2301,22 +2301,19 @@
       position: relative;
       width: 100%;
       margin: 0 auto;
-      padding: clamp(1.1rem, 2vw, 1.35rem);
-      border: 1px solid rgba(19, 54, 41, 0.08);
-      border-radius: var(--radius-lg);
-      background: rgba(255, 255, 255, 0.72);
-      box-shadow: 0 20px 44px rgba(24, 60, 47, 0.1);
+      padding: clamp(1rem, 2vw, 1.35rem);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 1.35rem;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 22px 54px rgba(24, 60, 47, 0.11);
       overflow: hidden;
     }
 
     .pc-shell::before {
       content: "";
       position: absolute;
-      inset: -18% auto auto -12%;
-      width: 18rem;
-      height: 18rem;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(11, 111, 255, 0.14), transparent 68%);
+      inset: 0;
+      background: linear-gradient(135deg, rgba(11, 111, 255, 0.06), rgba(22, 183, 255, 0) 42%);
       pointer-events: none;
     }
 
@@ -2494,67 +2491,76 @@
     }
 
     .comparison__table-wrapper {
-      max-width: 1000px;
-      margin: 4rem auto 0;
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
       background: #ffffff;
-      border-radius: 1.5rem;
-      box-shadow: 0 10px 40px rgba(19, 54, 41, 0.06);
+      border-radius: 1rem;
+      box-shadow: 0 18px 46px rgba(24, 60, 47, 0.08);
       overflow: hidden;
-      border: 1px solid rgba(19, 54, 41, 0.03);
+      border: 1px solid rgba(15, 23, 42, 0.08);
     }
 
     .comparison__table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       text-align: left;
     }
 
     .comparison__table th,
     .comparison__table td {
-      padding: 1.5rem 2rem;
-      border-bottom: 1px solid rgba(19, 54, 41, 0.06);
+      padding: clamp(1rem, 2vw, 1.35rem);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+      vertical-align: top;
       transition: background-color 200ms ease;
     }
 
+    .comparison__table th+th,
+    .comparison__table td+td {
+      border-left: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
     .comparison__table tbody tr:hover td {
-      background-color: rgba(19, 54, 41, 0.02);
+      background-color: rgba(248, 250, 252, 0.96);
     }
 
     .comparison__table tbody tr:hover td.highlight-col {
-      background-color: rgba(11, 111, 255, 0.06);
+      background-color: rgba(232, 243, 255, 0.96);
     }
 
     .comparison__table th {
       font-family: "Sora", sans-serif;
-      font-size: 1.15rem;
-      color: #04120b;
-      font-weight: 600;
-      background-color: #ffffff;
+      font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+      color: #07111f;
+      font-weight: 800;
+      background: #f8fafc;
     }
 
     .comparison__table td {
-      font-size: 1rem;
-      color: rgba(4, 18, 11, 0.65);
-      line-height: 1.5;
+      font-size: 0.96rem;
+      color: rgba(15, 23, 42, 0.72);
+      line-height: 1.55;
     }
 
     .comparison__table td strong {
-      color: #04120b;
+      color: #07111f;
       display: block;
-      margin-bottom: 0.35rem;
-      font-weight: 600;
+      margin-bottom: 0.28rem;
+      font-weight: 800;
     }
 
     .comparison__table .highlight-col {
-      background-color: rgba(11, 111, 255, 0.03);
-      color: #04120b;
-      font-weight: 500;
+      background-color: #f1f7ff;
+      color: #07111f;
+      font-weight: 600;
     }
 
     .comparison__table th.highlight-col {
-      background-color: rgba(11, 111, 255, 0.08);
-      color: #04120b;
-      border-bottom-color: rgba(11, 111, 255, 0.2);
+      background: linear-gradient(135deg, #0b6fff, #0f9f7a);
+      color: #ffffff;
+      border-bottom-color: rgba(11, 111, 255, 0.22);
     }
 
     .comparison__table tbody tr:last-child td {
@@ -2573,6 +2579,60 @@
       font-size: 0.8rem;
       margin-right: 0.5rem;
       vertical-align: text-bottom;
+    }
+
+    .comparison__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 1.55rem;
+      padding: 0.26rem 0.58rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.06);
+      color: rgba(15, 23, 42, 0.74);
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .comparison__eyebrow--api {
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+    }
+
+    .comparison__feature {
+      width: 24%;
+      color: #0f172a;
+      font-weight: 850;
+    }
+
+    .comparison__status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 1.8rem;
+      margin-bottom: 0.45rem;
+      padding: 0.34rem 0.62rem;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .comparison__status--limited {
+      background: #fff2e8;
+      color: #9f3d12;
+    }
+
+    .comparison__status--better {
+      background: #e8f8ef;
+      color: #0f7a44;
+    }
+
+    .comparison__note {
+      display: block;
+      color: rgba(15, 23, 42, 0.58);
+      font-size: 0.88rem;
+      font-weight: 600;
     }
 
     @media (max-width: 1080px) {
@@ -2807,13 +2867,16 @@
       .comparison__table-wrapper {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        margin-top: 2rem;
+        margin-top: 0;
+      }
+
+      .comparison__table {
+        min-width: 760px;
       }
 
       .comparison__table th,
       .comparison__table td {
         padding: 1rem;
-        min-width: 140px;
       }
 
       .orbit-stage__board {
@@ -6814,7 +6877,8 @@
 
     <section class="problem-section section">
       <div class="problem-section__inner reveal">
-        <h2>Customer conversations are scattered. <span>Sales follow-ups are missed.</span> Campaigns are difficult to manage.</h2>
+        <h2>Customer conversations are scattered. </br>
+          <span>Sales follow-ups are missed.</span> </br>Campaigns are difficult to manage.</h2>
         <p class="problem-section__lede">
           Most businesses use separate tools for WhatsApp, Instagram, Messenger, lead tracking, broadcasts, and team
           coordination. This creates delays, missed opportunities, and poor visibility.
@@ -6859,7 +6923,7 @@
       <div class="core-features__inner reveal">
         <div class="core-features__heading">
           <span class="eyebrow">Core Features</span>
-          <h2>Core Feature Blocks</h2>
+          <h2>Core Features</h2>
           <p>The main workspace for managing conversations, leads, campaigns, automations, templates, flows, and Meta lead capture.</p>
         </div>
 
@@ -7088,108 +7152,112 @@
     <section class="platform-compare section section--raised" id="platform-capabilities">
       <div class="section-heading reveal">
         <span class="eyebrow">Platform Capabilities</span>
-        <h2>See why top brands graduate to the API.</h2>
+        <h2>WhatsApp Business App vs WhatsApp Official API.</h2>
+        <p>See where the regular app starts to strain and where the official API becomes the right operating layer for growing teams.</p>
       </div>
 
       <div class="pc-shell reveal">
-        <div class="pc-toggle-wrap">
-          <div class="pc-toggle" id="pc-toggle" role="tablist">
-            <div class="pc-toggle__glider"></div>
-            <button class="pc-toggle__btn is-active" id="pc-btn-app" aria-selected="true" role="tab">Business
-              App</button>
-            <button class="pc-toggle__btn" id="pc-btn-api" aria-selected="false" role="tab">Official API</button>
-          </div>
-        </div>
-
-        <div class="pc-stage">
-          <div class="pc-panel is-active" id="pc-panel-app" role="tabpanel">
-            <div class="pc-grid">
-              <article class="pc-card pc-card--app">
-                <div class="pc-card__icon"><img src="Social%20Media%20Icons/WhatsApp.svg" alt=""
-                    style="filter: grayscale(1); opacity:0.6; width:24px; height:24px;" /></div>
-                <div>
-                  <h3>1 User Limitation</h3>
-                  <p>Only works effectively on a single phone or natively linked devices. Massive bottleneck for support
-                    teams.</p>
-                </div>
-              </article>
-              <article class="pc-card pc-card--app">
-                <div class="pc-card__icon" style="color: #f25c54;"><svg width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
-                    </path>
-                    <line x1="12" y1="9" x2="12" y2="13"></line>
-                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                  </svg></div>
-                <div>
-                  <h3>Max 256 Broadcasts</h3>
-                  <p>Friction to scale promotional messages organically due to locked, unvetted delivery algorithms.</p>
-                </div>
-              </article>
-              <article class="pc-card pc-card--app">
-                <div class="pc-card__icon" style="color: #f25c54;"><svg width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                  </svg></div>
-                <div>
-                  <h3>0 Integrations Supported</h3>
-                  <p>Zero CRM connections, meaning data lives exclusively on the phone and is totally disconnected from
-                    infrastructure.</p>
-                </div>
-              </article>
-            </div>
-          </div>
-
-          <div class="pc-panel" id="pc-panel-api" role="tabpanel">
-            <div class="pc-grid">
-              <article class="pc-card pc-card--api">
-                <div class="pc-card__icon" style="color: #0b6fff;"><svg width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                  </svg></div>
-                <div>
-                  <h3>Infinite Global Agents</h3>
-                  <p>Wire the API node to Connektly and grant simultaneous dashboard access to hundreds of distributed
-                    reps globally.</p>
-                </div>
-              </article>
-              <article class="pc-card pc-card--api">
-                <div class="pc-card__icon" style="color: #0b6fff;"><svg width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                  </svg></div>
-                <div>
-                  <h3>100k+ Validated Scale</h3>
-                  <p>Official Meta templates expand with your domain strength, delivering perfect scalability up to 100k
-                    daily blasts.</p>
-                </div>
-              </article>
-              <article class="pc-card pc-card--api">
-                <div class="pc-card__icon" style="color: #0b6fff;"><svg width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                  </svg></div>
-                <div>
-                  <h3>Green Tick Verifiable</h3>
-                  <p>100% compliant rate-limiting with API endpoints lets you submit for native WhatsApp Green Tick
-                    validation.</p>
-                </div>
-              </article>
-            </div>
-          </div>
+        <div class="comparison__table-wrapper" aria-label="WhatsApp Business App versus WhatsApp Official API comparison">
+          <table class="comparison__table">
+            <thead>
+              <tr>
+                <th class="comparison__feature">Capability</th>
+                <th>
+                  <span class="comparison__eyebrow">Business App</span>
+                </th>
+                <th class="highlight-col">
+                  <span class="comparison__eyebrow comparison__eyebrow--api">Official API with Connektly</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="comparison__feature">Team access</td>
+                <td>
+                  <span class="comparison__status comparison__status--limited">Limited</span>
+                  <strong>Works around one phone-first inbox</strong>
+                  Shared work quickly becomes messy across support and sales teams.
+                </td>
+                <td class="highlight-col">
+                  <span class="comparison__status comparison__status--better">Scalable</span>
+                  <strong>Multi-agent inbox for every team</strong>
+                  Assign chats, track owners, and let multiple agents work from one dashboard.
+                </td>
+              </tr>
+              <tr>
+                <td class="comparison__feature">Broadcast reach</td>
+                <td>
+                  <span class="comparison__status comparison__status--limited">Capped</span>
+                  <strong>Small contact lists and manual sends</strong>
+                  Broadcasts depend on saved contacts and are hard to measure.
+                </td>
+                <td class="highlight-col">
+                  <span class="comparison__status comparison__status--better">High volume</span>
+                  <strong>Template campaigns built for scale</strong>
+                  Send approved campaigns to segmented audiences with delivery visibility.
+                </td>
+              </tr>
+              <tr>
+                <td class="comparison__feature">Automation</td>
+                <td>
+                  <span class="comparison__status comparison__status--limited">Manual</span>
+                  <strong>Basic quick replies only</strong>
+                  Teams still chase follow-ups, reminders, and routing by hand.
+                </td>
+                <td class="highlight-col">
+                  <span class="comparison__status comparison__status--better">Automated</span>
+                  <strong>Flows for support, sales, and reminders</strong>
+                  Trigger replies, qualify leads, and move conversations without repetitive work.
+                </td>
+              </tr>
+              <tr>
+                <td class="comparison__feature">CRM and systems</td>
+                <td>
+                  <span class="comparison__status comparison__status--limited">Disconnected</span>
+                  <strong>Customer data stays trapped in chat</strong>
+                  No reliable sync with CRM, helpdesk, billing, or internal tools.
+                </td>
+                <td class="highlight-col">
+                  <span class="comparison__status comparison__status--better">Connected</span>
+                  <strong>API-ready integrations</strong>
+                  Connect WhatsApp conversations to the tools your business already runs on.
+                </td>
+              </tr>
+              <tr>
+                <td class="comparison__feature">Compliance and brand</td>
+                <td>
+                  <span class="comparison__status comparison__status--limited">Informal</span>
+                  <strong>Good for early conversations</strong>
+                  Not built for advanced consent, audit trails, or verified brand workflows.
+                </td>
+                <td class="highlight-col">
+                  <span class="comparison__status comparison__status--better">Official</span>
+                  <strong>Meta-approved business messaging</strong>
+                  Use approved templates, structured opt-ins, and paths toward verification.
+                </td>
+              </tr>
+              <tr>
+                <td class="comparison__feature">Reporting</td>
+                <td>
+                  <span class="comparison__status comparison__status--limited">Low visibility</span>
+                  <strong>Hard to know what is working</strong>
+                  Reporting is limited when conversations happen across personal devices.
+                </td>
+                <td class="highlight-col">
+                  <span class="comparison__status comparison__status--better">Measurable</span>
+                  <strong>Track conversations and campaign performance</strong>
+                  Monitor delivery, response trends, team activity, and customer outcomes.
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
     <section class="pricing section section--raised">
       <div class="section-heading reveal">
-        <span class="eyebrow">Flexible plans</span>
+        <span class="eyebrow">Flexible pricing</span>
         <h2>Built for businesses of all sizes.</h2>
         <p>
           Start free, scale when you need deeper automation.
@@ -8136,37 +8204,6 @@
       document.fonts.ready.then(syncSolutionIndicator);
     }
 
-    function initPlatformSwitcher() {
-      const btnApp = document.getElementById("pc-btn-app");
-      const btnApi = document.getElementById("pc-btn-api");
-      const panelApp = document.getElementById("pc-panel-app");
-      const panelApi = document.getElementById("pc-panel-api");
-
-      if (!btnApp || !btnApi) return;
-
-      btnApp.addEventListener("click", () => {
-        document.body.setAttribute("data-pc-state", "app");
-        btnApi.classList.remove("is-active");
-        btnApi.setAttribute("aria-selected", "false");
-        btnApp.classList.add("is-active");
-        btnApp.setAttribute("aria-selected", "true");
-
-        panelApi.classList.remove("is-active");
-        panelApp.classList.add("is-active");
-      });
-
-      btnApi.addEventListener("click", () => {
-        document.body.setAttribute("data-pc-state", "api");
-        btnApp.classList.remove("is-active");
-        btnApp.setAttribute("aria-selected", "false");
-        btnApi.classList.add("is-active");
-        btnApi.setAttribute("aria-selected", "true");
-
-        panelApp.classList.remove("is-active");
-        panelApi.classList.add("is-active");
-      });
-    }
-
     function initDemoPopup() {
       const popup = document.querySelector("[data-demo-popup]");
       const bookLink = document.querySelector("[data-demo-popup-book]");
@@ -8273,7 +8310,6 @@
       updateFaqVisibility(activeFaqFilter);
       renderPricingCycle(activePricingCycle);
       loadCentralizedPricingPlans();
-      initPlatformSwitcher();
       initDemoPopup();
     });
 

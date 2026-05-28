@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner With Us | Connektly Partner Program</title>
+  <meta name="description" content="Join the Connektly Partner Program and earn commission by helping businesses manage WhatsApp, Instagram, and Messenger conversations better." />
+  <link rel="icon" type="image/png" href="../connektly-favicon.png" />
+  <link rel="apple-touch-icon" href="../connektly-favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #07111f;
+      --muted: #526174;
+      --blue: #0b6fff;
+      --blue-soft: #eaf2ff;
+      --green: #25d366;
+      --line: rgba(15, 23, 42, 0.1);
+      --shadow: 0 24px 70px rgba(24, 60, 47, 0.12);
+      --max-width: clamp(1180px, 88vw, 1480px);
+      --site-header-shell-height: 5rem;
+      --site-header-gap: 0rem;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 10%, rgba(11, 111, 255, 0.12), transparent 28rem),
+        radial-gradient(circle at 86% 18%, rgba(37, 211, 102, 0.12), transparent 26rem),
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 48%, #ffffff 100%);
+      font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    [data-site-header] {
+      display: block;
+      min-height: calc(var(--site-header-shell-height) + var(--site-header-gap));
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .partner-section,
+    .partner-hero {
+      width: min(calc(100% - clamp(2rem, 5vw, 6rem)), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .partner-hero {
+      min-height: calc(100vh - var(--site-header-shell-height));
+      padding: clamp(4rem, 7vw, 7rem) 0 clamp(4rem, 7vw, 6.5rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 0.78fr);
+      gap: clamp(2.5rem, 6vw, 6.5rem);
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 2.2rem;
+      padding: 0.52rem 0.82rem;
+      border: 1px solid rgba(11, 111, 255, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      color: #0a58c9;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 28px rgba(24, 60, 47, 0.08);
+    }
+
+    .badge::before {
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      box-shadow: 0 0 0 0.34rem rgba(11, 111, 255, 0.1);
+    }
+
+    .partner-hero h1,
+    .partner-section h2,
+    .partner-form-panel h2,
+    .partner-final-cta h2 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      letter-spacing: 0;
+      color: #07111f;
+    }
+
+    .partner-hero h1 {
+      max-width: 14ch;
+      margin-top: clamp(1.25rem, 2.4vw, 1.9rem);
+      font-size: clamp(1.86rem, 3.6vw, 3.72rem);
+      line-height: 0.98;
+    }
+
+    .partner-hero h1 span,
+    .partner-section h2 span,
+    .partner-final-cta h2 span {
+      color: var(--blue);
+    }
+
+    .partner-hero__lede {
+      max-width: 68ch;
+      margin: clamp(1.35rem, 2.5vw, 2rem) 0 0;
+      color: #314158;
+      font-size: clamp(1rem, 1.3vw, 1.18rem);
+      line-height: 1.72;
+    }
+
+    .partner-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: clamp(1.8rem, 3vw, 2.5rem);
+    }
+
+    .button {
+      min-height: 3.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.9rem 1.25rem;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 900;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button--primary {
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 16px 34px rgba(11, 111, 255, 0.14);
+    }
+
+    .button--secondary {
+      border: 1px solid rgba(11, 111, 255, 0.18);
+      background: #ffffff;
+      color: var(--blue);
+    }
+
+    .partner-hero__visual {
+      position: relative;
+      display: grid;
+      gap: 1rem;
+      padding: clamp(1rem, 2.5vw, 1.5rem);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(234, 242, 255, 0.78)),
+        radial-gradient(circle at 82% 8%, rgba(37, 211, 102, 0.16), transparent 32%);
+      box-shadow: var(--shadow);
+    }
+
+    .partner-pipeline {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .partner-pipeline__row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.85rem;
+      align-items: center;
+      padding: 1rem;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.86);
+    }
+
+    .partner-pipeline__icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--blue-soft);
+    }
+
+    .partner-pipeline__icon img {
+      width: 1.35rem;
+      height: 1.35rem;
+      object-fit: contain;
+    }
+
+    .partner-pipeline strong {
+      display: block;
+      color: #07111f;
+      font-size: 0.98rem;
+    }
+
+    .partner-pipeline span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .partner-pipeline__value {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .partner-section {
+      padding: clamp(3.5rem, 7vw, 6.5rem) 0;
+    }
+
+    .partner-section h2,
+    .partner-form-panel h2,
+    .partner-final-cta h2 {
+      max-width: min(100%, 1180px);
+      font-size: clamp(1.55rem, 2.4vw, 2.6rem);
+      line-height: 1.08;
+    }
+
+    .section-lede {
+      max-width: 74ch;
+      margin: 1rem 0 0;
+      color: #526174;
+      font-size: clamp(1rem, 1.15vw, 1.12rem);
+      line-height: 1.7;
+    }
+
+    .card-grid,
+    .audience-grid,
+    .offer-grid,
+    .faq-grid {
+      display: grid;
+      gap: clamp(1rem, 2vw, 1.4rem);
+      margin-top: clamp(1.8rem, 3.5vw, 3rem);
+    }
+
+    .card-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .audience-grid,
+    .offer-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .faq-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .benefit-card,
+    .audience-card,
+    .step-card,
+    .offer-card,
+    .faq-card {
+      min-height: 100%;
+      border: 1px solid rgba(15, 23, 42, 0.09);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 18px 46px rgba(24, 60, 47, 0.08);
+    }
+
+    .benefit-card,
+    .step-card,
+    .faq-card {
+      padding: clamp(1.15rem, 2vw, 1.5rem);
+    }
+
+    .benefit-card h3,
+    .step-card h3,
+    .faq-card h3 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1rem, 1.25vw, 1.16rem);
+      line-height: 1.25;
+      color: #07111f;
+    }
+
+    .benefit-card p,
+    .step-card p,
+    .faq-card p {
+      margin: 0.75rem 0 0;
+      color: #526174;
+      font-size: clamp(0.95rem, 1vw, 1.03rem);
+      line-height: 1.65;
+    }
+
+    .benefit-card__icon,
+    .step-card__number {
+      width: 2.75rem;
+      height: 2.75rem;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    .benefit-card__icon svg {
+      width: 1.35rem;
+      height: 1.35rem;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .audience-card,
+    .offer-card {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1rem;
+      color: #314158;
+      font-weight: 800;
+    }
+
+    .audience-card::before,
+    .offer-card::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 0.58rem;
+      height: 0.58rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      box-shadow: 0 0 0 0.32rem rgba(11, 111, 255, 0.09);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(1rem, 2vw, 1.4rem);
+      margin-top: clamp(1.8rem, 3.5vw, 3rem);
+    }
+
+    .partner-form-section {
+      width: min(calc(100% - clamp(2rem, 5vw, 6rem)), var(--max-width));
+      margin: 0 auto;
+      padding: clamp(3.5rem, 7vw, 6.5rem) 0;
+    }
+
+    .partner-form-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(420px, 1fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: start;
+    }
+
+    .partner-form-panel {
+      padding: clamp(1.25rem, 2.6vw, 2rem);
+      border: 1px solid rgba(15, 23, 42, 0.09);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow);
+    }
+
+    .partner-form {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .form-field--full {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label,
+    .consent-field {
+      color: #314158;
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      min-height: 3.1rem;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      border-radius: 8px;
+      background: #ffffff;
+      color: #07111f;
+      padding: 0.85rem 0.9rem;
+      outline: none;
+      transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .form-field textarea {
+      min-height: 8rem;
+      resize: vertical;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: rgba(11, 111, 255, 0.5);
+      box-shadow: 0 0 0 0.22rem rgba(11, 111, 255, 0.1);
+    }
+
+    .consent-field {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      line-height: 1.55;
+    }
+
+    .consent-field input {
+      width: 1.05rem;
+      height: 1.05rem;
+      margin-top: 0.18rem;
+      accent-color: var(--blue);
+    }
+
+    .form-status {
+      min-height: 1.5rem;
+      margin: 0;
+      color: #0a58c9;
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .form-status.is-error {
+      color: #c62828;
+    }
+
+    .partner-final-cta {
+      width: min(calc(100% - clamp(2rem, 5vw, 6rem)), var(--max-width));
+      margin: 0 auto clamp(4rem, 7vw, 6.5rem);
+      padding: clamp(2rem, 5vw, 3.2rem);
+      border: 1px solid rgba(11, 111, 255, 0.16);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(234, 242, 255, 0.96), rgba(238, 255, 245, 0.92)),
+        #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .partner-final-cta p {
+      max-width: 70ch;
+      margin: 1rem 0 0;
+      color: #314158;
+      font-size: clamp(1rem, 1.15vw, 1.12rem);
+      line-height: 1.7;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1180px) {
+      .card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .audience-grid,
+      .offer-grid,
+      .steps-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 980px) {
+      .partner-hero,
+      .partner-form-layout {
+        min-height: auto;
+        grid-template-columns: 1fr;
+      }
+
+      .partner-form-layout {
+        gap: 2rem;
+      }
+
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .partner-section,
+      .partner-hero,
+      .partner-form-section,
+      .partner-final-cta {
+        width: min(calc(100% - 1.25rem), var(--max-width));
+      }
+
+      .partner-hero h1 {
+        font-size: clamp(1.47rem, 7.8vw, 2.4rem);
+      }
+
+      .card-grid,
+      .audience-grid,
+      .offer-grid,
+      .steps-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .partner-actions .button,
+      .partner-form .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body data-page="partners">
+  <div data-site-header></div>
+
+  <main>
+    <section class="partner-hero">
+      <div class="partner-hero__copy reveal">
+        <span class="badge">Connektly Partner Program</span>
+        <h1>Grow with Connektly. <span>Earn by helping businesses</span> get more customers on WhatsApp, Instagram, and Messenger.</h1>
+        <p class="partner-hero__lede">
+          Partner with Connektly and onboard businesses that need a better way to manage customer conversations, leads, campaigns, and support. You bring the customers, we provide the platform, onboarding support, and commission opportunities.
+        </p>
+        <div class="partner-actions">
+          <a class="button button--primary" href="#partner-application">Become a Partner</a>
+          <a class="button button--secondary" href="#partner-application">Talk to Our Team</a>
+        </div>
+      </div>
+
+      <div class="partner-hero__visual reveal" aria-label="Connektly partner revenue pipeline preview">
+        <div class="partner-pipeline">
+          <div class="partner-pipeline__row">
+            <span class="partner-pipeline__icon"><img src="../Social Media Icons/WhatsApp.svg" alt="" /></span>
+            <span><strong>Qualified WhatsApp lead</strong><span>Agency referral</span></span>
+            <strong class="partner-pipeline__value">New</strong>
+          </div>
+          <div class="partner-pipeline__row">
+            <span class="partner-pipeline__icon"><img src="../Social Media Icons/Instagram.png" alt="" /></span>
+            <span><strong>Demo and onboarding</strong><span>Connektly assisted</span></span>
+            <strong class="partner-pipeline__value">Live</strong>
+          </div>
+          <div class="partner-pipeline__row">
+            <span class="partner-pipeline__icon"><img src="../Social Media Icons/Messenger.svg" alt="" /></span>
+            <span><strong>Subscribed customer</strong><span>Commission eligible</span></span>
+            <strong class="partner-pipeline__value">Earn</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="partner-section reveal" aria-labelledby="benefits-title">
+      <h2 id="benefits-title">Why Partner With <span>Connektly?</span></h2>
+      <div class="card-grid">
+        <article class="benefit-card">
+          <span class="benefit-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"></path></svg></span>
+          <h3>Earn Commission</h3>
+          <p>Get rewarded for every eligible customer you refer or onboard successfully with Connektly.</p>
+        </article>
+        <article class="benefit-card">
+          <span class="benefit-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h16"></path><path d="M14 6l6 6-6 6"></path></svg></span>
+          <h3>Easy Product to Sell</h3>
+          <p>Businesses already need WhatsApp, Instagram, and Messenger support. Connektly makes the pitch simple: one inbox, better tracking, faster replies, and automation.</p>
+        </article>
+        <article class="benefit-card">
+          <span class="benefit-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg></span>
+          <h3>Sales &amp; Onboarding Support</h3>
+          <p>Our team helps with product demos, onboarding guidance, and technical support so you can focus on bringing in customers.</p>
+        </article>
+        <article class="benefit-card">
+          <span class="benefit-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-4"></path></svg></span>
+          <h3>Built for Growing Businesses</h3>
+          <p>Connektly is useful for e-commerce brands, service businesses, agencies, local businesses, clinics, real estate teams, education businesses, and more.</p>
+        </article>
+        <article class="benefit-card">
+          <span class="benefit-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"></path><path d="M14 7h7v7"></path></svg></span>
+          <h3>Long-Term Opportunity</h3>
+          <p>Build a recurring revenue opportunity by becoming a trusted Connektly partner for your clients.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="partner-section reveal" aria-labelledby="who-title">
+      <h2 id="who-title">Who Can <span>Partner?</span></h2>
+      <div class="audience-grid">
+        <div class="audience-card">Digital marketing agencies</div>
+        <div class="audience-card">Freelancers and consultants</div>
+        <div class="audience-card">Website and app development agencies</div>
+        <div class="audience-card">CRM and software resellers</div>
+        <div class="audience-card">WhatsApp marketing service providers</div>
+        <div class="audience-card">Business consultants</div>
+        <div class="audience-card">Influencers and community owners</div>
+        <div class="audience-card">Anyone with access to business owners and decision makers</div>
+      </div>
+    </section>
+
+    <section class="partner-section reveal" aria-labelledby="process-title">
+      <h2 id="process-title">How the Partner Program <span>Works</span></h2>
+      <div class="steps-grid">
+        <article class="step-card">
+          <span class="step-card__number">1</span>
+          <h3>Apply as a Partner</h3>
+          <p>Fill out the partner application form with your details and business background.</p>
+        </article>
+        <article class="step-card">
+          <span class="step-card__number">2</span>
+          <h3>Get Approved</h3>
+          <p>Our team will review your profile and connect with you for the next steps.</p>
+        </article>
+        <article class="step-card">
+          <span class="step-card__number">3</span>
+          <h3>Refer or Onboard Customers</h3>
+          <p>Introduce Connektly to businesses that need better messaging, automation, and customer management.</p>
+        </article>
+        <article class="step-card">
+          <span class="step-card__number">4</span>
+          <h3>Earn Commission</h3>
+          <p>Receive commission for eligible customers who successfully subscribe to Connektly.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="partner-section reveal" aria-labelledby="offer-title">
+      <h2 id="offer-title">What Partners Can <span>Offer Clients</span></h2>
+      <div class="offer-grid">
+        <div class="offer-card">Unified inbox for WhatsApp, Instagram, and Messenger</div>
+        <div class="offer-card">WhatsApp Cloud API support</div>
+        <div class="offer-card">Real-time customer conversations</div>
+        <div class="offer-card">Campaign and broadcast tools</div>
+        <div class="offer-card">Automation workflows</div>
+        <div class="offer-card">Contact and lead management</div>
+        <div class="offer-card">Team inbox and assignment features</div>
+        <div class="offer-card">Message templates and media messaging</div>
+        <div class="offer-card">Better customer support and sales follow-up</div>
+      </div>
+    </section>
+
+    <section class="partner-form-section reveal" id="partner-application" aria-labelledby="application-title">
+      <div class="partner-form-layout">
+        <div>
+          <span class="badge">Partner Application</span>
+          <h2 id="application-title">Apply to Become a <span>Connektly Partner</span></h2>
+          <p class="section-lede">Tell us about yourself and your client network. Our team will review your application and contact you shortly.</p>
+        </div>
+
+        <div class="partner-form-panel">
+          <h2>Partner details</h2>
+          <form class="partner-form" id="partner-form" novalidate>
+            <input type="hidden" name="formType" value="partner_application" />
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="full-name">Full Name</label>
+                <input id="full-name" name="full_name" type="text" autocomplete="name" required />
+              </div>
+              <div class="form-field">
+                <label for="business-name">Business / Agency Name</label>
+                <input id="business-name" name="business_name" type="text" autocomplete="organization" />
+              </div>
+              <div class="form-field">
+                <label for="email">Email Address</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="form-field">
+                <label for="whatsapp-number">WhatsApp Number</label>
+                <input id="whatsapp-number" name="whatsapp_number" type="tel" autocomplete="tel" required />
+              </div>
+              <div class="form-field">
+                <label for="location">City / Location</label>
+                <input id="location" name="location" type="text" autocomplete="address-level2" />
+              </div>
+              <div class="form-field">
+                <label for="partner-type">Partner Type</label>
+                <select id="partner-type" name="partner_type" required>
+                  <option value="">Select partner type</option>
+                  <option>Agency</option>
+                  <option>Freelancer</option>
+                  <option>Consultant</option>
+                  <option>Reseller</option>
+                  <option>Influencer / Community Owner</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-field form-field--full">
+                <label for="customer-volume">Potential Customer Volume</label>
+                <select id="customer-volume" name="potential_customer_volume">
+                  <option value="">Select expected volume</option>
+                  <option>1-5 businesses</option>
+                  <option>6-20 businesses</option>
+                  <option>21-50 businesses</option>
+                  <option>50+ businesses</option>
+                </select>
+              </div>
+              <div class="form-field form-field--full">
+                <label for="client-network">Tell us about your client network</label>
+                <textarea id="client-network" name="client_network"></textarea>
+              </div>
+              <div class="form-field form-field--full">
+                <label for="message">Message / Additional Details</label>
+                <textarea id="message" name="message"></textarea>
+              </div>
+            </div>
+
+            <label class="consent-field">
+              <input id="consent" name="consent" type="checkbox" required />
+              <span>I agree to be contacted by the Connektly team regarding the Partner Program.</span>
+            </label>
+
+            <button class="button button--primary" type="submit">Submit Partner Application</button>
+            <p class="form-status" id="partner-form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="partner-section reveal" aria-labelledby="faq-title">
+      <h2 id="faq-title">Partner Program <span>FAQ</span></h2>
+      <div class="faq-grid">
+        <article class="faq-card">
+          <h3>Do I need technical knowledge to become a partner?</h3>
+          <p>No. Basic product understanding is enough. Our team can support you with demos, onboarding, and technical guidance.</p>
+        </article>
+        <article class="faq-card">
+          <h3>How do I earn commission?</h3>
+          <p>You earn commission when an eligible customer referred or onboarded by you successfully subscribes to Connektly.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Who can I refer?</h3>
+          <p>You can refer businesses that use WhatsApp, Instagram, or Messenger for sales, support, marketing, or customer communication.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Will Connektly help me close customers?</h3>
+          <p>Yes. Our team can assist with product demos, onboarding support, and platform-related questions.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Is this suitable for agencies?</h3>
+          <p>Yes. Agencies can offer Connektly as an additional solution to their clients and create a new revenue stream.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="partner-final-cta reveal">
+      <h2>Ready to become a <span>Connektly Partner?</span></h2>
+      <p>Join the Connektly Partner Program and start earning by helping businesses manage customer conversations better.</p>
+      <div class="partner-actions">
+        <a class="button button--primary" href="#partner-application">Apply for Partner Program</a>
+      </div>
+    </section>
+  </main>
+
+  <div data-site-footer></div>
+
+  <script src="../components/global.js"></script>
+  <script>
+    const revealNodes = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      );
+
+      revealNodes.forEach((node) => revealObserver.observe(node));
+    } else {
+      revealNodes.forEach((node) => node.classList.add("is-visible"));
+    }
+
+    const partnerForm = document.getElementById("partner-form");
+    const partnerStatus = document.getElementById("partner-form-status");
+
+    if (partnerForm && partnerStatus) {
+      partnerForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        partnerStatus.classList.remove("is-error");
+
+        if (!partnerForm.checkValidity()) {
+          partnerStatus.textContent = "Please complete the required fields before submitting.";
+          partnerStatus.classList.add("is-error");
+          partnerForm.reportValidity();
+          return;
+        }
+
+        const submitButton = partnerForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+        partnerStatus.textContent = "Submitting your application...";
+
+        try {
+          const payload = Object.fromEntries(new FormData(partnerForm).entries());
+          // TODO: Send payload to the production lead capture endpoint when the partner backend is ready.
+          await new Promise((resolve) => window.setTimeout(resolve, 700));
+          console.info("Partner application placeholder submission", payload);
+          partnerForm.reset();
+          partnerStatus.textContent = "Thank you for applying to become a Connektly Partner. Our team will review your application and contact you shortly.";
+        } catch (error) {
+          partnerStatus.textContent = "Something went wrong while submitting your application. Please try again.";
+          partnerStatus.classList.add("is-error");
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Submit Partner Application";
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

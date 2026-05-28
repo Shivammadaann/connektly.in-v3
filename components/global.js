@@ -1942,7 +1942,7 @@
                 </div>
                 <div class="mega-menu__column">
                   <span class="mega-menu__heading">Features</span>
-                  <a href="/product/whatsapp/index.html"-calling">
+                  <a href="/whatsapp-business-calling-api/">
                     <span class="dropdown-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>
                     <span>
                       <span class="dropdown-item-label">WhatsApp Business Calling API</span>
@@ -1964,33 +1964,6 @@
                     <span class="dropdown-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
                     <span>
                       <span class="dropdown-item-label">Automation Builder</span>
-                    </span>
-                  </a>
-                </div>
-                <div class="mega-menu__column">
-                  <span class="mega-menu__heading">Retain Customers</span>
-                  <a href="/features/index.html">
-                    <span class="dropdown-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
-                    <span>
-                      <span class="dropdown-item-label">Conversational Support</span>
-                    </span>
-                  </a>
-                  <a href="/product/whatsapp/index.html"">
-                    <span class="dropdown-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></span>
-                    <span>
-                      <span class="dropdown-item-label">Promotions and Newsletters</span>
-                    </span>
-                  </a>
-                  <a href="/features/index.html">
-                    <span class="dropdown-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></span>
-                    <span>
-                      <span class="dropdown-item-label">Renewal Reminders</span>
-                    </span>
-                  </a>
-                  <a href="/features/index.html">
-                    <span class="dropdown-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg></span>
-                    <span>
-                      <span class="dropdown-item-label">CSAT or NPS Surveys</span>
                     </span>
                   </a>
                 </div>
@@ -2073,7 +2046,8 @@
                   </span>
                 </a>
               </div>
-          <a href="/contact/index.html">Contact Us</a>
+            </div>
+          </div>
           <div class="mobile-actions">
             <a class="nav-login" href="https://app.connektly.in/login" target="_blank" rel="noopener noreferrer">Login</a>
             <a class="button button--sm nav-cta" href="https://app.connektly.in/signup" target="_blank" rel="noopener noreferrer">Get Started</a>
@@ -2134,6 +2108,7 @@
           <div class="footer-nav-col"><h3>Company</h3><ul>
             <li><a href="/">Home</a></li>
             <li><a href="/contact/index.html">Contact Us</a></li>
+            <li><a href="/partners/">Partner With Us</a></li>
             <li><a href="https://app.connektly.in/login" target="_blank" rel="noopener noreferrer">Login</a></li>
             <li><a href="https://app.connektly.in/signup" target="_blank" rel="noopener noreferrer">Get Started</a></li>
           </ul></div>
