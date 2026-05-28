@@ -4,6 +4,7 @@
   const API_BASE_URL = "https://backend.connektly.in";
   const LEAD_ENDPOINT = `${API_BASE_URL}/api/leads`;
   const ATTRIBUTION_KEY = "connektly_attribution";
+  const THANK_YOU_URL = "/thank-you/";
   const SUCCESS_MESSAGE =
     "Thank you. Your details have been submitted successfully. Our team will contact you shortly.";
 
@@ -305,6 +306,7 @@
 
       form.reset();
       setStatus(statusNode, result.message || SUCCESS_MESSAGE, false);
+      window.location.assign(THANK_YOU_URL);
     } catch (error) {
       setStatus(statusNode, error.message || "Something went wrong. Please try again.", true);
     } finally {

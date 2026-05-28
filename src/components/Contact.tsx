@@ -2,6 +2,7 @@ import { type FormEvent, useState } from "react";
 
 const API_BASE_URL = "https://backend.connektly.in";
 const ATTRIBUTION_KEY = "connektly_attribution";
+const THANK_YOU_URL = "/thank-you/";
 
 function getAttribution() {
   const params = new URLSearchParams(window.location.search);
@@ -78,6 +79,7 @@ export function Contact() {
 
       form.reset();
       setStatus(result.message);
+      window.location.assign(THANK_YOU_URL);
     } catch (error) {
       setIsError(true);
       setStatus(error instanceof Error ? error.message : "Something went wrong. Please try again.");

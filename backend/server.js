@@ -704,13 +704,11 @@ app.post("/api/leads", leadLimiter, async (req, res) => {
 
     const savedLead = await leadStore.createLead(lead);
 
-    try {
-      await sendLeadEmail(savedLead);
-    } catch (error) {
-      console.error("Lead email failed", error);
-    }
-
     res.status(201).json({ success: true, message: SUCCESS_MESSAGE });
+
+    sendLeadEmail(savedLead).catch((error) => {
+      console.error("Lead email failed", error);
+    });
   } catch (error) {
     console.error("Lead submission failed", error);
     res.status(500).json({ success: false, message: "Something went wrong. Please try again." });
