@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collection - Connektly Help Centre</title>
+  <meta name="description" content="Browse Connektly Help Centre collection articles." />
+  <link rel="icon" href="../connektly-favicon.png" />
+  <link rel="stylesheet" href="./help.css" />
+</head>
+<body>
+  <div data-site-header></div>
+  <main class="help-main" data-collection-page>
+    <section class="collection-header">
+      <div class="help-shell">
+        <nav class="breadcrumb">
+          <a href="/help/">All Collections</a>
+          <span>/</span>
+          <span data-breadcrumb-current>Collection</span>
+        </nav>
+        <div class="collection-title-row">
+          <span class="collection-icon" data-collection-icon>HC</span>
+          <div>
+            <h1 data-collection-title>Loading collection...</h1>
+            <p data-collection-description></p>
+            <span class="help-meta" data-collection-count></span>
+          </div>
+        </div>
+        <div class="help-search">
+          <input data-help-search type="search" placeholder="Search for articles, guides, or questions..." autocomplete="off" />
+          <span class="help-search__icon" aria-hidden="true"></span>
+          <div class="help-search-results" data-search-results></div>
+        </div>
+      </div>
+    </section>
+    <section class="help-shell group-stack" data-groups>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </section>
+  </main>
+  <div data-site-footer></div>
+  <script src="../components/global.js"></script>
+  <script src="./help.js"></script>
+</body>
+</html>

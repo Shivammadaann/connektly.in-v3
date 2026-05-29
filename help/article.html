@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article - Connektly Help Centre</title>
+  <meta name="description" content="Read a Connektly Help Centre article." />
+  <link rel="icon" href="../connektly-favicon.png" />
+  <link rel="stylesheet" href="./help.css" />
+</head>
+<body>
+  <div data-site-header></div>
+  <main class="help-main" data-article-page>
+    <section class="article-header">
+      <div class="help-shell">
+        <nav class="breadcrumb" data-article-breadcrumb>
+          <a href="/help/">All Collections</a>
+        </nav>
+        <h1 data-article-title>Loading article...</h1>
+        <p data-article-summary></p>
+        <span class="help-meta" data-article-meta></span>
+      </div>
+    </section>
+    <section class="help-shell article-layout">
+      <article>
+        <div class="article-content" data-article-content>
+          <div class="skeleton-card"></div>
+        </div>
+        <section class="related-section" data-related></section>
+        <section class="feedback-box">
+          <h2>Did this article help you?</h2>
+          <div class="feedback-actions">
+            <button class="help-button" type="button" data-feedback="helpful">Yes</button>
+            <button class="help-button help-button--ghost" type="button" data-feedback="neutral">Neutral</button>
+            <button class="help-button help-button--ghost" type="button" data-feedback="not_helpful">No</button>
+          </div>
+          <p class="help-meta" data-feedback-status role="status" aria-live="polite"></p>
+        </section>
+      </article>
+      <aside class="toc-panel" data-toc></aside>
+    </section>
+  </main>
+  <div data-site-footer></div>
+  <script src="../components/global.js"></script>
+  <script src="./help.js"></script>
+</body>
+</html>

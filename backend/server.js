@@ -8,6 +8,8 @@ const rateLimit = require("express-rate-limit");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const { Pool } = require("pg");
+const { createHelpStore } = require("./help-store");
+const { createHelpRouter } = require("./help-routes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -32,7 +34,7 @@ const allowedOrigins = (process.env.ALLOWED_ORIGINS || defaultOrigins.join(","))
   .filter(Boolean);
 
 app.use(helmet());
-app.use(express.json({ limit: "80kb" }));
+app.use(express.json({ limit: "1mb" }));
 app.use(
   cors({
     origin(origin, callback) {
@@ -581,6 +583,7 @@ function createLeadStore() {
 }
 
 const leadStore = createLeadStore();
+const helpStore = createHelpStore();
 
 function createTransporter() {
   if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
@@ -789,6 +792,8 @@ app.patch("/api/admin/leads/:id/status", requireAdmin, async (req, res) => {
   }
 });
 
+app.use(createHelpRouter({ helpStore, requireAdmin }));
+
 app.use((error, req, res, next) => {
   if (error && error.message === "Not allowed by CORS") {
     res.status(403).json({ success: false, message: "Origin not allowed." });
@@ -799,11 +804,10 @@ app.use((error, req, res, next) => {
   res.status(500).json({ success: false, message: "Something went wrong. Please try again." });
 });
 
-leadStore
-  .init()
+Promise.all([leadStore.init(), helpStore.init()])
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Connektly lead API running on port ${PORT}`);
+      console.log(`Connektly API running on port ${PORT}`);
     });
   })
   .catch((error) => {

@@ -1,6 +1,6 @@
-# Connektly Lead Backend
+# Connektly Backend
 
-Express API for Connektly website lead capture, email notifications, persistent lead storage, and protected admin lead APIs.
+Express API for Connektly website lead capture, email notifications, persistent lead storage, protected admin lead APIs, and the Help Centre CMS/API.
 
 ## Local setup
 
@@ -53,9 +53,12 @@ ADMIN_JWT_SECRET=
 DATABASE_URL=
 SUPABASE_URL=
 SUPABASE_SERVICE_ROLE_KEY=
+SUPABASE_STORAGE_BUCKET=help-centre-assets
 ```
 
 Use either `DATABASE_URL` for PostgreSQL or `SUPABASE_URL` plus `SUPABASE_SERVICE_ROLE_KEY` for Supabase REST storage. The service role key must only exist on the backend.
+
+Help Centre content uses `DATABASE_URL` for Supabase/PostgreSQL storage. Help Centre media uploads use `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and `SUPABASE_STORAGE_BUCKET`.
 
 ## Database
 
@@ -109,6 +112,178 @@ create index if not exists website_leads_status_idx on website_leads (status);
 create index if not exists website_leads_form_type_idx on website_leads (form_type);
 ```
 
+## Help Centre
+
+Public Help Centre URLs:
+
+```text
+https://www.connektly.in/help
+https://www.connektly.in/help/collection.html?slug=collection-slug
+https://www.connektly.in/help/article.html?slug=article-slug
+```
+
+The frontend uses:
+
+```js
+const API_BASE_URL = "https://backend.connektly.in";
+```
+
+Public Help APIs:
+
+```text
+GET /api/help/collections
+GET /api/help/collections/:slug
+GET /api/help/articles/:slug
+GET /api/help/search?q=query
+POST /api/help/articles/:slug/feedback
+```
+
+Protected Help CMS APIs:
+
+```text
+GET /api/admin/help/stats
+GET /api/admin/help/collections
+POST /api/admin/help/collections
+GET /api/admin/help/collections/:id
+PATCH /api/admin/help/collections/:id
+DELETE /api/admin/help/collections/:id
+GET /api/admin/help/groups
+POST /api/admin/help/groups
+GET /api/admin/help/groups/:id
+PATCH /api/admin/help/groups/:id
+DELETE /api/admin/help/groups/:id
+GET /api/admin/help/articles
+POST /api/admin/help/articles
+GET /api/admin/help/articles/:id
+PATCH /api/admin/help/articles/:id
+DELETE /api/admin/help/articles/:id
+POST /api/admin/help/articles/:id/publish
+POST /api/admin/help/articles/:id/unpublish
+POST /api/admin/help/articles/:id/duplicate
+POST /api/admin/help/media/upload
+GET /api/admin/help/media
+DELETE /api/admin/help/media/:id
+GET /api/admin/help/feedback
+```
+
+All admin Help Centre routes require the same JWT as the lead admin routes. Public routes only return published content. Draft and archived articles do not appear publicly.
+
+### Help Centre SQL
+
+Run this in Supabase SQL editor if you want to create the tables manually. The backend also creates these tables automatically when `DATABASE_URL` is configured.
+
+```sql
+create extension if not exists pgcrypto;
+
+create table if not exists help_collections (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  slug text unique not null,
+  description text,
+  icon text,
+  sort_order integer default 0,
+  is_published boolean default true,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create table if not exists help_groups (
+  id uuid primary key default gen_random_uuid(),
+  collection_id uuid references help_collections(id) on delete cascade,
+  title text not null,
+  slug text not null,
+  description text,
+  sort_order integer default 0,
+  is_published boolean default true,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now(),
+  unique(collection_id, slug)
+);
+
+create table if not exists help_articles (
+  id uuid primary key default gen_random_uuid(),
+  collection_id uuid references help_collections(id) on delete set null,
+  group_id uuid references help_groups(id) on delete set null,
+  title text not null,
+  slug text unique not null,
+  summary text,
+  content_html text,
+  content_text text,
+  toc jsonb,
+  tags text[],
+  featured_image_url text,
+  seo_title text,
+  seo_description text,
+  status text default 'draft' check (status in ('draft', 'published', 'archived')),
+  sort_order integer default 0,
+  reading_time integer,
+  author_name text,
+  view_count integer default 0,
+  published_at timestamptz,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create table if not exists help_article_feedback (
+  id uuid primary key default gen_random_uuid(),
+  article_id uuid references help_articles(id) on delete cascade,
+  rating text not null check (rating in ('helpful', 'neutral', 'not_helpful')),
+  message text,
+  page_url text,
+  referrer text,
+  user_agent text,
+  ip_address text,
+  created_at timestamptz default now()
+);
+
+create table if not exists help_media (
+  id uuid primary key default gen_random_uuid(),
+  file_name text not null,
+  file_url text not null,
+  mime_type text,
+  file_size integer,
+  alt_text text,
+  created_at timestamptz default now()
+);
+
+create index if not exists help_collections_slug_idx on help_collections (slug);
+create index if not exists help_groups_collection_id_idx on help_groups (collection_id);
+create index if not exists help_articles_slug_idx on help_articles (slug);
+create index if not exists help_articles_status_idx on help_articles (status);
+create index if not exists help_articles_collection_id_idx on help_articles (collection_id);
+create index if not exists help_articles_group_id_idx on help_articles (group_id);
+create index if not exists help_article_feedback_article_id_idx on help_article_feedback (article_id);
+```
+
+### Supabase Storage
+
+Create a public Supabase Storage bucket:
+
+```text
+help-centre-assets
+```
+
+Admin image uploads go through `POST /api/admin/help/media/upload`. Allowed files are `jpg`, `jpeg`, `png`, `webp`, and `gif`, up to 5 MB. The Supabase service role key stays backend-only.
+
+### Managing Help Centre Content
+
+Open `https://www.connektly.in/admin`, log in, and use the Help Centre navigation:
+
+```text
+Dashboard
+Collections
+Groups
+Articles
+Media
+Feedback
+```
+
+Collections are main topics. Groups are sections inside collections. Articles can be saved as draft, published, unpublished, duplicated, previewed, edited in Visual Editor mode, or edited directly in HTML Code mode.
+
+The backend sanitizes article HTML before saving. Script tags, inline JavaScript events, and `javascript:` URLs are removed. H2 and H3 headings automatically receive unique anchors and are stored as the article table of contents.
+
+Article feedback is collected from the public article page and shown under Help Centre > Feedback.
+
 ## SMTP
 
 Configure `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, and `SMTP_PASS`. Lead emails are sent to `LEAD_RECEIVER_EMAIL`, which defaults to `admin@connektly.in`.
@@ -153,7 +328,7 @@ Add all required environment variables in Render. Then connect the custom domain
 backend.connektly.in
 ```
 
-Point the DNS CNAME for `api` to the Render-provided hostname.
+Point the DNS CNAME for `backend` to the Render-provided hostname.
 
 ## Frontend URLs
 
@@ -169,4 +344,4 @@ The admin panel is available at:
 https://www.connektly.in/admin
 ```
 
-For local development, change the one `API_BASE_URL` constant in `components/lead-forms.js` or `admin/index.html` from `https://backend.connektly.in` to `http://localhost:5000`.
+For local development, change the `API_BASE_URL` constants in `components/lead-forms.js`, `help/help.js`, and `admin/index.html` from `https://backend.connektly.in` to `http://localhost:5000`.

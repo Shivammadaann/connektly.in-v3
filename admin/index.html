@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Connektly Lead Admin</title>
+  <title>Connektly Admin</title>
   <link rel="icon" href="../connektly-favicon.png" />
   <style>
     :root {
@@ -17,6 +17,7 @@
       --good: #047857;
       --warn: #b45309;
       --bad: #b91c1c;
+      --soft: #eef4ff;
       --shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
     }
 
@@ -27,14 +28,15 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background: var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     button,
     input,
-    select {
+    select,
+    textarea {
       font: inherit;
     }
 
@@ -49,20 +51,28 @@
       padding: 24px;
     }
 
-    .login-card {
-      width: min(440px, 100%);
-      background: var(--panel);
+    .login-card,
+    .panel,
+    .metric,
+    .table-wrap,
+    .editor-shell,
+    .sidebar-card {
       border: 1px solid var(--line);
       border-radius: 8px;
-      box-shadow: var(--shadow);
+      background: var(--panel);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .login-card {
+      width: min(440px, 100%);
       padding: 30px;
+      box-shadow: var(--shadow);
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 24px;
     }
 
     .brand img {
@@ -76,6 +86,7 @@
 
     h1,
     h2,
+    h3,
     p {
       margin-top: 0;
     }
@@ -83,6 +94,11 @@
     h1 {
       margin-bottom: 8px;
       font-size: 1.8rem;
+      letter-spacing: 0;
+    }
+
+    h2,
+    h3 {
       letter-spacing: 0;
     }
 
@@ -97,13 +113,14 @@
     }
 
     label {
-      font-size: 0.88rem;
-      font-weight: 700;
       color: #334155;
+      font-size: 0.86rem;
+      font-weight: 800;
     }
 
     input,
-    select {
+    select,
+    textarea {
       width: 100%;
       min-height: 42px;
       border: 1px solid var(--line);
@@ -114,8 +131,15 @@
       outline: none;
     }
 
+    textarea {
+      resize: vertical;
+      line-height: 1.55;
+    }
+
     input:focus,
-    select:focus {
+    select:focus,
+    textarea:focus,
+    .rich-editor:focus {
       border-color: var(--brand);
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
     }
@@ -124,13 +148,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       min-height: 42px;
       border: 0;
       border-radius: 8px;
       padding: 10px 16px;
       color: #fff;
       background: var(--brand);
-      font-weight: 800;
+      font-weight: 900;
     }
 
     .button:hover {
@@ -144,22 +169,36 @@
 
     .button--ghost {
       color: var(--ink);
-      background: #eef4ff;
+      background: var(--soft);
     }
 
     .button--ghost:hover {
       background: #dbeafe;
     }
 
+    .button--danger {
+      background: var(--bad);
+    }
+
+    .small-button {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 7px 10px;
+      color: var(--brand-dark);
+      background: #fff;
+      font-weight: 900;
+    }
+
     .error {
       min-height: 20px;
       color: var(--bad);
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .app {
-      min-height: 100vh;
       display: none;
+      min-height: 100vh;
     }
 
     .topbar {
@@ -171,15 +210,79 @@
       justify-content: space-between;
       gap: 16px;
       padding: 16px 24px;
-      background: rgba(255, 255, 255, 0.92);
       border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(14px);
     }
 
-    .content {
-      width: min(1360px, 100%);
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      width: min(1500px, 100%);
       margin: 0 auto;
+    }
+
+    .admin-nav {
+      position: sticky;
+      top: 75px;
+      align-self: start;
+      min-height: calc(100vh - 75px);
+      padding: 22px 14px;
+      border-right: 1px solid var(--line);
+    }
+
+    .admin-nav h2 {
+      margin: 18px 10px 8px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-btn {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 42px;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #334155;
+      background: transparent;
+      font-weight: 850;
+      text-align: left;
+    }
+
+    .nav-btn.is-active,
+    .nav-btn:hover {
+      color: var(--brand-dark);
+      background: var(--soft);
+    }
+
+    .content {
+      min-width: 0;
       padding: 24px;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.is-active {
+      display: block;
+    }
+
+    .view-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .view-head h1 {
+      margin-bottom: 4px;
     }
 
     .metrics {
@@ -187,15 +290,6 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
       margin-bottom: 18px;
-    }
-
-    .metric,
-    .filters,
-    .table-wrap {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
     }
 
     .metric {
@@ -215,16 +309,18 @@
       line-height: 1;
     }
 
-    .filters {
+    .filters,
+    .toolbar-row {
       display: grid;
       grid-template-columns: 1.5fr repeat(4, 1fr) auto;
       gap: 12px;
-      padding: 14px;
-      margin-bottom: 18px;
       align-items: end;
+      margin-bottom: 18px;
+      padding: 14px;
     }
 
-    .filters .field {
+    .filters .field,
+    .toolbar-row .field {
       margin: 0;
     }
 
@@ -234,8 +330,8 @@
 
     table {
       width: 100%;
-      border-collapse: collapse;
       min-width: 980px;
+      border-collapse: collapse;
     }
 
     th,
@@ -251,28 +347,75 @@
       color: #475569;
       background: #f8fbff;
       font-size: 0.78rem;
-      text-transform: uppercase;
       letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     tr:last-child td {
       border-bottom: 0;
     }
 
+    .row-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .article-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .article-list-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: inherit;
+      background: #fff;
+      text-decoration: none;
+    }
+
+    .article-list-item h3 {
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    .article-list-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
     .status {
       display: inline-flex;
       border-radius: 999px;
       padding: 4px 10px;
-      font-size: 0.78rem;
-      font-weight: 800;
       color: #1e293b;
       background: #e2e8f0;
+      font-size: 0.78rem;
+      font-weight: 900;
       text-transform: capitalize;
     }
 
-    .status--new {
+    .status--new,
+    .status--draft {
       color: var(--brand-dark);
       background: #dbeafe;
+    }
+
+    .status--published,
+    .status--converted {
+      color: var(--good);
+      background: #dcfce7;
+    }
+
+    .status--archived,
+    .status--rejected {
+      color: var(--bad);
+      background: #fee2e2;
     }
 
     .status--contacted,
@@ -281,36 +424,151 @@
       background: #fef3c7;
     }
 
-    .status--converted {
-      color: var(--good);
-      background: #dcfce7;
-    }
-
-    .status--rejected {
-      color: var(--bad);
-      background: #fee2e2;
-    }
-
-    .row-actions {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .small-button {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      min-height: 34px;
-      padding: 7px 10px;
-      color: var(--brand-dark);
-      background: #fff;
-      font-weight: 800;
-    }
-
     .empty {
       padding: 36px;
       text-align: center;
       color: var(--muted);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel,
+    .sidebar-card {
+      padding: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field--full {
+      grid-column: 1 / -1;
+    }
+
+    .tabs,
+    .editor-tabs {
+      display: inline-flex;
+      gap: 6px;
+      padding: 5px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .tab-btn {
+      min-height: 34px;
+      border: 0;
+      border-radius: 7px;
+      padding: 7px 11px;
+      color: #475569;
+      background: transparent;
+      font-weight: 900;
+    }
+
+    .tab-btn.is-active,
+    .tab-btn:hover {
+      color: var(--brand-dark);
+      background: var(--soft);
+    }
+
+    .editor-shell {
+      overflow: hidden;
+    }
+
+    .editor-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      background: #f8fbff;
+    }
+
+    .editor-toolbar button,
+    .editor-toolbar select {
+      width: auto;
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 6px 9px;
+      color: #334155;
+      background: #fff;
+      font-weight: 850;
+    }
+
+    .rich-editor,
+    .html-editor {
+      width: 100%;
+      min-height: 420px;
+      padding: 22px;
+      border: 0;
+      outline: none;
+      background: #fff;
+      line-height: 1.75;
+    }
+
+    .rich-editor {
+      overflow: auto;
+    }
+
+    .rich-editor h2,
+    .rich-editor h3,
+    .rich-editor h4 {
+      letter-spacing: 0;
+    }
+
+    .html-editor {
+      display: none;
+      font-family: Consolas, "Courier New", monospace;
+      resize: vertical;
+    }
+
+    .editor-shell.is-code .rich-editor,
+    .editor-shell.is-code .editor-toolbar {
+      display: none;
+    }
+
+    .editor-shell.is-code .html-editor {
+      display: block;
+    }
+
+    .toc-preview {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .media-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .media-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #eef4ff;
+    }
+
+    .media-card div {
+      padding: 12px;
     }
 
     .modal {
@@ -326,7 +584,7 @@
     }
 
     .drawer {
-      width: min(620px, 100%);
+      width: min(760px, 100%);
       height: 100%;
       margin-left: auto;
       overflow: auto;
@@ -334,37 +592,33 @@
       box-shadow: var(--shadow);
     }
 
+    .drawer--wide {
+      width: min(980px, 100%);
+    }
+
     .drawer__head {
       position: sticky;
       top: 0;
+      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       padding: 18px 22px;
-      background: #fff;
       border-bottom: 1px solid var(--line);
+      background: #fff;
     }
 
     .drawer__body {
       padding: 22px;
     }
 
-    .detail-section {
-      margin-bottom: 24px;
-    }
-
-    .detail-section h2 {
-      margin-bottom: 12px;
-      font-size: 1rem;
-    }
-
     .details {
       display: grid;
       grid-template-columns: 170px 1fr;
+      overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 8px;
-      overflow: hidden;
     }
 
     .details dt,
@@ -375,26 +629,59 @@
     }
 
     .details dt {
-      background: #f8fbff;
       color: #475569;
-      font-weight: 800;
+      background: #f8fbff;
+      font-weight: 900;
     }
 
     .details dd {
       overflow-wrap: anywhere;
     }
 
-    .details dt:last-of-type,
-    .details dd:last-of-type {
-      border-bottom: 0;
+    .preview-article {
+      max-width: 760px;
+      margin: 0 auto;
+      line-height: 1.75;
     }
 
-    @media (max-width: 1000px) {
-      .metrics {
+    .preview-article h1 {
+      font-size: 2.4rem;
+    }
+
+    .preview-article img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 1100px) {
+      .admin-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-nav {
+        position: static;
+        min-height: 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-btn {
+        display: inline-flex;
+        width: auto;
+        margin: 3px;
+      }
+
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics,
+      .media-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .filters {
+      .filters,
+      .toolbar-row {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -406,13 +693,17 @@
         padding-right: 14px;
       }
 
-      .topbar {
+      .topbar,
+      .view-head {
         align-items: flex-start;
         flex-direction: column;
       }
 
       .metrics,
-      .filters {
+      .filters,
+      .toolbar-row,
+      .form-grid,
+      .media-grid {
         grid-template-columns: 1fr;
       }
 
@@ -429,12 +720,12 @@
 <body>
   <main class="auth-shell" id="login-screen">
     <section class="login-card" aria-labelledby="login-title">
-      <div class="brand">
+      <div class="brand" style="margin-bottom: 24px;">
         <img src="../logo.svg" alt="Connektly" />
         <strong>Connektly</strong>
       </div>
-      <h1 id="login-title">Lead Admin</h1>
-      <p class="muted">Sign in to view website form submissions.</p>
+      <h1 id="login-title">Admin</h1>
+      <p class="muted">Sign in to manage leads and Help Centre content.</p>
       <form id="login-form">
         <div class="field">
           <label for="email">Email</label>
@@ -455,121 +746,164 @@
       <div class="brand">
         <img src="../logo.svg" alt="Connektly" />
         <div>
-          <strong>Lead Dashboard</strong>
-          <div class="muted">Website submissions and attribution</div>
+          <strong id="topbar-title">Lead Dashboard</strong>
+          <div class="muted" id="topbar-subtitle">Website submissions and attribution</div>
         </div>
       </div>
       <button class="button button--ghost" type="button" id="logout-button">Logout</button>
     </header>
 
-    <div class="content">
-      <section class="metrics" aria-label="Lead summary">
-        <article class="metric"><span>Total leads</span><strong id="total-count">0</strong></article>
-        <article class="metric"><span>New</span><strong id="new-count">0</strong></article>
-        <article class="metric"><span>Contacted</span><strong id="contacted-count">0</strong></article>
-        <article class="metric"><span>Converted</span><strong id="converted-count">0</strong></article>
-      </section>
+    <div class="admin-layout">
+      <nav class="admin-nav" aria-label="Admin navigation">
+        <h2>Main</h2>
+        <button class="nav-btn is-active" type="button" data-view-target="leads">Leads</button>
+        <h2>Help Centre</h2>
+        <button class="nav-btn" type="button" data-view-target="help-dashboard">Dashboard</button>
+        <button class="nav-btn" type="button" data-view-target="help-collections">Collections</button>
+        <button class="nav-btn" type="button" data-view-target="help-groups">Groups</button>
+        <button class="nav-btn" type="button" data-view-target="help-articles">Articles</button>
+        <button class="nav-btn" type="button" data-view-target="help-media">Media</button>
+        <button class="nav-btn" type="button" data-view-target="help-feedback">Feedback</button>
+      </nav>
 
-      <form class="filters" id="filters-form">
-        <div class="field">
-          <label for="search">Search</label>
-          <input id="search" name="search" type="search" placeholder="Name, email, phone, company" />
-        </div>
-        <div class="field">
-          <label for="formType">Lead Type</label>
-          <select id="formType" name="formType">
-            <option value="">All types</option>
-            <option value="homepage_lead">Homepage</option>
-            <option value="landing_page_lead">Landing Page</option>
-            <option value="contact_us">Contact Us</option>
-            <option value="book_demo">Book Demo</option>
-            <option value="partner_application">Partner</option>
-            <option value="pricing_enquiry">Pricing</option>
-            <option value="footer_lead">Footer</option>
-            <option value="popup_lead">Popup</option>
-            <option value="generic_lead">Generic</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="status">Status</label>
-          <select id="status" name="status">
-            <option value="">All statuses</option>
-            <option value="new">New</option>
-            <option value="contacted">Contacted</option>
-            <option value="qualified">Qualified</option>
-            <option value="converted">Converted</option>
-            <option value="rejected">Rejected</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="utmSource">UTM Source</label>
-          <input id="utmSource" name="utmSource" type="text" />
-        </div>
-        <div class="field">
-          <label for="utmCampaign">UTM Campaign</label>
-          <input id="utmCampaign" name="utmCampaign" type="text" />
-        </div>
-        <div class="field">
-          <label for="sourcePage">Source Page</label>
-          <input id="sourcePage" name="sourcePage" type="text" />
-        </div>
-        <button class="button" type="submit">Apply</button>
-      </form>
+      <div class="content">
+        <section class="view is-active" id="view-leads">
+          <div class="view-head">
+            <div>
+              <h1>Leads</h1>
+              <p class="muted">Website form submissions and marketing attribution.</p>
+            </div>
+          </div>
+          <section class="metrics" aria-label="Lead summary">
+            <article class="metric"><span>Total leads</span><strong id="total-count">0</strong></article>
+            <article class="metric"><span>New</span><strong id="new-count">0</strong></article>
+            <article class="metric"><span>Contacted</span><strong id="contacted-count">0</strong></article>
+            <article class="metric"><span>Converted</span><strong id="converted-count">0</strong></article>
+          </section>
+          <form class="filters panel" id="filters-form">
+            <div class="field"><label for="search">Search</label><input id="search" name="search" type="search" placeholder="Name, email, phone, company" /></div>
+            <div class="field"><label for="formType">Lead Type</label><select id="formType" name="formType"><option value="">All types</option><option value="homepage_lead">Homepage</option><option value="landing_page_lead">Landing Page</option><option value="contact_us">Contact Us</option><option value="book_demo">Book Demo</option><option value="partner_application">Partner</option><option value="pricing_enquiry">Pricing</option><option value="footer_lead">Footer</option><option value="popup_lead">Popup</option><option value="generic_lead">Generic</option></select></div>
+            <div class="field"><label for="status">Status</label><select id="status" name="status"><option value="">All statuses</option><option value="new">New</option><option value="contacted">Contacted</option><option value="qualified">Qualified</option><option value="converted">Converted</option><option value="rejected">Rejected</option></select></div>
+            <div class="field"><label for="utmSource">UTM Source</label><input id="utmSource" name="utmSource" type="text" /></div>
+            <div class="field"><label for="utmCampaign">UTM Campaign</label><input id="utmCampaign" name="utmCampaign" type="text" /></div>
+            <div class="field"><label for="sourcePage">Source Page</label><input id="sourcePage" name="sourcePage" type="text" /></div>
+            <button class="button" type="submit">Apply</button>
+          </form>
+          <section class="table-wrap" aria-live="polite">
+            <table>
+              <thead><tr><th>Date</th><th>Lead Type</th><th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Source Page</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="lead-rows"></tbody>
+            </table>
+            <div class="empty" id="empty-state" hidden>No leads found.</div>
+          </section>
+        </section>
 
-      <section class="table-wrap" aria-live="polite">
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Lead Type</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Company</th>
-              <th>Source Page</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="lead-rows"></tbody>
-        </table>
-        <div class="empty" id="empty-state" hidden>No leads found.</div>
-      </section>
+        <section class="view" id="view-help-dashboard">
+          <div class="view-head">
+            <div><h1>Help Centre Dashboard</h1><p class="muted">A quick view of published content, drafts, and reader feedback.</p></div>
+          </div>
+          <section class="metrics" id="help-metrics"></section>
+          <div class="two-column">
+            <section class="panel"><h2>Recent Articles</h2><div id="recent-articles" class="article-list"></div></section>
+            <section class="panel"><h2>Recent Feedback</h2><div id="recent-feedback" class="article-list"></div></section>
+          </div>
+        </section>
+
+        <section class="view" id="view-help-collections">
+          <div class="view-head">
+            <div><h1>Collections</h1><p class="muted">Create and organize the main Help Centre topics.</p></div>
+            <button class="button" type="button" id="new-collection">New Collection</button>
+          </div>
+          <section class="table-wrap"><table><thead><tr><th>Icon</th><th>Title</th><th>Slug</th><th>Articles</th><th>Published</th><th>Sort</th><th>Actions</th></tr></thead><tbody id="collection-rows"></tbody></table></section>
+        </section>
+
+        <section class="view" id="view-help-groups">
+          <div class="view-head">
+            <div><h1>Groups</h1><p class="muted">Manage sections inside each collection.</p></div>
+            <button class="button" type="button" id="new-group">New Group</button>
+          </div>
+          <section class="toolbar-row panel">
+            <div class="field"><label for="group-collection-filter">Collection</label><select id="group-collection-filter"><option value="">All collections</option></select></div>
+            <button class="button" type="button" id="reload-groups">Load Groups</button>
+          </section>
+          <section class="table-wrap"><table><thead><tr><th>Title</th><th>Collection</th><th>Slug</th><th>Articles</th><th>Published</th><th>Sort</th><th>Actions</th></tr></thead><tbody id="group-rows"></tbody></table></section>
+        </section>
+
+        <section class="view" id="view-help-articles">
+          <div class="view-head">
+            <div><h1>Articles</h1><p class="muted">Write, preview, publish, and organize Help Centre articles.</p></div>
+            <button class="button" type="button" id="new-article">New Article</button>
+          </div>
+          <form class="filters panel" id="article-filter-form">
+            <div class="field"><label for="article-search">Search</label><input id="article-search" name="search" type="search" placeholder="Search title or body" /></div>
+            <div class="field"><label for="article-collection-filter">Collection</label><select id="article-collection-filter" name="collectionId"><option value="">All collections</option></select></div>
+            <div class="field"><label for="article-group-filter">Group</label><select id="article-group-filter" name="groupId"><option value="">All groups</option></select></div>
+            <div class="field"><label for="article-status-filter">Status</label><select id="article-status-filter" name="status"><option value="">All statuses</option><option value="draft">Draft</option><option value="published">Published</option><option value="archived">Archived</option></select></div>
+            <button class="button" type="submit">Apply</button>
+          </form>
+          <section class="table-wrap"><table><thead><tr><th>Title</th><th>Collection</th><th>Group</th><th>Status</th><th>Updated</th><th>Published</th><th>Actions</th></tr></thead><tbody id="article-rows"></tbody></table></section>
+        </section>
+
+        <section class="view" id="view-help-media">
+          <div class="view-head">
+            <div><h1>Media</h1><p class="muted">Upload article images through the protected backend.</p></div>
+          </div>
+          <section class="panel" style="margin-bottom: 18px;">
+            <form id="media-upload-form" class="toolbar-row" style="padding: 0; margin: 0;">
+              <div class="field"><label for="media-file">Image</label><input id="media-file" name="file" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required /></div>
+              <button class="button" type="submit">Upload Image</button>
+            </form>
+            <p class="muted" id="media-upload-status" role="status" aria-live="polite"></p>
+          </section>
+          <section class="media-grid" id="media-grid"></section>
+        </section>
+
+        <section class="view" id="view-help-feedback">
+          <div class="view-head">
+            <div><h1>Article Feedback</h1><p class="muted">See whether Help Centre articles are useful to readers.</p></div>
+          </div>
+          <section class="table-wrap"><table><thead><tr><th>Article</th><th>Rating</th><th>Date</th><th>Page URL</th><th>Referrer</th></tr></thead><tbody id="feedback-rows"></tbody></table></section>
+        </section>
+      </div>
     </div>
   </main>
 
   <section class="modal" id="detail-modal" aria-modal="true" role="dialog" aria-labelledby="detail-title">
     <aside class="drawer">
-      <header class="drawer__head">
-        <div>
-          <h1 id="detail-title">Lead Details</h1>
-          <p class="muted" id="detail-subtitle"></p>
-        </div>
-        <button class="button button--ghost" type="button" id="close-modal">Close</button>
-      </header>
+      <header class="drawer__head"><div><h1 id="detail-title">Lead Details</h1><p class="muted" id="detail-subtitle"></p></div><button class="button button--ghost" type="button" data-close-modal>Close</button></header>
       <div class="drawer__body" id="detail-body"></div>
+    </aside>
+  </section>
+
+  <section class="modal" id="content-modal" aria-modal="true" role="dialog" aria-labelledby="content-modal-title">
+    <aside class="drawer drawer--wide">
+      <header class="drawer__head"><div><h1 id="content-modal-title">Edit</h1><p class="muted" id="content-modal-subtitle"></p></div><button class="button button--ghost" type="button" data-close-modal>Close</button></header>
+      <div class="drawer__body" id="content-modal-body"></div>
+    </aside>
+  </section>
+
+  <section class="modal" id="preview-modal" aria-modal="true" role="dialog" aria-labelledby="preview-title">
+    <aside class="drawer drawer--wide">
+      <header class="drawer__head"><div><h1 id="preview-title">Article Preview</h1><p class="muted">Preview before publishing.</p></div><button class="button button--ghost" type="button" data-close-modal>Close</button></header>
+      <div class="drawer__body" id="preview-body"></div>
     </aside>
   </section>
 
   <script>
     const API_BASE_URL = "https://backend.connektly.in";
     const TOKEN_KEY = "connektly_admin_token";
+    const HELP_PUBLIC_BASE = "https://www.connektly.in/help";
 
-    const loginScreen = document.getElementById("login-screen");
-    const adminApp = document.getElementById("admin-app");
-    const loginForm = document.getElementById("login-form");
-    const loginButton = document.getElementById("login-button");
-    const loginError = document.getElementById("login-error");
-    const logoutButton = document.getElementById("logout-button");
-    const filtersForm = document.getElementById("filters-form");
-    const leadRows = document.getElementById("lead-rows");
-    const emptyState = document.getElementById("empty-state");
-    const modal = document.getElementById("detail-modal");
-    const detailBody = document.getElementById("detail-body");
-    const detailSubtitle = document.getElementById("detail-subtitle");
-    const closeModal = document.getElementById("close-modal");
-
-    let leads = [];
+    const state = {
+      leads: [],
+      collections: [],
+      groups: [],
+      articles: [],
+      media: [],
+      feedback: [],
+      activeView: "leads",
+      dirty: false
+    };
 
     const labels = {
       homepage_lead: "Homepage Lead",
@@ -583,266 +917,650 @@
       generic_lead: "Generic Lead"
     };
 
+    function qs(selector, root = document) {
+      return root.querySelector(selector);
+    }
+
+    function qsa(selector, root = document) {
+      return Array.from(root.querySelectorAll(selector));
+    }
+
     function token() {
       return window.localStorage.getItem(TOKEN_KEY) || "";
     }
 
     function setToken(value) {
-      if (value) {
-        window.localStorage.setItem(TOKEN_KEY, value);
-      } else {
-        window.localStorage.removeItem(TOKEN_KEY);
-      }
+      if (value) window.localStorage.setItem(TOKEN_KEY, value);
+      else window.localStorage.removeItem(TOKEN_KEY);
     }
 
     function escapeHtml(value) {
-      return String(value || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+      return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 
     function formatDate(value) {
       if (!value) return "";
       const date = new Date(value);
       if (Number.isNaN(date.getTime())) return "";
-      return new Intl.DateTimeFormat("en-IN", {
-        dateStyle: "medium",
-        timeStyle: "short"
-      }).format(date);
+      return new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(date);
+    }
+
+    function slugify(value) {
+      return String(value || "").toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 120) || "untitled";
+    }
+
+    function textFromHtml(html) {
+      const div = document.createElement("div");
+      div.innerHTML = html || "";
+      return div.textContent || "";
+    }
+
+    function generateTocFromHtml(html) {
+      const div = document.createElement("div");
+      div.innerHTML = html || "";
+      const used = new Map();
+      const toc = [];
+      div.querySelectorAll("h2,h3").forEach((heading) => {
+        const title = heading.textContent.trim();
+        if (!title) return;
+        let id = slugify(heading.id || title);
+        const count = used.get(id) || 0;
+        used.set(id, count + 1);
+        if (count > 0) id = `${id}-${count + 1}`;
+        heading.id = id;
+        toc.push({ id, title, level: heading.tagName.toLowerCase() === "h2" ? 2 : 3 });
+      });
+      return { html: div.innerHTML, toc };
     }
 
     async function api(path, options = {}) {
+      const isFormData = options.body instanceof FormData;
       const response = await fetch(`${API_BASE_URL}${path}`, {
         ...options,
         headers: {
-          "Content-Type": "application/json",
+          ...(isFormData ? {} : { "Content-Type": "application/json" }),
           Authorization: `Bearer ${token()}`,
           ...(options.headers || {})
         }
       });
       const data = await response.json().catch(() => ({}));
-
       if (!response.ok || data.success === false) {
-        if (response.status === 401) {
-          showLogin();
-        }
+        if (response.status === 401) showLogin();
         throw new Error(data.message || "Request failed.");
       }
-
       return data;
     }
 
     function showLogin() {
-      adminApp.style.display = "none";
-      loginScreen.style.display = "grid";
+      qs("#admin-app").style.display = "none";
+      qs("#login-screen").style.display = "grid";
     }
 
     function showApp() {
-      loginScreen.style.display = "none";
-      adminApp.style.display = "block";
+      qs("#login-screen").style.display = "none";
+      qs("#admin-app").style.display = "block";
     }
 
-    function updateMetrics() {
-      document.getElementById("total-count").textContent = leads.length;
-      document.getElementById("new-count").textContent = leads.filter((lead) => lead.status === "new").length;
-      document.getElementById("contacted-count").textContent = leads.filter((lead) => lead.status === "contacted").length;
-      document.getElementById("converted-count").textContent = leads.filter((lead) => lead.status === "converted").length;
+    function setTopbar(title, subtitle) {
+      qs("#topbar-title").textContent = title;
+      qs("#topbar-subtitle").textContent = subtitle;
     }
 
-    function renderRows() {
-      updateMetrics();
-      emptyState.hidden = leads.length > 0;
-
-      leadRows.innerHTML = leads
-        .map((lead) => `
-          <tr>
-            <td>${escapeHtml(formatDate(lead.createdAt || lead.submittedAt))}</td>
-            <td>${escapeHtml(labels[lead.formType] || lead.formType || "")}</td>
-            <td>${escapeHtml(lead.name)}</td>
-            <td>${escapeHtml(lead.email)}</td>
-            <td>${escapeHtml(lead.phone)}</td>
-            <td>${escapeHtml(lead.companyName)}</td>
-            <td>${escapeHtml(lead.sourcePage)}</td>
-            <td><span class="status status--${escapeHtml(lead.status || "new")}">${escapeHtml(lead.status || "new")}</span></td>
-            <td>
-              <div class="row-actions">
-                <button class="small-button" type="button" data-view="${escapeHtml(lead.id)}">View</button>
-                <select data-status="${escapeHtml(lead.id)}" aria-label="Update status">
-                  ${["new", "contacted", "qualified", "converted", "rejected"].map((status) => `
-                    <option value="${status}" ${status === lead.status ? "selected" : ""}>${status}</option>
-                  `).join("")}
-                </select>
-              </div>
-            </td>
-          </tr>
-        `)
-        .join("");
+    function switchView(view) {
+      if (state.dirty && !window.confirm("You have unsaved article changes. Leave anyway?")) return;
+      state.dirty = false;
+      state.activeView = view;
+      qsa(".view").forEach((node) => node.classList.toggle("is-active", node.id === `view-${view}`));
+      qsa("[data-view-target]").forEach((button) => button.classList.toggle("is-active", button.dataset.viewTarget === view));
+      const titles = {
+        leads: ["Lead Dashboard", "Website submissions and attribution"],
+        "help-dashboard": ["Help Centre", "Content health and recent activity"],
+        "help-collections": ["Help Centre", "Collections"],
+        "help-groups": ["Help Centre", "Groups"],
+        "help-articles": ["Help Centre", "Articles"],
+        "help-media": ["Help Centre", "Media library"],
+        "help-feedback": ["Help Centre", "Article feedback"]
+      };
+      setTopbar(...titles[view]);
+      if (view === "leads") void loadLeads();
+      if (view === "help-dashboard") void loadHelpDashboard();
+      if (view === "help-collections") void loadCollections();
+      if (view === "help-groups") void loadGroups();
+      if (view === "help-articles") void loadArticles();
+      if (view === "help-media") void loadMedia();
+      if (view === "help-feedback") void loadFeedback();
     }
 
-    function buildQuery() {
+    function buildQuery(form) {
       const params = new URLSearchParams();
-      new FormData(filtersForm).forEach((value, key) => {
-        if (String(value).trim()) {
-          params.set(key, String(value).trim());
-        }
+      new FormData(form).forEach((value, key) => {
+        if (String(value).trim()) params.set(key, String(value).trim());
       });
       return params.toString();
     }
 
     async function loadLeads() {
-      leadRows.innerHTML = '<tr><td colspan="9">Loading leads...</td></tr>';
-      emptyState.hidden = true;
+      const rows = qs("#lead-rows");
+      rows.innerHTML = '<tr><td colspan="9">Loading leads...</td></tr>';
       try {
-        const query = buildQuery();
+        const query = buildQuery(qs("#filters-form"));
         const data = await api(`/api/admin/leads${query ? `?${query}` : ""}`);
-        leads = data.leads || [];
-        renderRows();
+        state.leads = data.leads || [];
+        renderLeads();
       } catch (error) {
-        leadRows.innerHTML = `<tr><td colspan="9">${escapeHtml(error.message || "Unable to load leads.")}</td></tr>`;
+        rows.innerHTML = `<tr><td colspan="9">${escapeHtml(error.message)}</td></tr>`;
       }
     }
 
-    function renderDetails(lead) {
-      detailSubtitle.textContent = `${labels[lead.formType] || lead.formType || "Lead"} · ${formatDate(lead.createdAt || lead.submittedAt)}`;
-      const groups = [
-        ["Lead", ["formType", "status", "name", "email", "phone", "companyName", "website", "businessType", "partnerType", "selectedPlan", "customerVolume", "preferredDemoTime", "consent", "message", "clientNetwork"]],
-        ["Lead Source", ["utmSource", "utmMedium", "utmCampaign", "utmTerm", "utmContent", "gclid", "fbclid", "msclkid", "landingPage", "firstPageUrl", "referrer", "capturedAt"]],
-        ["Page Details", ["sourcePage", "pageUrl", "userAgent", "submittedAt", "createdAt", "updatedAt", "ipAddress"]]
-      ];
-
-      const fieldLabels = {
-        formType: "Lead Type",
-        companyName: "Company",
-        selectedPlan: "Selected Plan",
-        businessType: "Business Type",
-        partnerType: "Partner Type",
-        customerVolume: "Customer Volume",
-        clientNetwork: "Client Network",
-        preferredDemoTime: "Preferred Demo Time",
-        utmSource: "UTM Source",
-        utmMedium: "UTM Medium",
-        utmCampaign: "UTM Campaign",
-        utmTerm: "UTM Term",
-        utmContent: "UTM Content",
-        firstPageUrl: "First Page URL",
-        landingPage: "Landing Page",
-        capturedAt: "Captured At",
-        sourcePage: "Source Page",
-        pageUrl: "Page URL",
-        userAgent: "User Agent",
-        submittedAt: "Submitted At",
-        createdAt: "Created At",
-        updatedAt: "Updated At",
-        ipAddress: "IP Address"
-      };
-
-      detailBody.innerHTML = groups
-        .map(([title, fields]) => {
-          const rows = fields
-            .filter((field) => lead[field] !== undefined && lead[field] !== null && String(lead[field]).trim() !== "")
-            .map((field) => `
-              <dt>${escapeHtml(fieldLabels[field] || field)}</dt>
-              <dd>${escapeHtml(["submittedAt", "createdAt", "updatedAt"].includes(field) ? formatDate(lead[field]) : lead[field])}</dd>
-            `)
-            .join("");
-
-          if (!rows) return "";
-
-          return `
-            <section class="detail-section">
-              <h2>${escapeHtml(title)}</h2>
-              <dl class="details">${rows}</dl>
-            </section>
-          `;
-        })
-        .join("");
+    function renderLeads() {
+      qs("#total-count").textContent = state.leads.length;
+      qs("#new-count").textContent = state.leads.filter((lead) => lead.status === "new").length;
+      qs("#contacted-count").textContent = state.leads.filter((lead) => lead.status === "contacted").length;
+      qs("#converted-count").textContent = state.leads.filter((lead) => lead.status === "converted").length;
+      qs("#empty-state").hidden = state.leads.length > 0;
+      qs("#lead-rows").innerHTML = state.leads.map((lead) => `
+        <tr>
+          <td>${escapeHtml(formatDate(lead.createdAt || lead.submittedAt))}</td>
+          <td>${escapeHtml(labels[lead.formType] || lead.formType || "")}</td>
+          <td>${escapeHtml(lead.name)}</td>
+          <td>${escapeHtml(lead.email)}</td>
+          <td>${escapeHtml(lead.phone)}</td>
+          <td>${escapeHtml(lead.companyName)}</td>
+          <td>${escapeHtml(lead.sourcePage)}</td>
+          <td><span class="status status--${escapeHtml(lead.status || "new")}">${escapeHtml(lead.status || "new")}</span></td>
+          <td><div class="row-actions"><button class="small-button" type="button" data-lead-view="${escapeHtml(lead.id)}">View</button><select data-lead-status="${escapeHtml(lead.id)}">${["new","contacted","qualified","converted","rejected"].map((status) => `<option value="${status}" ${status === lead.status ? "selected" : ""}>${status}</option>`).join("")}</select></div></td>
+        </tr>
+      `).join("");
     }
 
-    async function openDetails(id) {
-      const existing = leads.find((lead) => lead.id === id);
+    async function openLeadDetails(id) {
+      const modal = qs("#detail-modal");
       modal.classList.add("is-open");
-      detailBody.innerHTML = "<p>Loading details...</p>";
+      qs("#detail-body").innerHTML = "<p>Loading details...</p>";
       try {
         const data = await api(`/api/admin/leads/${encodeURIComponent(id)}`);
-        renderDetails(data.lead || existing || {});
+        const lead = data.lead || {};
+        qs("#detail-subtitle").textContent = `${labels[lead.formType] || lead.formType || "Lead"} - ${formatDate(lead.createdAt || lead.submittedAt)}`;
+        const fields = ["formType","status","name","email","phone","companyName","website","businessType","partnerType","selectedPlan","customerVolume","message","sourcePage","pageUrl","utmSource","utmMedium","utmCampaign","gclid","fbclid","msclkid","firstPageUrl","landingPage","referrer","userAgent"];
+        qs("#detail-body").innerHTML = `<dl class="details">${fields.filter((field) => lead[field]).map((field) => `<dt>${escapeHtml(field)}</dt><dd>${escapeHtml(lead[field])}</dd>`).join("")}</dl>`;
       } catch (error) {
-        detailBody.innerHTML = `<p class="error">${escapeHtml(error.message)}</p>`;
+        qs("#detail-body").innerHTML = `<p class="error">${escapeHtml(error.message)}</p>`;
       }
     }
 
-    async function updateStatus(id, status) {
-      await api(`/api/admin/leads/${encodeURIComponent(id)}/status`, {
-        method: "PATCH",
-        body: JSON.stringify({ status })
-      });
-      await loadLeads();
+    async function loadCollections() {
+      const data = await api("/api/admin/help/collections");
+      state.collections = data.collections || [];
+      populateCollectionSelects();
+      renderCollections();
     }
 
-    loginForm.addEventListener("submit", async (event) => {
+    function populateCollectionSelects() {
+      const options = '<option value="">All collections</option>' + state.collections.map((item) => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)}</option>`).join("");
+      ["#group-collection-filter", "#article-collection-filter"].forEach((selector) => {
+        const select = qs(selector);
+        const current = select.value;
+        select.innerHTML = options;
+        select.value = current;
+      });
+    }
+
+    function populateGroupSelect(select, collectionId = "", includeAll = true) {
+      const groups = state.groups.filter((group) => !collectionId || group.collectionId === collectionId);
+      select.innerHTML = (includeAll ? '<option value="">All groups</option>' : '<option value="">No group</option>') + groups.map((group) => `<option value="${escapeHtml(group.id)}">${escapeHtml(group.title)}</option>`).join("");
+    }
+
+    function renderCollections() {
+      qs("#collection-rows").innerHTML = state.collections.length ? state.collections.map((item) => `
+        <tr>
+          <td>${escapeHtml(item.icon || "")}</td>
+          <td>${escapeHtml(item.title)}</td>
+          <td>${escapeHtml(item.slug)}</td>
+          <td>${Number(item.articleCount || 0)}</td>
+          <td><span class="status ${item.isPublished ? "status--published" : "status--draft"}">${item.isPublished ? "published" : "hidden"}</span></td>
+          <td>${Number(item.sortOrder || 0)}</td>
+          <td><div class="row-actions"><button class="small-button" data-edit-collection="${item.id}">Edit</button><a class="small-button" href="/help/collection.html?slug=${encodeURIComponent(item.slug)}" target="_blank">View</a><button class="small-button" data-manage-groups="${item.id}">Groups</button><button class="small-button" data-delete-collection="${item.id}">Delete</button></div></td>
+        </tr>
+      `).join("") : '<tr><td colspan="7">No collections yet.</td></tr>';
+    }
+
+    async function loadGroups() {
+      if (!state.collections.length) await loadCollections();
+      const collectionId = qs("#group-collection-filter").value;
+      const data = await api(`/api/admin/help/groups${collectionId ? `?collectionId=${encodeURIComponent(collectionId)}` : ""}`);
+      state.groups = data.groups || [];
+      populateGroupSelect(qs("#article-group-filter"));
+      renderGroups();
+    }
+
+    function collectionName(id) {
+      return (state.collections.find((item) => item.id === id) || {}).title || "";
+    }
+
+    function groupName(id) {
+      return (state.groups.find((item) => item.id === id) || {}).title || "";
+    }
+
+    function renderGroups() {
+      qs("#group-rows").innerHTML = state.groups.length ? state.groups.map((item) => `
+        <tr>
+          <td>${escapeHtml(item.title)}</td>
+          <td>${escapeHtml(collectionName(item.collectionId))}</td>
+          <td>${escapeHtml(item.slug)}</td>
+          <td>${Number(item.articleCount || 0)}</td>
+          <td><span class="status ${item.isPublished ? "status--published" : "status--draft"}">${item.isPublished ? "published" : "hidden"}</span></td>
+          <td>${Number(item.sortOrder || 0)}</td>
+          <td><div class="row-actions"><button class="small-button" data-edit-group="${item.id}">Edit</button><button class="small-button" data-delete-group="${item.id}">Delete</button></div></td>
+        </tr>
+      `).join("") : '<tr><td colspan="7">No groups yet.</td></tr>';
+    }
+
+    async function loadArticles() {
+      if (!state.collections.length) await loadCollections();
+      if (!state.groups.length) await loadGroups();
+      const query = buildQuery(qs("#article-filter-form"));
+      const data = await api(`/api/admin/help/articles${query ? `?${query}` : ""}`);
+      state.articles = data.articles || [];
+      renderArticles();
+    }
+
+    function renderArticles() {
+      qs("#article-rows").innerHTML = state.articles.length ? state.articles.map((item) => `
+        <tr>
+          <td><strong>${escapeHtml(item.title)}</strong><br><span class="muted">${escapeHtml(item.slug)}</span></td>
+          <td>${escapeHtml(item.collectionTitle || collectionName(item.collectionId))}</td>
+          <td>${escapeHtml(item.groupTitle || groupName(item.groupId))}</td>
+          <td><span class="status status--${escapeHtml(item.status)}">${escapeHtml(item.status)}</span></td>
+          <td>${escapeHtml(formatDate(item.updatedAt))}</td>
+          <td>${escapeHtml(formatDate(item.publishedAt))}</td>
+          <td><div class="row-actions"><button class="small-button" data-edit-article="${item.id}">Edit</button><button class="small-button" data-preview-article="${item.id}">Preview</button><button class="small-button" data-publish-article="${item.id}">Publish</button><button class="small-button" data-unpublish-article="${item.id}">Unpublish</button><button class="small-button" data-duplicate-article="${item.id}">Duplicate</button><a class="small-button" href="/help/article.html?slug=${encodeURIComponent(item.slug)}" target="_blank">View</a><button class="small-button" data-delete-article="${item.id}">Delete</button></div></td>
+        </tr>
+      `).join("") : '<tr><td colspan="7">No articles yet.</td></tr>';
+    }
+
+    async function loadHelpDashboard() {
+      const data = await api("/api/admin/help/stats");
+      const stats = data.stats || {};
+      const metrics = [
+        ["Total Collections", stats.totalCollections ?? stats.total_collections ?? 0],
+        ["Total Groups", stats.totalGroups ?? stats.total_groups ?? 0],
+        ["Total Articles", stats.totalArticles ?? stats.total_articles ?? 0],
+        ["Published", stats.publishedArticles ?? stats.published_articles ?? 0],
+        ["Drafts", stats.draftArticles ?? stats.draft_articles ?? 0],
+        ["Feedback", stats.totalFeedback ?? stats.total_feedback ?? 0]
+      ];
+      qs("#help-metrics").innerHTML = metrics.map(([label, value]) => `<article class="metric"><span>${label}</span><strong>${value}</strong></article>`).join("");
+      qs("#recent-articles").innerHTML = (stats.recentArticles || []).map((item) => `<a class="article-list-item" href="/help/article.html?slug=${encodeURIComponent(item.slug)}" target="_blank"><span><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.status || "")}</p></span><span class="chevron">-&gt;</span></a>`).join("") || '<p class="muted">No recent articles.</p>';
+      qs("#recent-feedback").innerHTML = (stats.recentFeedback || []).map((item) => `<div class="article-list-item"><span><h3>${escapeHtml(item.articleTitle || "Article")}</h3><p>${escapeHtml(item.rating || "")}</p></span></div>`).join("") || '<p class="muted">No feedback yet.</p>';
+    }
+
+    async function loadMedia() {
+      const data = await api("/api/admin/help/media");
+      state.media = data.media || [];
+      qs("#media-grid").innerHTML = state.media.length ? state.media.map((item) => `
+        <article class="media-card">
+          <img src="${escapeHtml(item.fileUrl)}" alt="${escapeHtml(item.altText || item.fileName)}" />
+          <div><strong>${escapeHtml(item.fileName)}</strong><p class="muted">${Math.round((item.fileSize || 0) / 1024)} KB</p><div class="row-actions"><button class="small-button" data-copy-url="${escapeHtml(item.fileUrl)}">Copy URL</button><button class="small-button" data-delete-media="${item.id}">Delete</button></div></div>
+        </article>
+      `).join("") : '<p class="muted">No media uploaded yet.</p>';
+    }
+
+    async function loadFeedback() {
+      const data = await api("/api/admin/help/feedback");
+      state.feedback = data.feedback || [];
+      qs("#feedback-rows").innerHTML = state.feedback.length ? state.feedback.map((item) => `
+        <tr><td>${escapeHtml(item.articleTitle)}</td><td><span class="status">${escapeHtml(item.rating)}</span></td><td>${escapeHtml(formatDate(item.createdAt))}</td><td>${escapeHtml(item.pageUrl)}</td><td>${escapeHtml(item.referrer)}</td></tr>
+      `).join("") : '<tr><td colspan="5">No feedback yet.</td></tr>';
+    }
+
+    function openContentModal(title, subtitle, html) {
+      qs("#content-modal-title").textContent = title;
+      qs("#content-modal-subtitle").textContent = subtitle || "";
+      qs("#content-modal-body").innerHTML = html;
+      qs("#content-modal").classList.add("is-open");
+    }
+
+    function collectionForm(item = {}) {
+      openContentModal(item.id ? "Edit Collection" : "New Collection", "Collections are the main topics visitors browse.", `
+        <form id="collection-form" class="panel">
+          <div class="form-grid">
+            <input type="hidden" name="id" value="${escapeHtml(item.id || "")}">
+            <div class="field"><label>Title</label><input name="title" value="${escapeHtml(item.title || "")}" required></div>
+            <div class="field"><label>Slug</label><input name="slug" value="${escapeHtml(item.slug || "")}" required></div>
+            <div class="field"><label>Icon</label><input name="icon" value="${escapeHtml(item.icon || "book-open")}"></div>
+            <div class="field"><label>Sort Order</label><input name="sortOrder" type="number" value="${Number(item.sortOrder || 0)}"></div>
+            <div class="field field--full"><label>Description</label><textarea name="description" rows="4">${escapeHtml(item.description || "")}</textarea></div>
+            <label><input name="isPublished" type="checkbox" ${item.isPublished !== false ? "checked" : ""}> Published</label>
+          </div>
+          <button class="button" type="submit">Save Collection</button>
+          <p class="error" data-form-error></p>
+        </form>
+      `);
+      bindSlugAutofill(qs("#collection-form"));
+    }
+
+    function groupForm(item = {}) {
+      openContentModal(item.id ? "Edit Group" : "New Group", "Groups organize article sections inside a collection.", `
+        <form id="group-form" class="panel">
+          <div class="form-grid">
+            <input type="hidden" name="id" value="${escapeHtml(item.id || "")}">
+            <div class="field"><label>Collection</label><select name="collectionId" required>${state.collections.map((c) => `<option value="${c.id}" ${c.id === item.collectionId ? "selected" : ""}>${escapeHtml(c.title)}</option>`).join("")}</select></div>
+            <div class="field"><label>Title</label><input name="title" value="${escapeHtml(item.title || "")}" required></div>
+            <div class="field"><label>Slug</label><input name="slug" value="${escapeHtml(item.slug || "")}" required></div>
+            <div class="field"><label>Sort Order</label><input name="sortOrder" type="number" value="${Number(item.sortOrder || 0)}"></div>
+            <div class="field field--full"><label>Description</label><textarea name="description" rows="4">${escapeHtml(item.description || "")}</textarea></div>
+            <label><input name="isPublished" type="checkbox" ${item.isPublished !== false ? "checked" : ""}> Published</label>
+          </div>
+          <button class="button" type="submit">Save Group</button>
+          <p class="error" data-form-error></p>
+        </form>
+      `);
+      bindSlugAutofill(qs("#group-form"));
+    }
+
+    function articleForm(item = {}) {
+      const content = item.contentHtml || "<h2>Overview</h2><p>Write the article content here.</p>";
+      openContentModal(item.id ? "Edit Article" : "New Article", "Write in visual mode or edit the HTML directly.", `
+        <form id="article-form">
+          <div class="two-column">
+            <div class="panel">
+              <input type="hidden" name="id" value="${escapeHtml(item.id || "")}">
+              <div class="field"><label>Title</label><input name="title" value="${escapeHtml(item.title || "")}" required></div>
+              <div class="field"><label>Slug</label><input name="slug" value="${escapeHtml(item.slug || "")}" required></div>
+              <div class="field"><label>Summary</label><textarea name="summary" rows="3">${escapeHtml(item.summary || "")}</textarea></div>
+              <div class="editor-tabs" style="margin-bottom: 10px;"><button class="tab-btn is-active" type="button" data-editor-mode="visual">Visual Editor</button><button class="tab-btn" type="button" data-editor-mode="code">HTML Code</button></div>
+              <div class="editor-shell" id="editor-shell">
+                <div class="editor-toolbar">
+                  <button type="button" data-command="undo">Undo</button><button type="button" data-command="redo">Redo</button>
+                  <button type="button" data-command="bold">B</button><button type="button" data-command="italic">I</button><button type="button" data-command="underline">U</button><button type="button" data-command="strikeThrough">S</button>
+                  <select data-format-block><option value="p">Paragraph</option><option value="h2">Heading H2</option><option value="h3">Heading H3</option><option value="h4">Heading H4</option><option value="blockquote">Quote</option><option value="pre">Code Block</option></select>
+                  <select data-command-value="fontSize"><option value="3">Normal</option><option value="4">Large</option><option value="5">Larger</option></select>
+                  <select data-command-value="fontName"><option value="Inter">Inter</option><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Consolas">Consolas</option></select>
+                  <button type="button" data-command="insertUnorderedList">Bullets</button><button type="button" data-command="insertOrderedList">Numbers</button>
+                  <button type="button" data-command="justifyLeft">Left</button><button type="button" data-command="justifyCenter">Center</button><button type="button" data-command="justifyRight">Right</button>
+                  <button type="button" data-link>Link</button><button type="button" data-image>Image</button><button type="button" data-command="insertHorizontalRule">Divider</button><button type="button" data-command="removeFormat">Clear</button>
+                </div>
+                <div class="rich-editor" id="rich-editor" contenteditable="true">${content}</div>
+                <textarea class="html-editor" id="html-editor">${escapeHtml(content)}</textarea>
+              </div>
+              <div class="field" style="margin-top: 16px;"><label>SEO Title</label><input name="seoTitle" value="${escapeHtml(item.seoTitle || "")}"></div>
+              <div class="field"><label>SEO Description</label><textarea name="seoDescription" rows="3">${escapeHtml(item.seoDescription || "")}</textarea></div>
+              <div class="field"><label>Tags</label><input name="tags" value="${escapeHtml((item.tags || []).join ? item.tags.join(", ") : item.tags || "")}" placeholder="setup, billing, whatsapp"></div>
+            </div>
+            <aside class="sidebar-card">
+              <div class="field"><label>Status</label><select name="status"><option value="draft" ${item.status !== "published" && item.status !== "archived" ? "selected" : ""}>Draft</option><option value="published" ${item.status === "published" ? "selected" : ""}>Published</option><option value="archived" ${item.status === "archived" ? "selected" : ""}>Archived</option></select></div>
+              <div class="field"><label>Collection</label><select name="collectionId" id="article-editor-collection"><option value="">Select collection</option>${state.collections.map((c) => `<option value="${c.id}" ${c.id === item.collectionId ? "selected" : ""}>${escapeHtml(c.title)}</option>`).join("")}</select></div>
+              <div class="field"><label>Group</label><select name="groupId" id="article-editor-group"><option value="">No group</option></select></div>
+              <div class="field"><label>Featured Image URL</label><input name="featuredImageUrl" value="${escapeHtml(item.featuredImageUrl || "")}"></div>
+              <div class="field"><label>Author</label><input name="authorName" value="${escapeHtml(item.authorName || "Connektly Team")}"></div>
+              <div class="field"><label>Sort Order</label><input name="sortOrder" type="number" value="${Number(item.sortOrder || 0)}"></div>
+              <div class="field"><label>Public URL</label><input readonly value="${HELP_PUBLIC_BASE}/article.html?slug=${escapeHtml(item.slug || "")}"></div>
+              <h3>Table of Contents</h3>
+              <ol class="toc-preview" id="toc-preview"></ol>
+              <p class="muted" id="reading-time">Reading time: 1 min</p>
+              <div class="row-actions"><button class="button" type="submit">Save</button><button class="button button--ghost" type="button" id="preview-current-article">Preview</button></div>
+              <p class="error" data-form-error></p>
+            </aside>
+          </div>
+        </form>
+      `);
+      bindSlugAutofill(qs("#article-form"));
+      populateGroupSelect(qs("#article-editor-group"), qs("#article-editor-collection").value, false);
+      qs("#article-editor-group").value = item.groupId || "";
+      bindEditor();
+      refreshTocPreview();
+    }
+
+    function bindSlugAutofill(form) {
+      const title = form.querySelector('[name="title"]');
+      const slug = form.querySelector('[name="slug"]');
+      if (!title || !slug) return;
+      title.addEventListener("input", () => {
+        if (!slug.value || slug.dataset.touched !== "true") slug.value = slugify(title.value);
+      });
+      slug.addEventListener("input", () => slug.dataset.touched = "true");
+    }
+
+    function getEditorHtml() {
+      const shell = qs("#editor-shell");
+      if (!shell) return "";
+      if (shell.classList.contains("is-code")) return qs("#html-editor").value;
+      return qs("#rich-editor").innerHTML;
+    }
+
+    function syncEditorToCode() {
+      qs("#html-editor").value = qs("#rich-editor").innerHTML;
+    }
+
+    function syncCodeToEditor() {
+      qs("#rich-editor").innerHTML = qs("#html-editor").value;
+    }
+
+    function refreshTocPreview() {
+      const result = generateTocFromHtml(getEditorHtml());
+      qs("#toc-preview").innerHTML = result.toc.length ? result.toc.map((item) => `<li>${escapeHtml(item.title)}</li>`).join("") : "<li>No H2 or H3 headings yet.</li>";
+      const words = textFromHtml(result.html).trim().split(/\s+/).filter(Boolean).length;
+      qs("#reading-time").textContent = `Reading time: ${Math.max(Math.ceil(words / 200), 1)} min`;
+    }
+
+    function bindEditor() {
+      qsa("[data-command]").forEach((button) => {
+        button.addEventListener("click", () => {
+          document.execCommand(button.dataset.command, false, null);
+          state.dirty = true;
+          refreshTocPreview();
+        });
+      });
+      qsa("[data-command-value]").forEach((select) => {
+        select.addEventListener("change", () => {
+          document.execCommand(select.dataset.commandValue, false, select.value);
+          state.dirty = true;
+          refreshTocPreview();
+        });
+      });
+      qs("[data-format-block]").addEventListener("change", (event) => {
+        document.execCommand("formatBlock", false, event.target.value);
+        state.dirty = true;
+        refreshTocPreview();
+      });
+      qs("[data-link]").addEventListener("click", () => {
+        const url = window.prompt("Enter link URL");
+        if (url) document.execCommand("createLink", false, url);
+      });
+      qs("[data-image]").addEventListener("click", () => {
+        const url = window.prompt("Enter image URL or upload it in Media first");
+        if (url) document.execCommand("insertImage", false, url);
+      });
+      qsa("[data-editor-mode]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const shell = qs("#editor-shell");
+          const mode = button.dataset.editorMode;
+          if (mode === "code") syncEditorToCode();
+          else syncCodeToEditor();
+          shell.classList.toggle("is-code", mode === "code");
+          qsa("[data-editor-mode]").forEach((entry) => entry.classList.toggle("is-active", entry === button));
+          refreshTocPreview();
+        });
+      });
+      qs("#rich-editor").addEventListener("input", () => { state.dirty = true; refreshTocPreview(); });
+      qs("#html-editor").addEventListener("input", () => { state.dirty = true; refreshTocPreview(); });
+      qs("#article-editor-collection").addEventListener("change", (event) => populateGroupSelect(qs("#article-editor-group"), event.target.value, false));
+      qs("#preview-current-article").addEventListener("click", () => previewArticle(serializeArticleForm()));
+    }
+
+    function serializeForm(form) {
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.isPublished = form.querySelector('[name="isPublished"]') ? form.querySelector('[name="isPublished"]').checked : undefined;
+      return data;
+    }
+
+    function serializeArticleForm() {
+      const form = qs("#article-form");
+      const data = Object.fromEntries(new FormData(form).entries());
+      const generated = generateTocFromHtml(getEditorHtml());
+      data.contentHtml = generated.html;
+      data.tags = data.tags || "";
+      return data;
+    }
+
+    function previewArticle(article) {
+      const generated = generateTocFromHtml(article.contentHtml || "");
+      qs("#preview-body").innerHTML = `
+        <article class="preview-article">
+          <h1>${escapeHtml(article.title || "Untitled Article")}</h1>
+          <p class="muted">${escapeHtml(article.summary || "")}</p>
+          <hr>
+          ${generated.html}
+        </article>
+      `;
+      qs("#preview-modal").classList.add("is-open");
+    }
+
+    async function saveCollection(event) {
       event.preventDefault();
-      loginError.textContent = "";
-      loginButton.disabled = true;
-      loginButton.textContent = "Logging in...";
+      const form = event.currentTarget;
+      const data = serializeForm(form);
       try {
-        const values = Object.fromEntries(new FormData(loginForm).entries());
-        const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
+        if (data.id) await api(`/api/admin/help/collections/${encodeURIComponent(data.id)}`, { method: "PATCH", body: JSON.stringify(data) });
+        else await api("/api/admin/help/collections", { method: "POST", body: JSON.stringify(data) });
+        closeModals();
+        await loadCollections();
+      } catch (error) {
+        form.querySelector("[data-form-error]").textContent = error.message;
+      }
+    }
+
+    async function saveGroup(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const data = serializeForm(form);
+      try {
+        if (data.id) await api(`/api/admin/help/groups/${encodeURIComponent(data.id)}`, { method: "PATCH", body: JSON.stringify(data) });
+        else await api("/api/admin/help/groups", { method: "POST", body: JSON.stringify(data) });
+        closeModals();
+        await loadGroups();
+      } catch (error) {
+        form.querySelector("[data-form-error]").textContent = error.message;
+      }
+    }
+
+    async function saveArticle(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const data = serializeArticleForm();
+      try {
+        if (data.id) await api(`/api/admin/help/articles/${encodeURIComponent(data.id)}`, { method: "PATCH", body: JSON.stringify(data) });
+        else await api("/api/admin/help/articles", { method: "POST", body: JSON.stringify(data) });
+        state.dirty = false;
+        closeModals();
+        await loadArticles();
+      } catch (error) {
+        form.querySelector("[data-form-error]").textContent = error.message;
+      }
+    }
+
+    function closeModals() {
+      qsa(".modal").forEach((modal) => modal.classList.remove("is-open"));
+    }
+
+    document.addEventListener("submit", (event) => {
+      if (event.target.id === "login-form") {
+        event.preventDefault();
+        qs("#login-button").disabled = true;
+        qs("#login-button").textContent = "Logging in...";
+        fetch(`${API_BASE_URL}/api/admin/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values)
-        });
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok || !data.token) {
-          throw new Error(data.message || "Invalid login.");
-        }
-        setToken(data.token);
-        showApp();
-        await loadLeads();
-      } catch (error) {
-        loginError.textContent = error.message || "Invalid login.";
-      } finally {
-        loginButton.disabled = false;
-        loginButton.textContent = "Login";
+          body: JSON.stringify(Object.fromEntries(new FormData(event.target).entries()))
+        })
+          .then((response) => response.json().then((data) => ({ response, data })))
+          .then(({ response, data }) => {
+            if (!response.ok || !data.token) throw new Error(data.message || "Invalid login.");
+            setToken(data.token);
+            showApp();
+            switchView("leads");
+          })
+          .catch((error) => qs("#login-error").textContent = error.message)
+          .finally(() => {
+            qs("#login-button").disabled = false;
+            qs("#login-button").textContent = "Login";
+          });
+      }
+      if (event.target.id === "filters-form") {
+        event.preventDefault();
+        void loadLeads();
+      }
+      if (event.target.id === "article-filter-form") {
+        event.preventDefault();
+        void loadArticles();
+      }
+      if (event.target.id === "collection-form") void saveCollection(event);
+      if (event.target.id === "group-form") void saveGroup(event);
+      if (event.target.id === "article-form") void saveArticle(event);
+      if (event.target.id === "media-upload-form") {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        qs("#media-upload-status").textContent = "Uploading...";
+        api("/api/admin/help/media/upload", { method: "POST", body: formData })
+          .then(() => {
+            event.target.reset();
+            qs("#media-upload-status").textContent = "Image uploaded.";
+            return loadMedia();
+          })
+          .catch((error) => qs("#media-upload-status").textContent = error.message);
       }
     });
 
-    logoutButton.addEventListener("click", () => {
-      setToken("");
-      leads = [];
-      showLogin();
+    document.addEventListener("click", async (event) => {
+      const target = event.target;
+      const nav = target.closest("[data-view-target]");
+      if (nav) switchView(nav.dataset.viewTarget);
+      if (target.id === "logout-button") { setToken(""); showLogin(); }
+      if (target.matches("[data-close-modal]") || target.classList.contains("modal")) closeModals();
+      if (target.id === "new-collection") collectionForm();
+      if (target.id === "new-group") { if (!state.collections.length) await loadCollections(); groupForm(); }
+      if (target.id === "new-article") { if (!state.collections.length) await loadCollections(); if (!state.groups.length) await loadGroups(); articleForm(); }
+      if (target.id === "reload-groups") void loadGroups();
+      if (target.dataset.leadView) void openLeadDetails(target.dataset.leadView);
+      if (target.dataset.editCollection) collectionForm(state.collections.find((item) => item.id === target.dataset.editCollection));
+      if (target.dataset.manageGroups) { qs("#group-collection-filter").value = target.dataset.manageGroups; switchView("help-groups"); }
+      if (target.dataset.deleteCollection && window.confirm("Delete this collection? This is blocked if it contains groups or articles.")) { await api(`/api/admin/help/collections/${target.dataset.deleteCollection}`, { method: "DELETE" }); await loadCollections(); }
+      if (target.dataset.editGroup) groupForm(state.groups.find((item) => item.id === target.dataset.editGroup));
+      if (target.dataset.deleteGroup && window.confirm("Delete this group? This is blocked if it contains articles.")) { await api(`/api/admin/help/groups/${target.dataset.deleteGroup}`, { method: "DELETE" }); await loadGroups(); }
+      if (target.dataset.editArticle) {
+        const data = await api(`/api/admin/help/articles/${target.dataset.editArticle}`);
+        articleForm(data.article);
+      }
+      if (target.dataset.previewArticle) {
+        const data = await api(`/api/admin/help/articles/${target.dataset.previewArticle}`);
+        previewArticle(data.article);
+      }
+      if (target.dataset.publishArticle) { await api(`/api/admin/help/articles/${target.dataset.publishArticle}/publish`, { method: "POST" }); await loadArticles(); }
+      if (target.dataset.unpublishArticle) { await api(`/api/admin/help/articles/${target.dataset.unpublishArticle}/unpublish`, { method: "POST" }); await loadArticles(); }
+      if (target.dataset.duplicateArticle) { await api(`/api/admin/help/articles/${target.dataset.duplicateArticle}/duplicate`, { method: "POST" }); await loadArticles(); }
+      if (target.dataset.deleteArticle && window.confirm("Delete this article?")) { await api(`/api/admin/help/articles/${target.dataset.deleteArticle}`, { method: "DELETE" }); await loadArticles(); }
+      if (target.dataset.copyUrl) navigator.clipboard.writeText(target.dataset.copyUrl);
+      if (target.dataset.deleteMedia && window.confirm("Delete this media record?")) { await api(`/api/admin/help/media/${target.dataset.deleteMedia}`, { method: "DELETE" }); await loadMedia(); }
     });
 
-    filtersForm.addEventListener("submit", (event) => {
+    document.addEventListener("change", (event) => {
+      if (event.target.matches("[data-lead-status]")) {
+        api(`/api/admin/leads/${encodeURIComponent(event.target.dataset.leadStatus)}/status`, { method: "PATCH", body: JSON.stringify({ status: event.target.value }) }).then(loadLeads);
+      }
+      if (event.target.id === "article-collection-filter") {
+        populateGroupSelect(qs("#article-group-filter"), event.target.value);
+      }
+    });
+
+    window.addEventListener("beforeunload", (event) => {
+      if (!state.dirty) return;
       event.preventDefault();
-      void loadLeads();
-    });
-
-    leadRows.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-view]");
-      if (button) {
-        void openDetails(button.dataset.view);
-      }
-    });
-
-    leadRows.addEventListener("change", (event) => {
-      const select = event.target.closest("[data-status]");
-      if (select) {
-        void updateStatus(select.dataset.status, select.value);
-      }
-    });
-
-    closeModal.addEventListener("click", () => modal.classList.remove("is-open"));
-    modal.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        modal.classList.remove("is-open");
-      }
+      event.returnValue = "";
     });
 
     if (token()) {
       showApp();
-      void loadLeads();
+      switchView("leads");
     } else {
       showLogin();
     }
