@@ -2364,7 +2364,7 @@
     const closeButton = widget.querySelector("[data-whatsapp-connect-close]");
     const form = widget.querySelector("[data-whatsapp-connect-form]");
     const input = form ? form.querySelector("input") : null;
-    const whatsAppUrl = "https://wa.me/919953321314";
+    const whatsAppUrl = "https://wa.me/12394965301";
 
     widget.dataset.whatsappBound = "true";
 
@@ -2393,7 +2393,12 @@
     if (form) {
       form.addEventListener("submit", (event) => {
         event.preventDefault();
-        window.location.href = '/thank-you/';
+        const message = input ? String(input.value || "").trim() : "";
+        const targetUrl = message
+          ? `${whatsAppUrl}?text=${encodeURIComponent(message)}`
+          : whatsAppUrl;
+
+        window.location.href = targetUrl;
       });
     }
 
